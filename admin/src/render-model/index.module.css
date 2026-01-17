@@ -1,0 +1,61 @@
+.background{
+    width: 100%;
+    max-height: 100vh;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    position: fixed;
+    overflow: hidden;
+    z-index: 11100;
+    align-items: center;
+}
+
+.modal{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    min-width: 20px;
+    min-height: 20px;
+    border: 1px solid var(--muted-border);
+    border-radius: 4px;
+    animation: modalanimate 300ms linear;
+    z-index: 100;
+}
+
+@keyframes modalanimate {
+    from{
+        opacity: 50%;
+    }to{
+        opacity: 100%
+    }
+}
+
+.close-btn-user{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.close-btn-user:hover{
+    color: var(--text-color);
+}
+
+.confirmBox{
+        width: 50%;
+        height: 100px;
+}
+
+@media screen and (max-width: 680px) {
+    .modal{
+        margin: 70px 20px;
+    }
+}

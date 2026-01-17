@@ -1,0 +1,59 @@
+/* .refresh-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .refresh-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .refresh-button.refreshing {
+    animation: rotate 1s linear infinite;
+    background-color: #6c757d; /* Change color while refreshing */
+  
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  } */
+
+
+  .button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+
+
+  
+  .doanime svg {
+    animation: spin_357 0.5s linear  ;
+  }
+  
+  @keyframes spin_357 {
+    from {
+      transform: rotate(0deg);
+    }
+  
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

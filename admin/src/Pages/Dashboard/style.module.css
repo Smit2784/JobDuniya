@@ -1,0 +1,180 @@
+.main {
+    display: flex;
+    
+}
+
+
+.modalBodyTable{
+    width: 98%;
+}
+
+.notificationCard{
+    width: 98%;
+}
+
+.containerApp{
+    width: 98%;
+    display: flex;
+    
+
+}
+
+
+.title{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+}
+
+.body {
+    width: 100%;
+    overflow: scroll;
+    display: flex;
+    margin: 0 auto;
+    position: relative;
+    height: 100vh;
+    background-color: var(--body);
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+}
+
+
+.activeTab {
+    width: 98%;
+    margin: 0 auto;
+    padding: 15px;
+    height: 60px;
+    margin-top: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    background-color: var(--white);
+}
+
+.activeTabTitle {
+    font-size: larger;
+    font-weight: 600;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+}
+
+.CountContainer {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+    width: 98%;
+    height: 350px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 10px;
+    overflow: auto;
+    /* justify-content: start; */
+    gap: 10px;
+    flex-flow: wrap;
+}
+
+.countCard {
+    border-radius: 10px;
+    flex: 1 0 auto;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+}
+
+.countCard:nth-child(1) {
+    /* flex: 1 0 300px; */
+    background-color: rgba(255, 144, 144, 0.292);
+    display: flex;
+    justify-content: start;
+    color: rgb(255, 0, 0);
+    padding: 25px;
+    flex-direction: column;
+}
+
+.bgWhite {
+    /* background-color: white; */
+    width: 98%;
+}
+
+.countCard:nth-child(2) {
+    /* flex: 1 0 300px; */
+    background-color: rgba(255, 131, 8, 0.196);
+    display: flex;
+    color: darkgoldenrod;
+    padding: 25px;
+    justify-content: start;
+    flex-direction: column;
+}
+
+.countCard:nth-child(3) {
+    /* flex: 1 0 300px; */
+    background-color: rgba(0, 255, 68, 0.211);
+    color: darkgreen;
+    display: flex;
+    padding: 25px;
+
+    justify-content: start;
+    flex-direction: column;
+}
+
+.countCard:nth-child(4) {
+    /* flex: 1 0 300px; */
+    background-color: rgba(115, 0, 255, 0.182);
+    display: flex;
+    padding: 25px;
+    color: darkblue;
+    justify-content: start;
+    flex-direction: column;
+}
+
+.countHeader {
+    font-weight: 560;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+}
+
+.countNumber {
+    margin-top: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.num {
+    font-size: clamp(50px, 100vh, 20px);
+    font-weight: 600;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+}
+
+@media (max-width : 768px) {
+    .rowcustom{
+        width: 95%;
+    
+    }
+    
+    .activeTab {
+        width: 95%;
+    }
+
+    .CountContainer {
+        width: 95%;
+        max-height: 50vh;
+    }
+    .notificationCard{
+        width: 95%;
+    }
+}
+
+.cardBody {
+    display: flex;
+    padding: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.TableContainer{
+    width: 98%;
+    overflow: auto;
+    margin: 0 auto;
+    max-height: 100vh;
+}
+@media (max-width:768px) {
+    .TableContainer{
+
+        width: 95%;
+    }
+}

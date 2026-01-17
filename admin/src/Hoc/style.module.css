@@ -1,0 +1,32 @@
+:root {
+    --text: #142d4c;
+    --btn: #385170;
+    --btnhover : #1e4d86;
+    --primary: #9fd3c7;
+    --primary--light: #9fd3c7ba;
+    --body: #ececec;
+    --white:white;
+    --border: rgb(37, 37, 37);
+    --secendory : rgb(106, 104, 104);
+}
+
+.botton{
+    background-color: var(--btn) ;
+    cursor: pointer;   
+    padding: 15px 10px;
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+    outline-width: 1px;
+    border: none;
+    font-size: larger;
+    color: var(--white);
+    transition: all 200ms ease-in-out ;
+}
+
+
+.botton:hover{
+    outline-width: 4px;
+    outline-style: solid;
+    outline-color: var(--body);
+}
