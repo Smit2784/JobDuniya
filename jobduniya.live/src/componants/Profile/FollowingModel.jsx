@@ -1,34 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import Modal from '../../render-model/Modal';
+import React, { useEffect, useState } from "react";
+import Modal from "../../render-model/Modal";
 import css from "../../Style/follow.module.css";
-import useAPI from '../../Hooks/USER/useAPI';
-import Cookies from 'js-cookie';
+import useAPI from "../../Hooks/USER/useAPI";
+import Cookies from "js-cookie";
 
 const Body = ({ onClose }) => {
     const api = useAPI();
-    const [users , setUsers] = useState([]);
-    const [errorMessage , setErrorMessage]  = useState("");
+    const [users, setUsers] = useState([]);
+    const [errorMessage, setErrorMessage] = useState("");
     useEffect(() => {
-        const apiCall =async () =>{
+        const apiCall = async () => {
             const id = Cookies.get("id");
-            const users = await api.getREQUEST(`getFollowings/${id}`)
+            const users = await api.getREQUEST(`getFollowings/${id}`);
             setUsers(users[0].targetId);
-        }
-        apiCall()
-    } , [])
+        };
+        apiCall();
+    }, []);
 
     return (
         <>
             <div className={css.container}>
                 <div className={css.header}>
                     <div>
-                        <span className="text-texty
-                        -center text-body  fw-bold  ">
+                        <span
+                            className="text-texty
+                        -center text-body  fw-bold  "
+                        >
                             Following
                         </span>
                     </div>
                     <div>
-                        <span onClick={onClose} className='hand'>
+                        <span onClick={onClose} className="hand">
                             <i className="fa fa-close fs-5"></i>
                         </span>
                     </div>
@@ -41,27 +43,58 @@ const Body = ({ onClose }) => {
                     />
                 </div>
                 <div className="d-flex flex-column gap-3">
-                { Array.isArray(users) && users?.map((e) => {
-                    return <div className={css.body}>
-                        <div className={css.profile}>
-                            <div className={css.imgDiv}>
-                                <img
-                                    // onError={(e) =>
-                                    // (e.target.src =
-                                    //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIwRBD9gNuA2GjcOf6mpL-WuBhJADTWC3QVQ&usqp=CAU")
-                                    // }
-                                    src={e.profileImage}
-                                    className={css.img}
-                                    alt=""
-                                />
-                            </div>
-                        </div>
-                        <div className={css.discription}>
-                            <span className="fs-6">{e.firstName} {e.lastName}</span>
-                            <button className="btn bgbtn">Unfollow</button>
-                        </div>
-                    </div>
-                })  }
+                    {Array.isArray(users) &&
+                        users?.map((e) => {
+                            return (
+                                <div className={css.body} key={e._id}>
+                                    <div className={css.profile}>
+                                        <div className={css.imgDiv}>
+                                            <img
+                                                src={e.profileImage}
+                                                className={css.img}
+                                                onError={(e) =>
+                                                    (e.target.src =
+                                                        "https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg")
+                                                }
+                                                alt=""
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className={css.discription}>
+                                        <span className="fs-6">
+                                            {e.firstName} {e.lastName}
+                                        </span>
+                                        <button
+                                            className="btn bgbtn"
+                                            onClick={() => {
+                                                const handleUnFollowButton =
+                                                    async () => {
+                                                        const id =
+                                                            Cookies.get("id");
+                                                        const res =
+                                                            await api.patchREQUEST(
+                                                                `api/userfollow/${id}/remove/${e._id}`,
+                                                                "userFollow",
+                                                            );
+                                                        if (res) {
+                                                            setUsers((prev) =>
+                                                                prev.filter(
+                                                                    (user) =>
+                                                                        user._id !==
+                                                                        e._id,
+                                                                ),
+                                                            );
+                                                        }
+                                                    };
+                                                handleUnFollowButton();
+                                            }}
+                                        >
+                                            Unfollow
+                                        </button>
+                                    </div>
+                                </div>
+                            );
+                        })}
                 </div>
             </div>
         </>
@@ -71,12 +104,9 @@ const Body = ({ onClose }) => {
 const FollowingModel = ({ onClose }) => {
     return (
         <>
-            <Modal
-                body={<Body
-                    onClose={onClose} />}
-            />
+            <Modal body={<Body onClose={onClose} />} />
         </>
     );
-}
+};
 
-export default FollowingModel
+export default FollowingModel;

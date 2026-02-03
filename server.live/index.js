@@ -1,6 +1,5 @@
 require("./db");
 const express = require("express");
-const multer = require("multer");
 const {
     User,
     Address,
@@ -23,8 +22,10 @@ require("dotenv").config();
 const key = process.env.JWT_SECRET;
 const encrypt = require("bcrypt");
 const crypto = require("crypto");
-const { SendMailToApplicient } = require("./mailServices");
+// const { SendMailToApplicient } = require("./mailServices");
 const { log } = require("console");
+const upload = require("./multerConfig");
+const path = require("path");
 // const multer = require("multer");
 
 // app.use((req, res, next) => {
@@ -36,7 +37,7 @@ const { log } = require("console");
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // app.use(cors({
 //     origin: 'https://jobduniya-live.vercel.app/',
 //     optionsSuccessStatus: 200,
@@ -1269,17 +1270,17 @@ app.get("/filter/user", async (req, res) => {
 });
 //   module.exports = app
 
-const storage = multer.diskStorage({
-    destination: "public/images",
-    filename: (req, res, cb) => {
-        cb(null, res.originalname + ".jpg");
-    },
-});
+// const storage = multer.diskStorage({
+//     destination: "public/images",
+//     filename: (req, res, cb) => {
+//         cb(null, res.originalname + ".jpg");
+//     },
+// });
 
-const upload = multer({
-    storage: storage,
-    // limits: { fileSize: 5 * 1024 * 1024 },y
-}).single("image");
+// const upload = multer({
+//     storage: storage,
+//     // limits: { fileSize: 5 * 1024 * 1024 },y
+// }).single("image");
 
 // app.use(express.json())
 app.get("/", async (req, res) => {
@@ -1290,11 +1291,33 @@ app.get("/", async (req, res) => {
         .catch((e) => res.status(404).send(e));
 });
 
-app.post("/upload", upload, async (req, res) => {
-    const imgObj = new img(req.body);
-    img.insertMany(imgObj).then(() => {
-        res.status(200).send(imgObj);
+// app.post("/upload", upload, async (req, res) => {
+//     const imgObj = new img(req.body);
+//     img.insertMany(imgObj).then(() => {
+//         res.status(200).send(imgObj);
+//     });
+// });
+
+app.post("/upload", upload.single("file"), (req, res) => {
+    const imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${req.file.filename}`;
+    res.json({
+        message: "File uploaded successfully",
+        file: req.file,
+        url: imageUrl,
     });
+});
+ 
+app.post("/resume", upload.single("file"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: "No PDF uploaded" });
+  }
+
+  const pdfUrl = `${req.protocol}://${req.get("host")}/uploads/pdfs/${req.file.filename}`;
+
+  res.json({
+    success: true,
+    url: pdfUrl
+  });
 });
 app.listen(process.env.PORT, () => console.log("server started..."));
 console.log("SERVER START PATH:", __dirname);

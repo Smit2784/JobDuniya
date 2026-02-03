@@ -89,7 +89,7 @@
 //     const yes = token ? true : false;
 //     useEffect(() => {
 //         if (token){
-//             naviget("/home");
+//             naviget("/");
 //         } 
 //     })
 //     return (

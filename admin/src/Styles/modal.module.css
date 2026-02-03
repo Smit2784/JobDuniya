@@ -1,43 +1,45 @@
-
-.modalBody{
+.modalBody {
     border-radius: 5px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+    font-family:
+        Cambria, Cochin, Georgia, Times, "Times New Roman", serif !important;
     width: 50%;
     max-height: 500px;
     overflow: auto;
     background-color: whitesmoke;
 }
 
-.modalBodyTable{
+.modalBodyTable {
     width: 70%;
     max-height: 500px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+    font-family:
+        Cambria, Cochin, Georgia, Times, "Times New Roman", serif !important;
     overflow: auto;
     background-color: whitesmoke;
 }
 
-.TableContainer{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+.TableContainer {
+    font-family:
+        Cambria, Cochin, Georgia, Times, "Times New Roman", serif !important;
     width: 100%;
-    overflow:auto;
+    overflow: auto;
     margin: 0 auto;
 }
 
-.modalBodyForm{
+.modalBodyForm {
     width: 50%;
     max-height: 500px;
     border-radius: 5px;
     overflow: auto;
     background-color: whitesmoke;
 }
-@media (max-width : 800px) {
-    .TableContainer{
+@media (max-width: 800px) {
+    .TableContainer {
         width: 95%;
     }
-    .modalBody{
+    .modalBody {
         width: 95%;
     }
-    .modalBodyTable{
+    .modalBodyTable {
         width: 95%;
     }
 }

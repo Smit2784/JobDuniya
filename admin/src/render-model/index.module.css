@@ -1,18 +1,18 @@
-.background{
+.background {
     width: 100%;
     max-height: 100vh;
     display: flex;
     justify-content: center;
     top: 0;
     left: 0;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     position: fixed;
     overflow: hidden;
     z-index: 11100;
     align-items: center;
 }
 
-.modal{
+.modal {
     position: relative;
     width: 100%;
     display: flex;
@@ -28,14 +28,15 @@
 }
 
 @keyframes modalanimate {
-    from{
+    from {
         opacity: 50%;
-    }to{
-        opacity: 100%
+    }
+    to {
+        opacity: 100%;
     }
 }
 
-.close-btn-user{
+.close-btn-user {
     position: absolute;
     right: 5px;
     top: 5px;
@@ -45,17 +46,17 @@
     background-color: transparent;
 }
 
-.close-btn-user:hover{
+.close-btn-user:hover {
     color: var(--text-color);
 }
 
-.confirmBox{
-        width: 50%;
-        height: 100px;
+.confirmBox {
+    width: 50%;
+    height: 100px;
 }
 
 @media screen and (max-width: 680px) {
-    .modal{
+    .modal {
         margin: 70px 20px;
     }
 }

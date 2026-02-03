@@ -73,7 +73,7 @@ const Footer = () => {
 
                 <div class="copyright">
                     <div class="copy-text">
-                        <p>Copyright&nbsp; &copy; 2024 <a href="#">JOBDUNIYA</a>&nbsp;All rights reserved</p>
+                        <p>Copyright&nbsp; &copy; 2026 <a href="#">JOBDUNIYA</a>&nbsp;All rights reserved</p>
                     </div>
 
                 </div>

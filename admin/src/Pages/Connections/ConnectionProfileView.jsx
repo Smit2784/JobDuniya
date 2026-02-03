@@ -1,13 +1,25 @@
-import css from "../../Styles/modal.module.css";
+import css from "./connection_v3.module.css";
 import react, { useCallback, useContext, useState } from "react";
 import Modal from "../../render-model/Modal";
-import { GlobalState } from '../../main'
+import { GlobalState } from "../../main";
 
 const Body = ({ onClose, style, hidden, setValue }) => {
     const [currentState, setCurrentState] = useContext(GlobalState);
     const [hide, setHide] = useState([]);
-    const user = JSON.parse(localStorage.getItem("connectionId")); // user data
-    console.log(user);
+    let user = null;
+    try {
+        const storedUser = localStorage.getItem("connectionId");
+        if (storedUser && storedUser !== "undefined") {
+            user = JSON.parse(storedUser);
+        }
+    } catch (error) {
+        console.error("Failed to parse user data:", error);
+    }
+
+    if (!user) {
+        return <div className="p-3 text-center">User data not available</div>;
+    }
+
     const schemaKeysPersonalDetail = [
         "langauges",
         "lastName",
@@ -19,7 +31,7 @@ const Body = ({ onClose, style, hidden, setValue }) => {
         "description",
     ];
     const filteredData1 = Object.entries(user).filter(([key, _]) =>
-        schemaKeysPersonalDetail.includes(key)
+        schemaKeysPersonalDetail.includes(key),
     );
     const schemaKeysEducation = [
         "univercity",
@@ -29,37 +41,32 @@ const Body = ({ onClose, style, hidden, setValue }) => {
         "startDateSchool",
         "endDateSchool",
         "gpa",
-        "certifications",   
-    ];
-    const filteredData2 = Object.entries(user?.education.length != 0 && user.education[0]).filter(([key, _]) =>
-        schemaKeysEducation.includes(key)
-    );
-
-    const schemaKeysExperience = [
-        'userType',
-        'jobTitle',
-        'companyName',
-        'startDateWork',
-        'endDateWork',
-        'responsibilities',
-        'achievements',
         "certifications",
     ];
-    
-    const filteredData3 = Object.entries( user?.experience.length != 0 && user?.experience[0]).filter(([key, _]) =>
-        schemaKeysExperience.includes(key)  
-    );
+    const filteredData2 = Object.entries(
+        user?.education.length != 0 && user.education[0],
+    ).filter(([key, _]) => schemaKeysEducation.includes(key));
 
-    const schemaKeysAddress = [
-        'state' ,
-        'city',
-        'pinCode',
-        'personalAddress'
+    const schemaKeysExperience = [
+        "userType",
+        "jobTitle",
+        "companyName",
+        "startDateWork",
+        "endDateWork",
+        "responsibilities",
+        "achievements",
+        "certifications",
     ];
 
-    const filteredData4 = Object.entries(user?.location.length != 0 && user.location[0]).filter(([key, _]) =>
-        schemaKeysAddress.includes(key)
-    );
+    const filteredData3 = Object.entries(
+        user?.experience.length != 0 && user?.experience[0],
+    ).filter(([key, _]) => schemaKeysExperience.includes(key));
+
+    const schemaKeysAddress = ["state", "city", "pinCode", "personalAddress"];
+
+    const filteredData4 = Object.entries(
+        user?.location.length != 0 && user.location[0],
+    ).filter(([key, _]) => schemaKeysAddress.includes(key));
     const handleHide = (key) => {
         setValue((prev) => {
             if (hide.includes(key)) {
@@ -77,221 +84,175 @@ const Body = ({ onClose, style, hidden, setValue }) => {
         });
     };
 
+    const sections = [
+        {
+            key: "PersonalDetails",
+            title: "Personal Details",
+            data: filteredData1,
+            icon: "fa-user",
+        },
+        {
+            key: "EducationDetails",
+            title: "Education Details",
+            data: filteredData2,
+            icon: "fa-graduation-cap",
+        },
+        {
+            key: "ExperienceDetails",
+            title: "Experience Details",
+            data: user.experience[0].isFresher === false ? filteredData3 : null,
+            icon: "fa-briefcase",
+        },
+        {
+            key: "LocationDetails",
+            title: "Location Details",
+            data: filteredData4,
+            icon: "fa-location-dot",
+        },
+    ];
+
     return (
-        <>
-            <div className={style}>
-                <div className={css.TableContainerConnection}>
-                    <table className="table  table-hover bg-white table-borderless  table-responsive-md  align-middle mb-0 ">
-                        <thead className="">
-                            <tr>
-                                <th>
-                                    <div class="d-flex align-items-center">
-                                        <img
-                                            src={user.profileImage}
-                                            onError={(e) =>
-                                            (e.target.src =
-                                                "https://w7.pngwing.com/pngs/695/655/png-transparent-head-the-dummy-avatar-man-tie-jacket-user.png")
-                                            }
-                                            alt=""
-                                            style={{
-                                                width: "80px",
-                                                height: "80px",
-                                            }}
-                                            class="rounded-circle"
-                                        />
-                                        <div class="ms-3">
-                                            <p class="fw-bold fs-5 mb-1">
-                                                {user?.firstName}
-                                            </p>
-                                            <p class="text-muted mb-0">
-                                                {user.email}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </th>
-                                {!hidden && (
-                                    <th className="text-end d-flex flex-column  justify-content-start">
-                                        {!hidden && (
-                                            <i
-                                                className="fa fa-close hand"
-                                                onClick={onClose}
-                                            ></i>
-                                        )}
-                                    </th>
-                                )}
-                            </tr>
-                        </thead>
-                        <thead className="hand table-info ">
-                            <tr
-                                className=""
-                                onClick={() => handleHide("PersonalDetails")}
-                            >
-                                <th>
-                                    <b>Personal Details</b>
-                                </th>
-                                <th className="text-end ">
-                                    {!hide.includes("PersonalDetails") ? (
-                                        <i class="fa-solid fa-caret-right"></i>
-                                    ) : (
-                                        <i class="fa-solid fa-caret-down"></i>
-                                    )}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody
-                            className="table-active table-bordered border-1 border-light"
-                            style={
-                                !hide.includes("PersonalDetails")
-                                    ? {
-                                        display: "none",
-                                    }
-                                    : {}
-                            }
-                        >
-                            {filteredData1.map(([key, value]) => (
-                                <tr key={key}>
-                                    {key === "cv" ? (
-                                        <>
-                                            <td>RESUME</td>
-                                            <td className="text-end fs-5 ">
-                                                <a
-                                                    href={value}
-                                                    className=""
-                                                    target="_blank"
-                                                >
-                                                    <i className="fa fa-eye"></i>{" "}
-                                                </a>
-                                            </td>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <td>{key.toLocaleUpperCase()}</td>
-                                            <td className="text-end">
-                                                {Array.isArray(value)
-                                                    ? value.join(", ")
-                                                    : value}
-                                            </td>
-                                        </>
-                                    )}
-                                </tr>
-                            ))}
-                        </tbody>
-                        <thead className="table-info hand ">
-                            <tr onClick={() => handleHide("EducationDetails")}>
-                                <th>
-                                    <b>Education Details</b>
-                                </th>
-                                <th className="text-end ">
-                                    {!hide.includes("EducationDetails") ? (
-                                        <i class="fa-solid fa-caret-right"></i>
-                                    ) : (
-                                        <i class="fa-solid fa-caret-down"></i>
-                                    )}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody
-                            className="table-active"
-                            style={
-                                !hide.includes("EducationDetails")
-                                    ? {
-                                        display: "none",
-                                    }
-                                    : {}
-                            }
-                        >
-                            {filteredData2.map(([key, value]) => (
-                                <>
-                                    <tr key={key}>
-                                        <td>{key.toLocaleUpperCase()}</td>
-                                        <td className="text-end">
-                                            {value.length > 0?Array.isArray(value)
-                                                ? value.join(", ")
-                                                : value : "-"}
-                                        </td>
-                                    </tr>
-                                </>
-                            ))}
-                        </tbody>
-                        <thead className="table-info hand">
-                            <tr onClick={() => handleHide("ExperienceDetails")}>
-                                <th>
-                                    <b>Exprience Details</b>
-                                </th>
-                                <th className="text-end ">
-                                    {!hide.includes("ExperienceDetails") ? (
-                                        <i class="fa-solid fa-caret-right"></i>
-                                    ) : (
-                                        <i class="fa-solid fa-caret-down"></i>
-                                    )}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody
-                            className="table-active"
-                            style={
-                                !hide.includes("ExperienceDetails")
-                                    ? {
-                                        display: "none",
-                                    }
-                                    : {}
-                            }
-                        >
-                            
-                            {filteredData3.map(([key, value]) => (
-                                <>
-                                    <tr key={key}>
-                                        <td>{key.toLocaleUpperCase()}</td>
-                                        <td className="text-end">
-                                            {value.length > 0?Array.isArray(value)
-                                                ? value.join(", ")
-                                                : value : "-"}
-                                        </td>
-                                    </tr>
-                                </>
-                            ))}
-                        </tbody>
-                        <thead className="table-info hand">
-                            <tr onClick={() => handleHide("LocationDetails")}>
-                                <th>
-                                    <b>Location Details</b>
-                                </th>
-                                <th className="text-end ">
-                                    {!hide.includes("LocationDetails") ? (
-                                        <i class="fa-solid fa-caret-right"></i>
-                                    ) : (
-                                        <i class="fa-solid fa-caret-down"></i>
-                                    )}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody
-                            className="table-active"
-                            style={
-                                !hide.includes("LocationDetails")
-                                    ? {
-                                        display: "none",
-                                    }
-                                    : {}
-                            }
-                        >
-                            {filteredData4.map(([key, value]) => (
-                                <>
-                                    <tr key={key}>
-                                        <td>{key.toLocaleUpperCase()}</td>
-                                        <td className="text-end">
-                                            {value.length > 0?Array.isArray(value)
-                                                ? value.join(", ")
-                                                : value : "-"}
-                                        </td>
-                                    </tr>
-                                </>
-                            ))}
-                        </tbody>
-                    </table>
+        <div className={css.profileContainer}>
+            {/* 1. Glassmorphism Header */}
+            <div className={css.header}>
+                {!hidden && (
+                    <button
+                        className={css.closeButton}
+                        onClick={onClose}
+                        title="Close"
+                    >
+                        <i className="fa-solid fa-xmark"></i>
+                    </button>
+                )}
+
+                {/* 2. Floating Profile Card */}
+                <div className={css.profileCard}>
+                    <img
+                        src={user.profileImage}
+                        onError={(e) =>
+                            (e.target.src =
+                                "https://w7.pngwing.com/pngs/695/655/png-transparent-head-the-dummy-avatar-man-tie-jacket-user.png")
+                        }
+                        alt="Profile"
+                        className={css.avatar}
+                    />
+                    <div className={css.nameInfo}>
+                        <h2>
+                            {user?.firstName} {user?.lastName}
+                        </h2>
+                        <p>{user.email}</p>
+                    </div>
                 </div>
             </div>
-        </>
+
+            {/* 3. Dashboard Grid Content */}
+            <div className={css.contentArea}>
+                {/* Personal Details Card */}
+                <div className={`${css.card} ${css.cardPersonal}`}>
+                    <div className={css.sectionTitle}>
+                        <i className="fa-regular fa-user"></i> Personal Details
+                    </div>
+                    <div className={css.dataGrid}>
+                        {filteredData1.map(([key, value]) => (
+                            <div key={key} className={css.dataItem}>
+                                <span className={css.label}>
+                                    {key === "cv" ? "Resume" : key}
+                                </span>
+                                <span className={css.value}>
+                                    {key === "cv" ? (
+                                        <a
+                                            href={value}
+                                            target="_blank"
+                                            className={css.linkBtn}
+                                        >
+                                            <i className="fa-regular fa-eye"></i>{" "}
+                                            View Resume
+                                        </a>
+                                    ) : value && value.length > 0 ? (
+                                        Array.isArray(value) ? (
+                                            value.join(", ")
+                                        ) : (
+                                            value
+                                        )
+                                    ) : (
+                                        "-"
+                                    )}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Experience Card */}
+                {user.experience[0].isFresher === false && (
+                    <div className={`${css.card} ${css.cardExperience}`}>
+                        <div className={css.sectionTitle}>
+                            <i className="fa-solid fa-briefcase"></i> Experience
+                        </div>
+                        <div className={css.listContainer}>
+                            {filteredData3.map(([key, value]) => (
+                                <div key={key} className={css.listItem}>
+                                    <div className={css.dataItem}>
+                                        <span className={css.label}>{key}</span>
+                                        <span className={css.value}>
+                                            {value && value.length > 0
+                                                ? Array.isArray(value)
+                                                    ? value.join(", ")
+                                                    : value
+                                                : "-"}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* Education Card */}
+                <div className={`${css.card} ${css.cardEducation}`}>
+                    <div className={css.sectionTitle}>
+                        <i className="fa-solid fa-graduation-cap"></i> Education
+                    </div>
+                    <div className={css.listContainer}>
+                        {filteredData2.map(([key, value]) => (
+                            <div key={key} className={css.listItem}>
+                                <div className={css.dataItem}>
+                                    <span className={css.label}>{key}</span>
+                                    <span className={css.value}>
+                                        {value && value.length > 0
+                                            ? Array.isArray(value)
+                                                ? value.join(", ")
+                                                : value
+                                            : "-"}
+                                    </span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Location Card */}
+                <div className={`${css.card} ${css.cardLocation}`}>
+                    <div className={css.sectionTitle}>
+                        <i className="fa-solid fa-location-dot"></i> Location
+                    </div>
+                    <div className={css.dataGrid}>
+                        {filteredData4.map(([key, value]) => (
+                            <div key={key} className={css.dataItem}>
+                                <span className={css.label}>{key}</span>
+                                <span className={css.value}>
+                                    {value && value.length > 0
+                                        ? Array.isArray(value)
+                                            ? value.join(", ")
+                                            : value
+                                        : "-"}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

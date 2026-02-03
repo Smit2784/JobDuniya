@@ -1,44 +1,76 @@
-import React from 'react'
-import "../../Style/profile.css"
-const Experience = ({userType,jobTitle,companyName,startDateWork,endDateWork,responsibilities,achievements}) => {
-    return (
-        <>
-            <div class="dataContainer">
-                <div class="data-item">
-                    <p className="data-title">User Type</p>
-                    <p className="data-item-info">{userType}</p>
-                </div>
-                <div class="data-item">
-                    <p className="data-title">Job Title</p>
-                    <p className="data-item-info">{jobTitle}</p>
-                </div>
-                <div class="data-item">
-                    <p className="data-title">Company Name</p>
-                    <p className="data-item-info">{companyName}</p>
-                </div>
-                <div class="data-item">
-                    <p className="data-title">Start Date of Work </p>
-                    <p className="data-item-info">{startDateWork}</p>
-                </div>
-                <div class="data-item">
-                    <p className="data-title">End Date of Work</p>
-                    <p className="data-item-info">{endDateWork}</p>
-                </div>
-                <div class="data-item">
-                    <p className="data-title">Responsibilities</p>
-                    {responsibilities&&responsibilities.map((e)=>
-                        <li className="data-item-info">{e}</li>
-                    )}
-                </div>
-                <div class="data-item">
-                    <p className="data-title">Achievements</p>
-                    {achievements&&achievements.map((e)=>
-                        <li className="data-item-info">{e}</li>
-                    )}
-                </div>
-            </div>
-        </>
-    )
-}
+import React from "react";
+import css from "../../Style/profile.module.css";
 
-export default Experience
+const Experience = ({
+    userType,
+    jobTitle,
+    companyName,
+    startDateWork,
+    endDateWork,
+    responsibilities,
+    achievements,
+}) => {
+    return (
+        <div className={css.timelineItem}>
+            <div className={css.timelineIconBox}>
+                <div className={css.timelineIcon}>
+                    <i className="fa-solid fa-briefcase"></i>
+                </div>
+                <div className={css.timelineLine}></div>
+            </div>
+            <div className={css.timelineContent}>
+                <h4 className={css.roleTitle}>{jobTitle || "Job Role"}</h4>
+                <div className={css.institutionName}>
+                    <i className="fa-regular fa-building"></i>
+                    {companyName || "Company Name"}
+                </div>
+
+                {(startDateWork || endDateWork) && (
+                    <span className={css.durationBadge}>
+                        {startDateWork} - {endDateWork || "Present"}
+                    </span>
+                )}
+
+                {userType && (
+                    <div
+                        style={{
+                            fontSize: "0.9rem",
+                            color: "#666",
+                            marginBottom: "0.5rem",
+                        }}
+                    >
+                        <strong>Type:</strong> {userType}
+                    </div>
+                )}
+
+                {(responsibilities?.length > 0 || achievements?.length > 0) && (
+                    <div className={css.detailsList}>
+                        {responsibilities && responsibilities.length > 0 && (
+                            <div className="mb-2">
+                                <strong>Responsibilities:</strong>
+                                <ul>
+                                    {responsibilities.map((e, i) => (
+                                        <li key={i}>{e}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+
+                        {achievements && achievements.length > 0 && (
+                            <div>
+                                <strong>Achievements:</strong>
+                                <ul>
+                                    {achievements.map((e, i) => (
+                                        <li key={i}>{e}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default Experience;

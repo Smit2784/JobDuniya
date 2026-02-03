@@ -1,17 +1,15 @@
-import React from 'react'
-import css from "../Pages/Dashboard/style.module.css";
-const Tab = ({ tabName , action }) => {
+import React from "react";
+import css from "./tab.module.css";
+
+const Tab = ({ tabName, action }) => {
     return (
-        <div className={css.activeTab}>
-            <div>
-                <span style={{color:"rgb(1, 182, 246)"}} className={css.activeTabTitle}>/ {tabName} </span>
+        <div className={css.tabContainer}>
+            <div className={css.tabTitle}>
+                <i className="fa-solid fa-layer-group"></i> / {tabName}
             </div>
-            <div>
-                {action}
-            </div>
-
+            <div className={css.actionButton}>{action}</div>
         </div>
-    )
-}
+    );
+};
 
-export default Tab
+export default Tab;

@@ -14,7 +14,6 @@ import "../../../Style/login.css";
 import InputText from "../validateInputs";
 import { isValidStep5 } from "../../../Auth/isValidate";
 
-
 const Step5 = ({ setScreen }) => {
     const lottie = (
         <Lottie
@@ -36,17 +35,17 @@ const Step5 = ({ setScreen }) => {
 
     const handleEnterResponsibilitesEvent = (e) => {
         if (e.key == "Enter") {
-            setResponsibilities([...responsibilities, input])
-            e.target.value = ""
-        }
-    }
-    
-    const handleEnterAchievementEvent = (e) => {
-        if (e.key == "Enter") {
-            setAchievements([...achievements, input])
+            setResponsibilities([...responsibilities, input]);
             e.target.value = "";
         }
-    }
+    };
+
+    const handleEnterAchievementEvent = (e) => {
+        if (e.key == "Enter") {
+            setAchievements([...achievements, input]);
+            e.target.value = "";
+        }
+    };
 
     const api = useAPI();
 
@@ -58,7 +57,7 @@ const Step5 = ({ setScreen }) => {
                 startDateWork,
                 endDateWork,
                 responsibilities,
-                achievements
+                achievements,
             ),
         [
             jobTitle,
@@ -67,27 +66,26 @@ const Step5 = ({ setScreen }) => {
             endDateWork,
             responsibilities,
             achievements,
-        ]
+        ],
     );
 
     const handleSubmit = useCallback(async () => {
-            const id = localStorage.getItem("upd_id");
-            const data = await api.patchREQUEST("updateDetails", "users", id, {
-                experience: [
-                    {
-                        isFresher,
-                        jobTitle,
-                        companyName,
-                        userType,
-                        startDateWork,
-                        endDateWork,
-                        responsibilities,
-                        achievements,
-                        
-                    },
-                ],
-            });
-            setScreen("step6");
+        const id = localStorage.getItem("upd_id");
+        const data = await api.patchREQUEST("updateDetails", "users", id, {
+            experience: [
+                {
+                    isFresher,
+                    jobTitle,
+                    companyName,
+                    userType,
+                    startDateWork,
+                    endDateWork,
+                    responsibilities,
+                    achievements,
+                },
+            ],
+        });
+        setScreen("step6");
     }, [
         jobTitle,
         companyName,
@@ -111,9 +109,19 @@ const Step5 = ({ setScreen }) => {
                     <div className="flexCheckbox">
                         <input
                             type="checkbox"
-                            onClick={() =>
-                                setIsFresher(!isFresher)
-                            }
+                            onChange={() => {
+                                if (!isFresher) {
+                                    setJobTitle("");
+                                    setCompanyName("");
+                                    setUserType("");
+                                    setStartDateWork("");
+                                    setEndDateWork("");
+                                    setResponsibilities([]);
+                                    setAchievements([]);
+                                    setInput("");
+                                }
+                                setIsFresher(!isFresher);
+                            }}
                         />{" "}
                         I don't have an any experience.
                     </div>
@@ -138,6 +146,7 @@ const Step5 = ({ setScreen }) => {
                     inputType={"text"}
                     placeHolder={"Job Title*"}
                     require={true}
+                    disabled={isFresher}
                 />
             }
             textbox2={
@@ -147,6 +156,7 @@ const Step5 = ({ setScreen }) => {
                     inputType={"text"}
                     placeHolder={"Company Name*"}
                     require={true}
+                    disabled={isFresher}
                 />
             }
             textbox6={
@@ -156,6 +166,7 @@ const Step5 = ({ setScreen }) => {
                     inputType={"text"}
                     placeHolder={"Employeement type*"}
                     require={true}
+                    disabled={isFresher}
                 />
             }
             textbox4={
@@ -165,6 +176,7 @@ const Step5 = ({ setScreen }) => {
                     inputType={"date"}
                     require={true}
                     label={"Start date*"}
+                    disabled={isFresher}
                 />
             }
             textbox5={
@@ -174,6 +186,7 @@ const Step5 = ({ setScreen }) => {
                     inputType={"date"}
                     require={true}
                     label={"End date*"}
+                    disabled={isFresher}
                 />
             }
             textbox7={
@@ -184,6 +197,7 @@ const Step5 = ({ setScreen }) => {
                     onKeyUp={(e) => handleEnterResponsibilitesEvent(e)}
                     placeholder="Responsiblities*(press enter to add)"
                     require={false}
+                    disabled={isFresher}
                 />
             }
             textbox8={
@@ -191,9 +205,10 @@ const Step5 = ({ setScreen }) => {
                     onChange={(e) => setInput(e.target.value)}
                     type={"text"}
                     className={`${classes.input}`}
-                    onKeyUp={(e) =>handleEnterAchievementEvent(e)}
+                    onKeyUp={(e) => handleEnterAchievementEvent(e)}
                     placeholder="Achievements*(press enter to add)"
                     require={false}
+                    disabled={isFresher}
                 />
             }
             button1={
@@ -205,13 +220,10 @@ const Step5 = ({ setScreen }) => {
             }
             button2={
                 <FormButton
-                    className={
-                        
-                             "--btn"
-                    }
+                    className={"--btn"}
                     text={"Next"}
                     onClick={() => {
-                        handleSubmit()
+                        handleSubmit();
                     }}
                 />
             }

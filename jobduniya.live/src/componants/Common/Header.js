@@ -34,12 +34,12 @@ const Header = () => {
                     <div className={css.navbarLeft}>
                         <div
                             className={
-                                window.location.pathname === `/home`
+                                window.location.pathname === `/`
                                     ? `${css.navLinkActive}`
                                     : `${css.navLinkBox}`
                             }
                         >
-                            <Link className={css.navLink} to={"/home"}>
+                            <Link className={css.navLink} to={"/"}>
                                 Home
                             </Link>
                         </div>
@@ -90,14 +90,14 @@ const Header = () => {
                                     <i class="fa-solid fa-bookmark"></i>
                                 </Link>
                             </div>
-                            <div className={`${css.navLinkBox}`}>
+                            {/* <div className={`${css.navLinkBox}`}>
                                 <button
                                     className={css.navLinkBtn}
                                     onClick={()=>setActiveModalState("notifications")}
                                 >
                                     <i class="fa-solid fa-bell"></i>
                                 </button>
-                            </div>
+                            </div> */}
                             <div
                                 className={
                                     window.location.pathname === `/mynetwork`
@@ -113,7 +113,7 @@ const Header = () => {
                             <div className={`${css.navLinkBox}`}>
                                 <Link
                                     className={css.resMenu}
-                                    to={"https://admin-live-vimal-bhesaniyas-projects.vercel.app/"}
+                                    to={"http://localhost:5173/"}
                                     target="_blank"
                                 >
                                     Employers/Post job
@@ -183,12 +183,12 @@ const Header = () => {
                     >
                         <div
                             className={
-                                window.location.pathname == `/home`
+                                window.location.pathname == `/`
                                     ? `${css.navLinkActive}`
                                     : `${css.navLinkBox}`
                             }
                         >
-                            <Link className={css.navLink} to={"/home"}>
+                            <Link className={css.navLink} to={"/"}>
                                 <i class="fa-solid fa-home"></i>
                             </Link>
                         </div>

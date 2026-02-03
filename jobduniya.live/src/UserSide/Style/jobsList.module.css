@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+* {
+    box-sizing: border-box;
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 80px auto 40px;
+    padding: 0 24px;
+    min-height: 80vh;
+}
+
+.headerSection {
+    margin-bottom: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.titleBox {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.resultCount {
+    font-size: 1rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.controlsBox {
+    flex: 1;
+    max-width: 600px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.searchWrapper {
+    flex: 2;
+    min-width: 200px;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    font-size: 1rem;
+    height: 48px;
+    outline: none;
+    transition: all 0.2s;
+    color: #1e293b;
+}
+
+.searchInput:focus {
+    border-color: #3b82f6;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.filterWrapper {
+    flex: 1;
+    min-width: 150px;
+}
+
+.filterSelect {
+    width: 100%;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    font-size: 0.95rem;
+    height: 48px;
+    outline: none;
+    cursor: pointer;
+    color: #1e293b;
+    transition: all 0.2s;
+}
+
+.filterSelect:focus,
+.filterSelect:hover {
+    border-color: #3b82f6;
+    background: white;
+}
+
+.jobListContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 1000px; /* Keep centering focused */
+    margin: 0 auto;
+}
+
+/* Empty State */
+.emptyState {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    background: #f8fafc;
+    border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+    .headerSection {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .controlsBox {
+        width: 100%;
+        max-width: none;
+    }
+    .searchWrapper,
+    .filterWrapper {
+        flex: 1 1 100%;
+    }
+}

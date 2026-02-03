@@ -5,18 +5,14 @@ import React, {
     useMemo,
     useState,
 } from "react";
-import useFirestorage from "../../Hooks/OTHER/useFirestorage";
-import InputText from "../signup/validateInputs";
-import edit from "../../Style/edit.module.css";
-import success from "../../assets/success.json"
+import useUploadPdf from "../../Hooks/OTHER/UploadPdf";
+import styles from "./Style/apply.module.css";
+import success from "../../assets/success.json";
 import Lottie from "lottie-react";
 import { ActiveModal } from "../..";
 import useAPI from "../../Hooks/USER/useAPI";
-import { isValidApplication } from "../../Auth/isValidate";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import UploadPdf from "../../Hooks/OTHER/UploadPdf";
-import useUploadPdf from "../../Hooks/OTHER/UploadPdf";
 
 const Apply = ({ jobs }) => {
     const upload = useUploadPdf();
@@ -33,6 +29,7 @@ const Apply = ({ jobs }) => {
     const id = localStorage.getItem("appliedID");
     const userId = Cookies.get("id");
     const api = useAPI();
+
     useEffect(() => {
         const search = async () => {
             try {
@@ -46,6 +43,9 @@ const Apply = ({ jobs }) => {
             const data = await api.getREQUEST(`profile/${Cookies.get("id")}`);
             if (data[0]) {
                 setUser(data[0]);
+                // Pre-fill email/phone if available
+                if (data[0].email) setUserEmail(data[0].email);
+                if (data[0].phone) setPhoneNumber(data[0].phone);
             }
         };
         search();
@@ -57,11 +57,13 @@ const Apply = ({ jobs }) => {
             const email = e.target.value;
             if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
                 setUserEmail(email);
+                setErrorMsg("");
             } else {
                 setUserEmail("");
+                // setErrorMsg("Invalid email format");
             }
         },
-        [userEmail]
+        [userEmail],
     );
 
     const handleInput2 = useCallback(
@@ -73,7 +75,7 @@ const Apply = ({ jobs }) => {
                 setPhoneNumber("");
             }
         },
-        [phoneNumber]
+        [phoneNumber],
     );
 
     const handleChange = (event) => {
@@ -88,35 +90,37 @@ const Apply = ({ jobs }) => {
 
     useEffect(() => {
         setCv(upload.url);
-    }, [upload.url])
-
+    }, [upload.url]);
 
     const handleNext1 = () => {
-        setProgress("80%");
-        setFrom("form2")
+        setProgress("50%");
+        setFrom("form2");
         localStorage.setItem("Email", userEmail);
         localStorage.setItem("phoneNumber", phoneNumber);
     };
 
     const handleNext2 = async () => {
-        const yes = window.confirm("Are you sure you want to submit the application form?")
+        const yes = window.confirm(
+            "Are you sure you want to submit the application form?",
+        );
         if (yes) {
             const cId = data?.company?._id;
-            const jobId = data._id
+            const jobId = data._id;
             const email = localStorage.getItem("Email");
             const phoneNumber = localStorage.getItem("phoneNumber");
-            console.log(cId , jobId,email ,phoneNumber,cv);
-            const RESPONSE = await api.postREQUEST("Apply", JSON.stringify({userId, email, phoneNumber, cv, cId, jobId }));
+            console.log(cId, jobId, email, phoneNumber, cv);
+            const RESPONSE = await api.postREQUEST(
+                "Apply",
+                JSON.stringify({ userId, email, phoneNumber, cv, cId, jobId }),
+            );
             setProgress("100%");
-            setFrom("form3")
-            toast.success("Application submited successfully")
+            setFrom("form3");
+            toast.success("Application submitted successfully");
         } else {
-            setActiveModalState("")
+            setActiveModalState("");
             localStorage.clear();
         }
-
     };
-
 
     let isTrue = useMemo(() => {
         if (userEmail && phoneNumber) {
@@ -126,220 +130,240 @@ const Apply = ({ jobs }) => {
         }
     }, [userEmail, phoneNumber]);
 
-
     return (
-        <>
-            <div className={`card h-auto card mt-5 p-3 ${edit.cardContainer}`}>
-                <div className="d-flex justify-content-between align-items-center">
-                    <div className="">
-                        <span className="text-muted fontDefaultTitle">
-                            Apply to {data.company?.Name}
-                        </span>
-                    </div>
-                    <div className="">
-                        <span onClick={() => setActiveModalState("")}>
-                            <i className="hand fa fa-close fs-4"></i>
-                        </span>
-                    </div>
-                </div>
-                <hr />
-                <br />
-                <div className="row">
-                    <div class="progress rounded" style={{ height: "15px" }}>
-                        <div
-                            class="progress-bar rounded"
-                            role="progressbar"
-                            style={{ width: progress }}
-                        >
-                            <span>{progress}</span>
-                        </div>
+        <div className={styles.modalOverlay}>
+            <div className={styles.cardContainer}>
+                <div className={styles.header}>
+                    <h3 className={styles.title}>
+                        Apply to {data.company?.Name}
+                    </h3>
+                    <div
+                        className={styles.closeBtn}
+                        onClick={() => setActiveModalState("")}
+                    >
+                        <i className="fa fa-times"></i>
                     </div>
                 </div>
-                {form === "form1" ? (
-                    <>
-                        <span className="mt-3 fs-5">Contect Info</span>
-                        <div className="row">
-                            <div className="col-md-2 appImageContainer">
+
+                <div className={styles.progressContainer}>
+                    <div
+                        className={styles.progressBar}
+                        style={{ width: progress === "0%" ? "10%" : progress }}
+                    ></div>
+                </div>
+
+                {form === "form1" && (
+                    <div className="animate__animated animate__fadeIn">
+                        <span className={styles.sectionTitle}>
+                            Contact Info
+                        </span>
+
+                        <div className={styles.profileSection}>
+                            <div className={styles.imageWrapper}>
                                 <img
-                                    className="appImage"
+                                    className={styles.appImage}
                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIBYfT1otzlFrFgIErgyxOyBbO37OM5JsaUA&usqp=CAU"
-                                    alt=""
+                                    alt="Profile"
                                 />
                             </div>
-                            <div className="col-md-10 mt-3">
-                                <div>
-                                    <span style={{ fontWeight: "bold" }}>
-                                        {user.firstName} {user.lastName}
-                                    </span>
-                                </div>
-                                <div>
-                                    <span
-                                        className="font-weight-normal"
-                                        style={{ fontSize: "small" }}
-                                    >
-                                        Student at{" "}
-                                        {user.education &&
-                                            user.education[0]?.univercity}
-                                    </span>
-                                </div>
-                                <div>
-                                    <span style={{ fontSize: "10px" }}>
-                                        {user.location &&
-                                            user.location[0]?.city}
-                                        ,
-                                        {user.location &&
-                                            user.location[0]?.state}
-                                        , india
-                                    </span>
-                                </div>
+                            <div className={styles.userInfo}>
+                                <span className={styles.userName}>
+                                    {user.firstName} {user.lastName}
+                                </span>
+                                <span className={styles.userRole}>
+                                    Student at{" "}
+                                    {user.education &&
+                                        user.education[0]?.univercity}
+                                </span>
+                                <span className={styles.userLocation}>
+                                    <i className="fa fa-map-marker-alt"></i>
+                                    {user.location &&
+                                        user.location[0]?.city},{" "}
+                                    {user.location && user.location[0]?.state}
+                                </span>
                             </div>
                         </div>
-                        <div className="row mt-3 gap-3 ">
-                            <div className="col-12">
-                                <label htmlFor="" className="form-label">
-                                    Your email address*
-                                </label>
-                                <input
-                                    type="email"
-                                    required={true}
-                                    placeholder="Email address"
-                                    className={
-                                        userEmail
-                                            ? "form-control"
-                                            : `${edit.inputText}  border-danger `
-                                    }
-                                    onChange={(e) => handleInput1(e)}
-                                />
-                                <span>{errorMsg}</span>
-                            </div>
-                            <div className="col-12">
-                                <label htmlFor="" className="form-label">
-                                    Phone number*
-                                </label>
-                                <input
-                                    type="text"
-                                    maxLength={10}
-                                    onChange={(e) => handleInput2(e)}
-                                    inputMode="numeric"
-                                    className={
-                                        phoneNumber
-                                            ? "form-control"
-                                            : `${edit.inputText}  border-danger `
-                                    }
-                                    placeholder="Phone Number"
-                                />
-                                <span>{ }</span>
-                            </div>
+
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>
+                                Email address
+                            </label>
+                            <input
+                                type="email"
+                                placeholder="name@example.com"
+                                className={`${styles.input} ${!userEmail && errorMsg ? styles.inputError : ""}`}
+                                onChange={handleInput1}
+                                defaultValue={user.email}
+                            />
+                            {errorMsg && (
+                                <span className={styles.errorText}>
+                                    {errorMsg}
+                                </span>
+                            )}
                         </div>
-                        <div className="row mt-4">
-                            <span style={{ fontSize: "10px" }}>
-                                Submitting this application won’t change your
-                                JobDuniya profile.
-                            </span>
-                            <span style={{ fontSize: "10px" }}>
-                                Application powered by JobDunya
-                            </span>
+
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>Phone number</label>
+                            <input
+                                type="text"
+                                maxLength={10}
+                                inputMode="numeric"
+                                placeholder="10-digit mobile number"
+                                className={styles.input}
+                                onChange={handleInput2}
+                                defaultValue={user.phone}
+                            />
                         </div>
-                        <hr />
-                        <div className="row text-end ">
-                            <div>
-                                <button
-                                    className={
-                                        isTrue
-                                            ? "disabled btn bgbtn text-end"
-                                            : `btn bgbtn text-end  `
-                                    }
-                                    onClick={handleNext1}
-                                >
-                                    Next
-                                </button>
-                            </div>
+
+                        <div className={styles.footer}>
+                            <button
+                                className={`${styles.btn} ${isTrue ? styles.disabledBtn : styles.primaryBtn}`}
+                                onClick={handleNext1}
+                                disabled={isTrue}
+                            >
+                                Next Step
+                            </button>
                         </div>
-                    </>
-                ) : (
-                    ""
+                    </div>
                 )}
-                {form == "form2" ? (
-                    <>
-                        <span className="mt-3 fs-5">Upload your resume</span>
-                        <div className="row mt-3 gap-3 ">
-                            <div className='col-12'>
-                                <label htmlFor="" className='form-label '></label>
+
+                {form === "form2" && (
+                    <div className="animate__animated animate__fadeIn">
+                        <span className={styles.sectionTitle}>Resume / CV</span>
+
+                        <div className={styles.formGroup}>
+                            <div className={styles.fileInputWrapper}>
+                                <i
+                                    className="fa fa-cloud-upload-alt fa-3x"
+                                    style={{
+                                        color: "#94a3b8",
+                                        marginBottom: "16px",
+                                    }}
+                                ></i>
+                                <p
+                                    style={{
+                                        fontWeight: "500",
+                                        color: "#475569",
+                                    }}
+                                >
+                                    Click or drag to upload your resume (PDF)
+                                </p>
                                 <input
                                     type="file"
-                                    required={true}
-                                    typeof="application/pdf"
-                                    className={"form-control"}
+                                    accept="application/pdf"
+                                    className={styles.fileInput}
                                     onChange={handleChange}
                                 />
-                                {upload.uploadProgress ? <div class="progress rounded" style={{ height: "10px" }}>
+                                {selectedFile && (
                                     <div
-                                        class="progress-bar rounded"
-                                        role="progressbar"
-                                        style={{ width: `${upload.uploadProgress}%` }}
+                                        style={{
+                                            marginTop: "16px",
+                                            color: "#2563eb",
+                                            fontWeight: "600",
+                                        }}
                                     >
-                                        <span>{upload.uploadProgress}</span>
+                                        <i
+                                            className="fa fa-file-pdf"
+                                            style={{ marginRight: "8px" }}
+                                        ></i>
+                                        {selectedFile.name}
                                     </div>
-                                </div> : ""}
+                                )}
                             </div>
+
+                            {upload.uploadProgress > 0 &&
+                                upload.uploadProgress < 100 && (
+                                    <div style={{ marginTop: "16px" }}>
+                                        <div
+                                            className={styles.progressContainer}
+                                            style={{ marginBottom: "8px" }}
+                                        >
+                                            <div
+                                                className={styles.progressBar}
+                                                style={{
+                                                    width: `${upload.uploadProgress}%`,
+                                                }}
+                                            ></div>
+                                        </div>
+                                        <span
+                                            style={{
+                                                fontSize: "0.85rem",
+                                                color: "#64748b",
+                                            }}
+                                        >
+                                            Uploading... {upload.uploadProgress}
+                                            %
+                                        </span>
+                                    </div>
+                                )}
                         </div>
-                        <div className="row mt-4">
-                            <span style={{ fontSize: "10px" }}>
-                                Submitting this application won’t change your
-                                JobDuniya profile.
-                            </span>
-                            <span style={{ fontSize: "10px" }}>
-                                Application powered by JobDunya
-                            </span>
-                        </div>
-                        <hr />
-                        <div className="row text-end ">
-                            <div>
-                                {!cv ? <button
-                                    className={
-                                        !selectedFile
-                                            ? "disabled btn bgbtn text-end"
-                                            : `btn bgbtn text-end  `
+
+                        <div className={styles.footer}>
+                            {!cv ? (
+                                <button
+                                    className={`${styles.btn} ${!selectedFile ? styles.disabledBtn : styles.primaryBtn}`}
+                                    onClick={() =>
+                                        upload.handleUpload(selectedFile)
                                     }
-                                    onClick={() => upload.handleUpload(selectedFile)}
+                                    disabled={!selectedFile}
                                 >
-                                    Next
+                                    Upload & Continue
                                 </button>
-                                    : <button
-                                        className={
-                                            !selectedFile
-                                                ? "disabled btn bgbtn text-end"
-                                                : `btn bgbtn text-end  `
-                                        }
-                                        onClick={() => handleNext2()}
-                                    >
-                                        Submit Application
-                                    </button>
-                                }
-                            </div>
+                            ) : (
+                                <button
+                                    className={`${styles.btn} ${styles.primaryBtn}`}
+                                    onClick={handleNext2}
+                                >
+                                    Submit Application
+                                </button>
+                            )}
                         </div>
-                    </>
-                ) : (
-                    ""
-                )
-                }
-                {
-                    form == "form3" ? (
-                        <>
-                            {" "}
-                            <span className="mt-3 fs-5">Your Application have been submited.</span>
-                            <div className="row mt-3 gap-3 h-50 d-flex  justify-content-center  align-content-center ">
-                                <div className="w-50 d-flex justify-content-center  align-content-center  h-25">
-                                    <Lottie animationData={success} width={100} > </Lottie>
-                                </div>
-                            </div>
-                        </>
-                    ) : (
-                        ""
-                    )
-                }
-            </div >
-        </>
+                    </div>
+                )}
+
+                {form === "form3" && (
+                    <div
+                        className="animate__animated animate__fadeIn"
+                        style={{ textAlign: "center", padding: "40px 0" }}
+                    >
+                        <div style={{ width: "150px", margin: "0 auto" }}>
+                            <Lottie animationData={success} loop={false} />
+                        </div>
+                        <h4 style={{ color: "#0f172a", margin: "20px 0 10px" }}>
+                            Application Submitted!
+                        </h4>
+                        <p style={{ color: "#64748b" }}>
+                            Good luck! The company will review your application
+                            soon.
+                        </p>
+
+                        <div
+                            className={styles.footer}
+                            style={{
+                                justifyContent: "center",
+                                borderTop: "none",
+                            }}
+                        >
+                            <button
+                                className={`${styles.btn} ${styles.primaryBtn}`}
+                                onClick={() => setActiveModalState("")}
+                            >
+                                Return to Jobs
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {form !== "form3" && (
+                    <div className={styles.disclaimer}>
+                        Submitting this application won’t change your JobDuniya
+                        profile.
+                        <br />
+                        Application powered by JobDuniya
+                    </div>
+                )}
+            </div>
+        </div>
     );
 };
 

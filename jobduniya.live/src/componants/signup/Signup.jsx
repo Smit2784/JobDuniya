@@ -18,7 +18,7 @@ const Signup = () => {
   
   const navigate = useNavigate();
   if (Cookies.get("token")) {
-    navigate("/home");
+    navigate("/");
   }
 
   return (

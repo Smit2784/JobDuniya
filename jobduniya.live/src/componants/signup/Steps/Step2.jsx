@@ -3,7 +3,7 @@ import "../../../Style/singup.css";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import "react-toastify/dist/ReactToastify.css";
-import css from "../../../Style/inputBoxs.module.css"
+import css from "../../../Style/inputBoxs.module.css";
 import Stepper from "react-stepper-horizontal";
 import useAPI from "../../../Hooks/USER/useAPI";
 import FormButton from "../../Common/FormButton";
@@ -14,6 +14,7 @@ import InputText from "../validateInputs";
 import { isValidStep2 } from "../../../Auth/isValidate";
 import ProfilePreview from "./profilePreview";
 import useFirestorage from "../../../Hooks/OTHER/useFirestorage";
+import axios from "axios";
 
 const Step2 = ({ setScreen }) => {
     const lottie = (
@@ -27,33 +28,67 @@ const Step2 = ({ setScreen }) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [profileImage, setprofileImage] = useState("");
-    
-    const upload = useFirestorage();
+
+    // const upload = useFirestorage();
     const api = useAPI();
-    const url = upload.imageUrl
-    
-    const handleFileChange =  useCallback(async (event) => {
-        const isConfirmed = window.confirm("Are you sure?")
-        if (isConfirmed) {
-            await upload.Upload(event.target.files[0] , "userprofiles/" ,"image/jpeg");
+    // const url = upload.imageUrl;
+
+    const uploadProfileImage = async (file) => {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const res = await axios.post(
+            `${process.env.REACT_APP_LOCAL_URL}upload`,
+            formData,
+            {
+                headers: { "Content-Type": "multipart/form-data" },
+            },
+        );
+
+        return res.data.url;
+    };
+
+    const handleFileChange = useCallback(async (event) => {
+        const isConfirmed = window.confirm("Are you sure?");
+        if (!isConfirmed) return;
+
+        const file = event.target.files[0];
+        if (!file) return;
+
+        try {
+            const imageUrl = await uploadProfileImage(file);
+            console.log("Image URL", imageUrl);
+            setprofileImage(imageUrl);
+        } catch (err) {
+            alert("Upload failed");
+            console.error(err);
         }
-    } , []); 
-    
+    }, []);
+
+    // useEffect(() => {
+    //     setprofileImage(url);
+    // }, [url]);
+
     useEffect(() => {
-        setprofileImage(url);
-    }, [url])
+        console.log("Profile Image", profileImage);
+    }, [profileImage]);
 
     const isValidateStep2 = useMemo(
         () => isValidStep2(firstName, lastName, profileImage),
-        [firstName, lastName, profileImage]
+        [firstName, lastName, profileImage],
+    );
+
+    const handleSubmit = useCallback(async () => {
+        const id = localStorage.getItem("upd_id");
+        const data = await api.patchREQUEST(
+            "updateDetails",
+            "users",
+            { _id: id },
+            { firstName, lastName, profileImage },
         );
-        
-        const handleSubmit =  useCallback(async () => {
-            const id = localStorage.getItem("upd_id");
-            const data  =await api.patchREQUEST("updateDetails" , "users" , { _id : id } ,{firstName , lastName , profileImage})
-            setScreen("step3")
-    } , [firstName , lastName , profileImage])
-    
+        setScreen("step3");
+    }, [firstName, lastName, profileImage]);
+
     return (
         <FormContainer
             heading={"Sign Up"}
@@ -85,12 +120,12 @@ const Step2 = ({ setScreen }) => {
                 <input
                     className={css.input}
                     type="file"
-                    onChange={(e) => { handleFileChange(e) }}
+                    onChange={(e) => {
+                        handleFileChange(e);
+                    }}
                 />
             }
-            textbox5={
-                <ProfilePreview image={profileImage&&profileImage} />
-            }
+            textbox5={<ProfilePreview image={profileImage && profileImage} />}
             button1={
                 <FormButton
                     className={"--btn"}
@@ -104,11 +139,12 @@ const Step2 = ({ setScreen }) => {
                     text={"next"}
                     isDisabled={isValidateStep2}
                     onClick={() => {
-                        handleSubmit()                    }}
+                        handleSubmit();
+                    }}
                 />
             }
         />
-    )
-}
+    );
+};
 
-export default Step2
+export default Step2;

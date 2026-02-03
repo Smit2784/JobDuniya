@@ -1,0 +1,72 @@
+/* Main Container Layout matching Sidebar */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8fafc;
+    margin-left: 280px;
+    width: calc(100% - 280px);
+    transition:
+        margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+}
+
+@media (max-width: 991px) {
+    .container {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* Content Wrapper */
+.contentWrapper {
+    padding: 24px 32px;
+}
+
+@media (max-width: 768px) {
+    .contentWrapper {
+        padding: 16px;
+    }
+}
+
+/* Notification Cards */
+.notificationCard {
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 12px !important;
+    padding: 1rem 1.5rem !important;
+    margin-bottom: 1rem;
+    background-color: white !important;
+    border-left: 4px solid #3b82f6 !important; /* Default Primary Accent */
+    color: #334155 !important;
+    transition: transform 0.2s ease;
+}
+
+.notificationCard:hover {
+    transform: translateX(4px);
+}
+
+.successCard {
+    border-left-color: #10b981 !important; /* Green */
+}
+
+.primaryCard {
+    border-left-color: #3b82f6 !important; /* Blue */
+}
+
+.closeBtn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    color: #94a3b8;
+}
+
+.closeBtn:hover {
+    background-color: #fee2e2;
+    color: #ef4444;
+}

@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import "../Style/jobview.css";
+import css from "./Style/listUsers.module.css";
+// import "../Style/jobview.css"; // Commented out to prevent conflict if cleaner slate needed
 import useAPI from "../Hooks/USER/useAPI";
 import Cookies from "js-cookie";
 import { EnableSpinner } from "..";
@@ -8,7 +9,7 @@ import { toast } from "react-toastify";
 import CompanyProfile from "../CompanySide/components/CompanyProfile";
 
 const ListUsers = () => {
-    const [setSpinnerState] = useContext(EnableSpinner)
+    const [setSpinnerState] = useContext(EnableSpinner);
     const [keyword, setKeyword] = useState("");
     const [user, setUser] = useState([]);
     const [followingId, setFollowingId] = useState([]);
@@ -21,9 +22,8 @@ const ListUsers = () => {
         const data = await api.getREQUEST(`filter/user?filter=${filter}`);
         if (data) {
             setUser(data.users);
-            setLength(data?.users?.length)
-        }
-        else {
+            setLength(data?.users?.length);
+        } else {
             setUser([]);
         }
     };
@@ -32,20 +32,21 @@ const ListUsers = () => {
             getUser(keyword);
         }, 1000);
         return () => clearTimeout(deBounce);
-    }, [keyword])
+    }, [keyword]);
 
-    // useEffect(() => {
-    //     const getUser = async () => {
-    //         const data = await api.getREQUEST(`notFollowed/${id}/0`);
-    //         if (data) {
-    //             setUser(data);
-    //         }
-    //         else {
-    //             setUser([]);
-    //         }
-    //     };
-    //     getUser();
-    // }, []);
+    useEffect(() => {
+        const getUser = async () => {
+            const data = await api.getREQUEST(`getFollowings/${id}`);
+            if (data && data[0] && Array.isArray(data[0].targetId)) {
+                // Convert objects to IDs if necessary
+                const targetIds = data[0].targetId.map((item) =>
+                    item && typeof item === "object" ? item._id : item,
+                );
+                setFollowingId(targetIds);
+            }
+        };
+        getUser();
+    }, [id]);
     // console.log(user);
 
     const handleFollowButton = useCallback((targetId) => {
@@ -56,7 +57,7 @@ const ListUsers = () => {
                 { userId: id },
                 {
                     targetId: [targetId],
-                }
+                },
             );
             if (users) {
                 setFollowedUser(users);
@@ -64,26 +65,25 @@ const ListUsers = () => {
 
             setFollowingId((prev) => {
                 if (prev?.includes(targetId)) {
-                    return prev.filter(id => id !== targetId);
+                    return prev.filter((id) => id !== targetId);
+                } else {
+                    return [...prev, targetId];
                 }
-                else {
-                    return [...prev, targetId]
-                }
-            })
+            });
         };
         UpdateFollow();
     }, []);
 
     const handleUnFollowButton = useCallback((targetId) => {
-
         const UpdateFollow = async () => {
-            const users = await api.patchREQUEST(`api/userfollow/${id}/remove/${targetId}`,
-                "userFollow"
+            const users = await api.patchREQUEST(
+                `api/userfollow/${id}/remove/${targetId}`,
+                "userFollow",
             );
             setFollowedUser(users);
-            setFollowingId(prev => {
+            setFollowingId((prev) => {
                 if (prev?.includes(targetId)) {
-                    return prev.filter(id => id !== targetId);
+                    return prev.filter((id) => id !== targetId);
                 } else {
                     return [...prev, targetId];
                 }
@@ -93,56 +93,56 @@ const ListUsers = () => {
     }, []);
 
     return (
-        <>
-            <div className="container" style={{ marginTop: "100px" }}>
-                <div className="row-jobList">
-                    <div className="col-jobList">
-                        <span className="fs-3">Recommended for you</span>
-                    </div>
-                    <div className="col-jobList">
-                        <div className="job--input">
-                            <input
-                                type="text"
-                                className="form-control h-100 w-100"
-                                placeholder={"type to search"}
-                                onChange={(e) => setKeyword(e.target.value)}
-                            />
-                        </div>
-                    </div>
+        <div className={css.container}>
+            <div className={css.headerSection}>
+                <div className={css.titleBox}>
+                    <h1 className={css.title}>Recommended for you</h1>
+                    <span className={css.resultCount}>
+                        {length} Connections Found
+                    </span>
                 </div>
-                <span className="fs-5"> Results {length}</span>
+                <div className={css.searchBox}>
+                    <input
+                        type="text"
+                        className={css.searchInput}
+                        placeholder="Search for people..."
+                        onChange={(e) => setKeyword(e.target.value)}
+                    />
+                </div>
             </div>
 
-            <div className="container card">
-                <div className="card---container">
-                    {user && Array.isArray(user) && user?.map((e) => {
-                        return <Card
+            <div className={css.gridContainer}>
+                {user &&
+                    Array.isArray(user) &&
+                    user?.map((e) => (
+                        <Card
+                            key={e?._id}
                             btnText={"Follow"}
                             firstName={e?.firstName}
                             _id={e?._id}
                             lastName={e?.lastName}
                             yes={"Follow"}
                             no={"Following"}
-                            handleUnFollowButton={() => handleUnFollowButton(e?._id)}
+                            handleUnFollowButton={() =>
+                                handleUnFollowButton(e?._id)
+                            }
                             pofession={e?.profession}
                             profileImage={e?.profileImage}
                             following_id={followingId}
                             univercity={e?.education[0]?.univercity}
-                            handleFollowButton={() => handleFollowButton(e?._id)}
+                            handleFollowButton={() =>
+                                handleFollowButton(e?._id)
+                            }
+                            // Pass styles or use global card styles specific to this new design
                         />
-                    })
-                    }
-
-                </div>
+                    ))}
             </div>
-            <div className="row">
-                    <div className="col text-center ">
-                        <span className="text-center fs-2">Companies</span>
-                    </div>
 
+            <div className={css.companiesSection}>
+                <span className={css.sectionTitle}>Companies</span>
+                <CompanyProfile />
             </div>
-            <CompanyProfile />
-        </>
+        </div>
     );
 };
 

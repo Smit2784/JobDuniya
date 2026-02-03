@@ -1,4 +1,6 @@
 .body-- {
     overflow: scroll;
+    padding-top: 73px;
+    box-sizing: border-box;
     height: 100vh;
 }

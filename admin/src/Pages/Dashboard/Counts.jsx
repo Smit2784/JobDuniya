@@ -1,64 +1,83 @@
 import React, { useEffect, useState, useCallback } from "react";
-import css from "./style.module.css";
+import css from "./dashboard.module.css";
 import useAPI from "../../Hooks/useAPI";
+
 const Counts = () => {
     const api = useAPI();
     const [job, setJob] = useState(0);
     const [application, setApplication] = useState(0);
     const [connection, setConnection] = useState(0);
     const id = localStorage.getItem("id");
-    const fetch = useCallback(async () => {
-        const application = await api.getREQUEST(`applied-users/${id}`)
-        setApplication(application?.length);
-        const data = await api.getREQUEST(`getConnections/${id}`);
-        setConnection(data?.length || 0);
-        const jobs = await api.getREQUEST(`FetchCompanyJobs/${id}`)
-        setJob(jobs?.length)
-    });
-    useEffect(() => {
-        fetch();
-    }, []);
-    return (
-        <div className={css.CountContainer}>
-            <div className={css.countCard}>
-                <div className={css.countHeader}>
-                    <i class="fa-solid fa-envelope-open-text"></i>
-                    <span className={css.title}> Applications</span>
-                </div>
-                <div className={css.countNumber}>
-                    <span className={css.num}> {application}</span>
-                </div>
-            </div>
-            <div className={css.countCard}>
-                <div className={css.countHeader}>
-                    <i class="fa-solid fa-users"></i>
-                    <span className={css.title}> Connections</span>
-                </div>
-                <div className={css.countNumber}>
-                    <span className={css.num}> {connection}</span>
-                    {/* <span className={css.num}> 0</span> */}
-                </div>
-            </div>
-            <div className={css.countCard}>
-                <div className={css.countHeader}>
-                    <i className="fa fa-briefcase"></i>
-                    <span className={css.title}> Jobs</span>
-                </div>
-                <div className={css.countNumber}>
-                    <span className={css.num}> {job}</span>
-                    {/* <span className={css.num}> 0</span> */}
 
-                </div>
-            </div>
-            <div className={css.countCard}>
+    // Move fetch logic inside useEffect to prevent infinite loop
+    useEffect(() => {
+        let isMounted = true;
+        const fetchCounts = async () => {
+            if (!id) return;
+            try {
+                const appData = await api.getREQUEST(`applied-users/${id}`);
+                const connData = await api.getREQUEST(`getConnections/${id}`);
+                const jobsData = await api.getREQUEST(`FetchCompanyJobs/${id}`);
+
+                if (isMounted) {
+                    setApplication(appData?.length || 0);
+                    setConnection(connData?.length || 0);
+                    setJob(jobsData?.length || 0);
+                }
+            } catch (error) {
+                console.error("Error fetching counts:", error);
+            }
+        };
+
+        fetchCounts();
+
+        return () => {
+            isMounted = false;
+        };
+    }, []); // Empty dependency array ensures this runs ONLY once on mount
+
+    return (
+        <div className={css.countsGrid}>
+            <div className={`${css.countCard} ${css.cardBlue}`}>
                 <div className={css.countHeader}>
-                    <i class="fa-solid fa-comment"></i>
-                    <span className={css.title}> Feedbacks</span>
+                    <i
+                        className="fa-solid fa-envelope-open-text"
+                        style={{ color: "#3b82f6" }}
+                    ></i>
+                    Applications
                 </div>
-                <div className={css.countNumber}>
-                    <span className={css.num}>0</span>
-                </div>
+                <div className={css.countValue}>{application}</div>
             </div>
+            <div className={`${css.countCard} ${css.cardOrange}`}>
+                <div className={css.countHeader}>
+                    <i
+                        className="fa-solid fa-users"
+                        style={{ color: "#f97316" }}
+                    ></i>
+                    Connections
+                </div>
+                <div className={css.countValue}>{connection}</div>
+            </div>
+            <div className={`${css.countCard} ${css.cardGreen}`}>
+                <div className={css.countHeader}>
+                    <i
+                        className="fa fa-briefcase"
+                        style={{ color: "#22c55e" }}
+                    ></i>
+                    Jobs
+                </div>
+                <div className={css.countValue}>{job}</div>
+            </div>
+            {/* <div className={`${css.countCard} ${css.cardPurple}`}>
+                <div className={css.countHeader}>
+                    <i
+                        className="fa-solid fa-comment"
+                        style={{ color: "#a855f7" }}
+                    ></i>
+                    Feedbacks
+                </div>
+                <div className={css.countValue}>0</div>
+            </div> */}
         </div>
     );
 };

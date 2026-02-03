@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
-import "../../Style/jobview.css";
+// import "../../Style/jobview.css";
+import css from "../Style/listUsers.module.css";
+
 const Card = ({
     profileImage,
     firstName,
@@ -8,58 +10,68 @@ const Card = ({
     _id,
     handleFollowButton,
     handleUnFollowButton,
-    no ,
+    no,
     yes,
     univercity,
     pofession,
+    disableFollowingBtn,
 }) => {
+    // Determine button state
+    const isFollowing = following_id?.includes(_id);
 
     return (
-        <>
-            <div className="card---body card ">
-                <div className="card---picture">
+        <div className={css.profileCard}>
+            <div className={css.coverBg}></div>
+            <div className={css.profileContent}>
+                <div className={css.profileImageWrapper}>
                     <img
                         src={profileImage}
-                        className="card---img"
-                        alt=""
+                        className={css.profileImg}
+                        alt={`${firstName} ${lastName}`}
                         onError={(e) =>
                             (e.target.src =
                                 "https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg")
                         }
                     />
                 </div>
-                <div className="card---header">
-                    <div>
-                        <span className="text-muted ellips fw-semibold">
-                            {firstName} {lastName}
-                        </span>
-                    </div>
-                    <div className="ellips">
-                        <span style={{ fontSize: "13px" }}>{pofession}</span>
-                    </div>
-                    <div className="ellips">
-                        <span style={{ fontSize: "12px" }}>{univercity}</span>
-                    </div>
-                    <div className="row d-flex  justify-content-center  align-content-center  h-100">
-                        {following_id?.includes(_id) ? (
-                            <button
-                                className="btn followBtn p-2 mt-2"
-                                onClick={() => handleUnFollowButton(_id)}
-                            >
-                                {no}
-                            </button>
-                        ) : (
-                            <button
-                                className="btn followBtn p-2 mt-2"
-                                onClick={() => handleFollowButton(_id)}
-                            >
-                                {yes}
-                            </button>
-                        )}
-                    </div>
+                <div className={css.userInfo}>
+                    <h3 className={css.userName}>
+                        {firstName} {lastName}
+                    </h3>
+                    <p className={css.userProfession}>{pofession || "N/A"}</p>
+                    <p className={css.userUniversity}>
+                        {univercity || "Univercity N/A"}
+                    </p>
+                </div>
+
+                <div className={css.actionArea}>
+                    {isFollowing ? (
+                        <button
+                            className={css.unfollowBtn}
+                            onClick={() =>
+                                !disableFollowingBtn &&
+                                handleUnFollowButton(_id)
+                            }
+                            disabled={disableFollowingBtn}
+                            style={
+                                disableFollowingBtn
+                                    ? { cursor: "not-allowed", opacity: 0.7 }
+                                    : {}
+                            }
+                        >
+                            {no}
+                        </button>
+                    ) : (
+                        <button
+                            className={css.followBtn}
+                            onClick={() => handleFollowButton(_id)}
+                        >
+                            {yes}
+                        </button>
+                    )}
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

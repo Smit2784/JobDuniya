@@ -1,0 +1,181 @@
+/* Sidebar Container */
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    border-right: 1px solid #edf2f7;
+}
+
+.containerSIDE {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1.5rem 1rem;
+}
+
+/* Logo Area */
+.linksMenuLogo {
+    margin-bottom: 2.5rem;
+    padding: 0 1rem;
+    text-align: center;
+}
+
+.logoImage {
+    max-width: 140px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Navigation Links */
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.linksMenus {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #64748b;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.linksMenus:hover {
+    background-color: #f1f5f9;
+    color: #23a6f0;
+}
+
+.linksMenus i:first-child {
+    font-size: 1.2rem;
+    width: 30px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.linkTitle {
+    flex-grow: 1;
+    font-size: 0.95rem;
+}
+
+.linksMenus i:last-child {
+    font-size: 0.8rem;
+    opacity: 0;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.linksMenus:hover i:last-child {
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+/* Active State */
+.activeLink {
+    background-color: #e0f2fe; /* Light Blue Background */
+    color: #0284c7; /* Stronger Blue Text */
+    font-weight: 600;
+}
+
+.activeLink i {
+    color: #0284c7;
+}
+
+/* Logout Section */
+.logoutSection {
+    margin-top: auto;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 1rem;
+}
+
+.linksMenusLast {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #ef4444; /* Red color for logout */
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    transition: all 0.2s ease;
+}
+
+.linksMenusLast:hover {
+    background-color: #fef2f2;
+}
+
+.linksMenusLast i:first-child {
+    font-size: 1.2rem;
+    width: 30px;
+    text-align: center;
+    margin-right: 10px;
+    color: #ef4444;
+}
+
+.linkTitleLogOut {
+    flex-grow: 1;
+    font-size: 0.95rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .sidebar {
+        width: 80px;
+        padding: 0;
+        align-items: center;
+    }
+
+    .containerSIDE {
+        padding: 1.5rem 0.5rem;
+        width: 100%;
+        align-items: center;
+    }
+
+    .linkTitle,
+    .linkTitleLogOut,
+    .linksMenus i:last-child {
+        display: none;
+    }
+
+    .linksMenuLogo {
+        padding: 0;
+        margin-bottom: 2rem;
+    }
+
+    .logoImage {
+        width: 40px;
+    }
+
+    .linksMenus,
+    .linksMenusLast {
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        border-radius: 12px;
+    }
+
+    .linksMenus i:first-child,
+    .linksMenusLast i:first-child {
+        margin: 0;
+        font-size: 1.4rem;
+    }
+}

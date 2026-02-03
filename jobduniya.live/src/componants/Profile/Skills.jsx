@@ -1,20 +1,19 @@
 import React from "react";
+import css from "../../Style/profile.module.css";
 
 const Skills = ({ data }) => {
     return (
-        <div className="row p-4">
-            <span className="fs-3 text-muted">Skills :</span>
-            {data?.map((skill) => {
-                return <div className="col">
-                    <p
-                        className="text-info bg-secondary-subtle  p-2 rounded-pill text-center mb-2 "
-                        style={{ whiteSpace: "nowrap" }}
-                    >
+        <div className={css.skillsContainer}>
+            <div className={css.skillsHeader}>
+                <i className="fa-solid fa-code"></i> Skills
+            </div>
+            <div className={css.skillsList}>
+                {data?.map((skill, index) => (
+                    <span key={index} className={css.skillBadge}>
                         {skill}
-                    </p>
-                </div>
-            })
-            }
+                    </span>
+                ))}
+            </div>
         </div>
     );
 };
