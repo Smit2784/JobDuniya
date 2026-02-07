@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Tab from "../../Shared/Tab";
-import css from "../Dashboard/dashboard.module.css";
+
 import useAPI from "../../Hooks/useAPI";
 import { ActiveModal } from "../../main";
 import { GlobalState } from "../../main";
@@ -44,32 +44,42 @@ const Connections = () => {
     }, []);
 
     return (
-        <div className={css.dashboardContainer}>
+        <div className="ml-[280px] w-[calc(100%-280px)] bg-[#f8f9fa] min-h-screen flex flex-col items-center transition-all duration-300 max-[900px]:ml-[80px] max-[900px]:w-[calc(100%-80px)]">
             <Navbar
                 left={`Hello 👋 ${currentState?.HRDetail?.Name || "User"}!`}
             />
             <Tab tabName={`Connections`} />
 
             <div
-                className={css.applicationsSection}
+                className="w-[95%] max-w-[1400px] mt-8 pb-8"
                 style={{ marginTop: "20px" }}
             >
-                <div className={css.tableHeader}>
-                    <div className={css.sectionTitle}>
+                <div className="bg-white rounded-t-xl py-5 px-8 border-b border-[#e2e8f0] flex justify-between items-center">
+                    <div className="text-[1.2rem] font-bold text-[#0f172a] flex items-center gap-[10px]">
                         <i className="fa-solid fa-users"></i>
                         My Connections
                     </div>
-                    <div className={css.badgeCount}>{items.length} Total</div>
+                    <div className="bg-[#e0f2fe] text-[#0284c7] py-1 px-3 rounded-full text-sm font-semibold">
+                        {items.length} Total
+                    </div>
                 </div>
 
-                <div className={css.tableContainer}>
-                    <table className={css.modernTable}>
+                <div className="bg-white rounded-b-xl shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] border border-[#e2e8f0] border-t-0 overflow-x-auto">
+                    <table className="w-full border-collapse min-w-[800px]">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Location</th>
-                                <th>Profession</th>
-                                <th>Actions</th>
+                                <th className="bg-[#f8fafc] text-[#64748b] font-semibold uppercase text-xs tracking-wider py-4 px-6 text-left">
+                                    Name
+                                </th>
+                                <th className="bg-[#f8fafc] text-[#64748b] font-semibold uppercase text-xs tracking-wider py-4 px-6 text-left">
+                                    Location
+                                </th>
+                                <th className="bg-[#f8fafc] text-[#64748b] font-semibold uppercase text-xs tracking-wider py-4 px-6 text-left">
+                                    Profession
+                                </th>
+                                <th className="bg-[#f8fafc] text-[#64748b] font-semibold uppercase text-xs tracking-wider py-4 px-6 text-left">
+                                    Actions
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,9 +98,12 @@ const Connections = () => {
                                 </tr>
                             ) : items.length > 0 ? (
                                 items.map((e) => (
-                                    <tr key={e._id || Math.random()}>
-                                        <td>
-                                            <div className={css.userCell}>
+                                    <tr
+                                        key={e._id || Math.random()}
+                                        className="hover:bg-[#f8fafc] border-b border-[#f1f5f9] last:border-b-0"
+                                    >
+                                        <td className="py-4 px-6 text-[#334155] align-middle">
+                                            <div className="flex items-center gap-4">
                                                 <img
                                                     src={`${e.profileImage}`}
                                                     alt=""
@@ -99,18 +112,20 @@ const Connections = () => {
                                                         e.target.src =
                                                             "https://w7.pngwing.com/pngs/695/655/png-transparent-head-the-dummy-avatar-man-tie-jacket-user.png";
                                                     }}
-                                                    className={css.avatar}
+                                                    className="w-10 h-10 rounded-full object-cover border-2 border-[#e2e8f0]"
                                                 />
-                                                <div className={css.userInfo}>
-                                                    <h6>
+                                                <div className="flex flex-col">
+                                                    <h6 className="m-0 text-[0.95rem] font-semibold text-[#0f172a]">
                                                         {e.firstName}{" "}
                                                         {e.lastName}
                                                     </h6>
-                                                    <p>{e.email}</p>
+                                                    <p className="m-0 text-[0.8rem] text-[#64748b]">
+                                                        {e.email}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
+                                        <td className="py-4 px-6 text-[#334155] align-middle">
                                             <span className="text-muted">
                                                 {e.location &&
                                                 e?.location[0]?.city
@@ -118,16 +133,16 @@ const Connections = () => {
                                                     : "N/A"}
                                             </span>
                                         </td>
-                                        <td>
+                                        <td className="py-4 px-6 text-[#334155] align-middle">
                                             <span className="badge bg-light text-dark border">
                                                 {e.profession || "N/A"}
                                             </span>
                                         </td>
-                                        <td>
-                                            <div className={css.actionGroup}>
+                                        <td className="py-4 px-6 text-[#334155] align-middle">
+                                            <div className="flex gap-2">
                                                 <button
                                                     type="button"
-                                                    className={`${css.iconBtn} ${css.btnView}`}
+                                                    className="w-8 h-8 rounded-lg border-none flex items-center justify-center cursor-pointer transition-all duration-200 bg-[#e0f2fe] text-[#0284c7] hover:bg-[#0284c7] hover:text-white"
                                                     title="View Profile"
                                                     onClick={() => {
                                                         setActiveModalState(

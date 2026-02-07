@@ -1,7 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import Tab from "../../Shared/Tab";
-import css from "../Dashboard/dashboard.module.css";
-import "../Connections/style.css";
 import { ActiveModal } from "../../main";
 import useAPI from "../../Hooks/useAPI";
 import { RefreshState } from "../../App";
@@ -93,24 +91,36 @@ const Applications = () => {
     };
 
     return (
-        <div className={css.applicationsSection}>
-            <div className={css.tableHeader}>
-                <div className={css.sectionTitle}>
+        <div className="w-[95%] max-w-[1400px] mt-8 pb-8">
+            <div className="bg-white rounded-t-xl py-5 px-8 border-b border-[#e2e8f0] flex justify-between items-center">
+                <div className="text-[1.2rem] font-bold text-[#0f172a] flex items-center gap-[10px]">
                     <i className="fa-solid fa-list-ul"></i>
                     Recent Applications
                 </div>
-                <div className={css.badgeCount}>{items.length} Total</div>
+                <div className="bg-[#e0f2fe] text-[#0284c7] py-1 px-3 rounded-full text-sm font-semibold">
+                    {items.length} Total
+                </div>
             </div>
 
-            <div className={css.tableContainer}>
-                <table className={css.modernTable}>
+            <div className="bg-white rounded-b-xl shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] border border-[#e2e8f0] border-t-0 overflow-x-auto">
+                <table className="w-full border-collapse min-w-[800px]">
                     <thead>
                         <tr>
-                            <th>Applicant</th>
-                            <th>Contact</th>
-                            <th>Position</th>
-                            <th>Resume</th>
-                            <th>Actions</th>
+                            <th className="bg-[#f8fafc] text-[#64748b] font-semibold uppercase text-xs tracking-wider py-4 px-6 text-left">
+                                Applicant
+                            </th>
+                            <th className="bg-[#f8fafc] text-[#64748b] font-semibold uppercase text-xs tracking-wider py-4 px-6 text-left">
+                                Contact
+                            </th>
+                            <th className="bg-[#f8fafc] text-[#64748b] font-semibold uppercase text-xs tracking-wider py-4 px-6 text-left">
+                                Position
+                            </th>
+                            <th className="bg-[#f8fafc] text-[#64748b] font-semibold uppercase text-xs tracking-wider py-4 px-6 text-left">
+                                Resume
+                            </th>
+                            <th className="bg-[#f8fafc] text-[#64748b] font-semibold uppercase text-xs tracking-wider py-4 px-6 text-left">
+                                Actions
+                            </th>
                         </tr>
                     </thead>
                     {isRefreshing && (
@@ -118,10 +128,10 @@ const Applications = () => {
                             <tr>
                                 <td colSpan={5} className="text-center p-3">
                                     <div
-                                        className="spinner-border text-primary"
+                                        className="inline-block w-8 h-8 border-4 border-current border-r-transparent rounded-full animate-spin text-blue-600"
                                         role="status"
                                     >
-                                        <span className="visually-hidden">
+                                        <span className="sr-only">
                                             Loading...
                                         </span>
                                     </div>
@@ -133,9 +143,12 @@ const Applications = () => {
                     <tbody>
                         {items.length > 0 ? (
                             items.map((e) => (
-                                <tr key={e._id}>
-                                    <td>
-                                        <div className={css.userCell}>
+                                <tr
+                                    key={e._id}
+                                    className="hover:bg-[#f8fafc] border-b border-[#f1f5f9] last:border-b-0"
+                                >
+                                    <td className="py-4 px-6 text-[#334155] align-middle">
+                                        <div className="flex items-center gap-4">
                                             <img
                                                 src={`${e?.userId?.profileImage}`}
                                                 alt="User"
@@ -144,43 +157,45 @@ const Applications = () => {
                                                     e.target.src =
                                                         "https://w7.pngwing.com/pngs/695/655/png-transparent-head-the-dummy-avatar-man-tie-jacket-user.png";
                                                 }}
-                                                className={css.avatar}
+                                                className="w-10 h-10 rounded-full object-cover border-2 border-[#e2e8f0]"
                                             />
-                                            <div className={css.userInfo}>
-                                                <h6>
+                                            <div className="flex flex-col">
+                                                <h6 className="m-0 text-[0.95rem] font-semibold text-[#0f172a]">
                                                     {e?.userId?.firstName}{" "}
                                                     {e?.userId?.lastName}
                                                 </h6>
-                                                <p>{e?.userId?.email}</p>
+                                                <p className="m-0 text-[0.8rem] text-[#64748b]">
+                                                    {e?.userId?.email}
+                                                </p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <span className="text-muted small">
+                                    <td className="py-4 px-6 text-[#334155] align-middle">
+                                        <span className="text-gray-500 text-sm">
                                             {e?.userId?.email}
                                         </span>
                                     </td>
-                                    <td>
-                                        <span className="badge bg-light text-dark border">
+                                    <td className="py-4 px-6 text-[#334155] align-middle">
+                                        <span className="inline-block py-1 px-2 rounded bg-gray-100 text-gray-800 border border-gray-200 text-xs font-semibold">
                                             {e?.jobId?.Title || "N/A"}
                                         </span>
                                     </td>
-                                    <td>
+                                    <td className="py-4 px-6 text-[#334155] align-middle">
                                         <a
                                             href={e?.cv}
                                             download={true}
                                             target="_blank"
                                             rel="noreferrer"
-                                            className={css.btnDownload}
+                                            className="text-[#6366f1] text-[1.1rem] transition-transform duration-200 hover:scale-110 inline-block"
                                         >
                                             <i className="fa-solid fa-file-pdf"></i>
                                         </a>
                                     </td>
-                                    <td>
-                                        <div className={css.actionGroup}>
+                                    <td className="py-4 px-6 text-[#334155] align-middle">
+                                        <div className="flex gap-2">
                                             <button
                                                 type="button"
-                                                className={`${css.iconBtn} ${css.btnView}`}
+                                                className="w-8 h-8 rounded-lg border-none flex items-center justify-center cursor-pointer transition-all duration-200 bg-[#e0f2fe] text-[#0284c7] hover:bg-[#0284c7] hover:text-white"
                                                 title="View Profile"
                                                 onClick={() => {
                                                     if (e?.userId) {
@@ -205,7 +220,7 @@ const Applications = () => {
 
                                             <button
                                                 type="button"
-                                                className={`${css.iconBtn} ${css.btnEmail}`}
+                                                className="w-8 h-8 rounded-lg border-none flex items-center justify-center cursor-pointer transition-all duration-200 bg-[#dcfce7] text-[#16a34a] hover:bg-[#16a34a] hover:text-white"
                                                 title="Send Email"
                                                 onClick={() => {
                                                     localStorage.setItem(
@@ -226,7 +241,7 @@ const Applications = () => {
 
                                             <button
                                                 type="button"
-                                                className={`${css.iconBtn} ${css.btnDelete}`}
+                                                className="w-8 h-8 rounded-lg border-none flex items-center justify-center cursor-pointer transition-all duration-200 bg-[#fee2e2] text-[#dc2626] hover:bg-[#dc2626] hover:text-white"
                                                 title="Delete"
                                                 onClick={() =>
                                                     handleDelete(e?._id)
@@ -241,8 +256,8 @@ const Applications = () => {
                         ) : (
                             <tr>
                                 <td colSpan={5} className="text-center p-5">
-                                    <div className="text-muted d-flex flex-column align-items-center">
-                                        <i className="fa-regular fa-folder-open fs-2 mb-2"></i>
+                                    <div className="text-gray-500 flex flex-col items-center">
+                                        <i className="fa-regular fa-folder-open text-2xl mb-2"></i>
                                         <span>No Applications Found</span>
                                     </div>
                                 </td>

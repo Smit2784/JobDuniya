@@ -1,5 +1,10 @@
-:root{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    font-family:
+        Cambria, Cochin, Georgia, Times, "Times New Roman", serif !important;
 }
 .loader {
     --dim: 3rem;
@@ -65,15 +70,13 @@
     }
 }
 
-
-
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0px;
-    font-family: 'segoe ui';
+    font-family: "segoe ui";
 }
 
 .navbarMain {
@@ -84,7 +87,7 @@ body {
     position: absolute;
 }
 
-.navbarMain>.nav-header {
+.navbarMain > .nav-header {
     display: inline;
 }
 
@@ -98,36 +101,35 @@ body {
     align-items: center;
 }
 
-
 .logo {
     width: 207px;
     position: fixed;
-    left: -8px
+    left: -8px;
 }
 
-.navbarMain>.nav-btn {
+.navbarMain > .nav-btn {
     display: none;
 }
 
-.navbarMain>.nav-links {
+.navbarMain > .nav-links {
     display: inline;
     float: right;
     display: flex;
     font-size: 18px;
 }
 
-.navbarMain>.nav-links>span {
+.navbarMain > .nav-links > span {
     display: inline-block;
     padding: 26px 10px 13px 10px;
     text-decoration: none;
     color: var(--text);
 }
 
-.navbarMain>.nav-links>span:hover {
+.navbarMain > .nav-links > span:hover {
     background-color: rgba(0, 0, 0, 0.948);
 }
 
-.navbarMain>#nav-check {
+.navbarMain > #nav-check {
     display: none;
 }
 
@@ -140,19 +142,19 @@ body {
     color: var(--white);
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
     .close {
         display: block;
     }
 
-    .navbarMain>.nav-btn {
+    .navbarMain > .nav-btn {
         display: inline-block;
         position: absolute;
         right: 0px;
         top: 0px;
     }
 
-    .navbarMain>.nav-btn>label {
+    .navbarMain > .nav-btn > label {
         display: inline-block;
         margin-top: 15px;
         width: 50px;
@@ -161,12 +163,12 @@ body {
         padding: 13px;
     }
 
-    .navbarMain>.nav-btn>label:hover,
-    .navbarMain #nav-check:checked~.nav-btn>label {
+    .navbarMain > .nav-btn > label:hover,
+    .navbarMain #nav-check:checked ~ .nav-btn > label {
         background-color: rgba(0, 0, 0, 0.3);
     }
 
-    .nav>.nav-btn>label>span {
+    .nav > .nav-btn > label > span {
         display: block;
         width: 25px;
         margin-top: 2px;
@@ -174,7 +176,7 @@ body {
         border-top: 3px solid var(--text);
     }
 
-    .nav>.nav-links {
+    .nav > .nav-links {
         position: fixed;
         width: 100%;
         /* background-color: #333333bf; */
@@ -193,61 +195,62 @@ body {
         /* left: 0px;/ */
     }
 
-    .nav>.nav-links>a {
+    .nav > .nav-links > a {
         display: block;
         width: 100%;
     }
 
-    .nav>#nav-check:not(:checked)~.nav-links {
+    .nav > #nav-check:not(:checked) ~ .nav-links {
         height: 0px;
     }
 
-    .nav>#nav-check:checked~.nav-links {
+    .nav > #nav-check:checked ~ .nav-links {
         height: 100vh;
         overflow-y: auto;
     }
 }
 
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .hand {
     cursor: pointer;
 }
 
-table thead tr  th{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+table thead tr th {
+    font-family:
+        Cambria, Cochin, Georgia, Times, "Times New Roman", serif !important;
 }
-table tbody tr  td{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
-}
-
-span
-{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+table tbody tr td {
+    font-family:
+        Cambria, Cochin, Georgia, Times, "Times New Roman", serif !important;
 }
 
-div
-{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+span {
+    font-family:
+        Cambria, Cochin, Georgia, Times, "Times New Roman", serif !important;
 }
 
-p
-{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+div {
+    font-family:
+        Cambria, Cochin, Georgia, Times, "Times New Roman", serif !important;
+}
+
+p {
+    font-family:
+        Cambria, Cochin, Georgia, Times, "Times New Roman", serif !important;
 }
 .sidebar {
     position: relative;
     top: 0;
     left: 0;
-    
+
     height: 100vh;
     background: #27313d;
     z-index: 10;
@@ -301,7 +304,6 @@ p
     color: red;
     width: 100px;
 }
-
 
 .links--menus {
     padding: 14px;
@@ -358,12 +360,11 @@ p
     opacity: 1;
 }
 
-
 .md {
     display: none;
 }
 
-@media (max-width : 768px) {
+@media (max-width: 768px) {
     .lg {
         display: none;
     }
@@ -371,11 +372,7 @@ p
     .md {
         display: block;
     }
-
-    .sidebar {
-        /* height: calc(100vh - 136px); */
-    }
-
+  
     .logo {
         justify-content: start;
     }
@@ -408,42 +405,41 @@ p
 *::-webkit-scrollbar {
     height: 5px;
     width: 5px;
-  }
-  *::-webkit-scrollbar-track {
+}
+*::-webkit-scrollbar-track {
     border-radius: 5px;
-    background-color: #FFFFFF;
-  }
-  
-  *::-webkit-scrollbar-track:hover {
-    background-color: #DDDDDD;
-  }
-  
-  *::-webkit-scrollbar-track:active {
-    background-color: #B8C0C2;
-  }
-  
-  *::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background-color: #6A6A6A;
-  }
-  
-  *::-webkit-scrollbar-thumb:hover {
-    background-color: #212121;
-  }
-  
-  *::-webkit-scrollbar-thumb:active {
-    background-color: #000000;
-  }
+    background-color: #ffffff;
+}
 
-  .customClass{
+*::-webkit-scrollbar-track:hover {
+    background-color: #dddddd;
+}
+
+*::-webkit-scrollbar-track:active {
+    background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #6a6a6a;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #212121;
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background-color: #000000;
+}
+
+.customClass {
     width: 20%;
     z-index: 100232222232222222000;
-  }
+}
 
-  @media (max-width : 768px) {
-    .customClass{
+@media (max-width: 768px) {
+    .customClass {
         width: 70%;
-      }
-  }
-
-  .customClass{}
+    }
+}
+ 

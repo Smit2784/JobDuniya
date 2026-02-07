@@ -1,6 +1,6 @@
 import React, { useContext, useState, useCallback, useEffect } from "react";
 import Tab from "../../Shared/Tab";
-import css from "./notification.module.css";
+
 import Navbar from "../../Shared/Navbar";
 import { GlobalState } from "../../main";
 import useAPI from "../../Hooks/useAPI";
@@ -90,9 +90,9 @@ const Notification = () => {
     }, []);
     return (
         <>
-            <div className={css.container}>
+            <div className="flex flex-col min-h-screen bg-[#f8fafc] w-[calc(100%-280px)] ml-[280px] transition-[margin,width] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] box-border max-[991px]:ml-0 max-[991px]:w-full">
                 <Navbar left={`Hello 👋 ${currentState.HRDetail.Name}!`} />
-                <div className={css.contentWrapper}>
+                <div className="py-6 px-8 max-md:p-4">
                     <Tab
                         tabName={"Notifications"}
                         action={
@@ -116,7 +116,7 @@ const Notification = () => {
                                 return (
                                     <div
                                         key={e._id || index}
-                                        className={`d-flex justify-content-between align-items-center ${css.notificationCard} ${css.successCard}`}
+                                        className={`d-flex justify-content-between align-items-center border-none shadow-[0_2px_4px_rgba(0,0,0,0.05)] rounded-xl p-[1rem_1.5rem] mb-4 bg-white border-l-4 text-[#334155] transition-transform duration-200 ease hover:translate-x-1 border-[#10b981]`}
                                     >
                                         <span className="fw-medium">
                                             <i className="fa-solid fa-briefcase text-success me-2"></i>
@@ -132,7 +132,7 @@ const Notification = () => {
                                             onClick={() =>
                                                 removeJob(index, e._id)
                                             }
-                                            className={css.closeBtn}
+                                            className="w-8 h-8 flex items-center justify-center rounded-full transition-colors duration-200 text-[#94a3b8] hover:bg-[#fee2e2] hover:text-[#ef4444]"
                                             role="button"
                                             title="Dismiss"
                                         >
@@ -146,7 +146,7 @@ const Notification = () => {
                                 return (
                                     <div
                                         key={e._id || index}
-                                        className={`d-flex justify-content-between align-items-center ${css.notificationCard} ${css.primaryCard}`}
+                                        className={`d-flex justify-content-between align-items-center border-none shadow-[0_2px_4px_rgba(0,0,0,0.05)] rounded-xl p-[1rem_1.5rem] mb-4 bg-white border-l-4 text-[#334155] transition-transform duration-200 ease hover:translate-x-1 border-[#3b82f6]`}
                                     >
                                         <span className="fw-medium">
                                             <i className="fa-solid fa-user-plus text-primary me-2"></i>
@@ -159,7 +159,7 @@ const Notification = () => {
                                             onClick={() =>
                                                 removeUser(index, e._id)
                                             }
-                                            className={css.closeBtn}
+                                            className="w-8 h-8 flex items-center justify-center rounded-full transition-colors duration-200 text-[#94a3b8] hover:bg-[#fee2e2] hover:text-[#ef4444]"
                                             role="button"
                                             title="Dismiss"
                                         >

@@ -1,3 +1,8 @@
+const fs = require("fs");
+try {
+    fs.writeFileSync("debug_startup.log", "Server index.js starting...\n");
+} catch (e) {}
+console.log("Server index.js starting...");
 require("./db");
 const express = require("express");
 const {
@@ -104,6 +109,23 @@ const transporter = nodemailer.createTransport({
         pass: process.env.NODEMAILER_AUTH_PASS,
     },
 });
+
+const SendMailToApplicient = async (to, subject, html) => {
+    const mailOptions = {
+        from: process.env.NODEMAILER_USER_GMAIL,
+        to: to,
+        subject: subject,
+        html: html,
+    };
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log("Email sent: ", info);
+        return info;
+    } catch (error) {
+        console.error("Error sending email: ", error);
+        throw error;
+    }
+};
 
 app.post("/EmailSend", async (req, res) => {
     try {
@@ -1306,18 +1328,26 @@ app.post("/upload", upload.single("file"), (req, res) => {
         url: imageUrl,
     });
 });
- 
+
 app.post("/resume", upload.single("file"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ message: "No PDF uploaded" });
-  }
+    if (!req.file) {
+        return res.status(400).json({ message: "No PDF uploaded" });
+    }
 
-  const pdfUrl = `${req.protocol}://${req.get("host")}/uploads/pdfs/${req.file.filename}`;
+    const pdfUrl = `${req.protocol}://${req.get("host")}/uploads/pdfs/${req.file.filename}`;
 
-  res.json({
-    success: true,
-    url: pdfUrl
-  });
+    res.json({
+        success: true,
+        url: pdfUrl,
+    });
 });
-app.listen(process.env.PORT, () => console.log("server started..."));
+app.listen(5500, () => {
+    console.log("server started on port 5500...");
+    try {
+        fs.appendFileSync(
+            "debug_startup.log",
+            "Server started on port 5500...\n",
+        );
+    } catch (e) {}
+});
 console.log("SERVER START PATH:", __dirname);

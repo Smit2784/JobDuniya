@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import css from "../Styles/modal.module.css";
 import { toast } from "react-toastify";
 import { ActiveModal } from "../main";
 import Modal from "../render-model/Modal";
@@ -13,12 +12,14 @@ const Body = ({ onClose }) => {
     const [formData, setFormData] = useState({
         isProfileComplete: true,
         Name: "",
-        Address: [{
-            personalAddress: "",
-            pinCode: "",
-            state: "",
-            city: "",
-        }],
+        Address: [
+            {
+                personalAddress: "",
+                pinCode: "",
+                state: "",
+                city: "",
+            },
+        ],
         Industry: "",
         Logo: "",
         TagLine: "",
@@ -38,50 +39,55 @@ const Body = ({ onClose }) => {
 
     const handleChange = (e, index) => {
         const { name, value } = e.target;
-        if (name.includes('OwnerDetail')) {
+        if (name.includes("OwnerDetail")) {
             setFormData({
                 ...formData,
                 OwnerDetail: {
                     ...formData.OwnerDetail,
-                    [name.split('.')[1]]: value
-                }
+                    [name.split(".")[1]]: value,
+                },
             });
-        } else if (name.includes('HRDetail')) {
+        } else if (name.includes("HRDetail")) {
             setFormData({
                 ...formData,
                 HRDetail: {
                     ...formData.HRDetail,
-                    [name.split('.')[1]]: value
-                }
+                    [name.split(".")[1]]: value,
+                },
             });
-        } else if (name.includes('Address')) {
+        } else if (name.includes("Address")) {
             const updatedAddress = [...formData.Address];
             updatedAddress[index] = {
                 ...updatedAddress[index],
-                [name.split('.')[1]]: value
+                [name.split(".")[1]]: value,
             };
             setFormData({
                 ...formData,
-                Address: updatedAddress
+                Address: updatedAddress,
             });
         } else {
-                setFormData({
-                    ...formData,
-                    [name]: value
-                });
+            setFormData({
+                ...formData,
+                [name]: value,
+            });
         }
     };
 
     const handleSubmit = async (e) => {
-        alert("submitt")
-        setPage("dashboard")
-        
+        alert("submitt");
+        setPage("dashboard");
+
         e.preventDefault();
         try {
             console.log(id);
             console.log(formData);
             // You need to replace 'API_ENDPOINT' with your actual API endpoint
-            const response = await api.patchREQUEST("updateDetails", "companies", id, formData);
+            const response = await api.patchREQUEST(
+                "updateDetails",
+                "companies",
+                id,
+                formData,
+            );
             console.log(response);
             // Handle success
         } catch (error) {
@@ -91,14 +97,14 @@ const Body = ({ onClose }) => {
     };
 
     return (
-        <div className={css.modalBody}>
+        <div className="rounded-[5px] font-serif w-1/2 max-h-[500px] overflow-auto bg-[#f5f5f5] max-[800px]:w-[95%]">
             <div className="p-4">
-                <span className="fs-3 m">Welcome to JobDuniya : you have to fill your profile</span>
+                <span className="fs-3 m">
+                    Welcome to JobDuniya : you have to fill your profile
+                </span>
                 <div className="container">
-                    <form onSubmit={handleSubmit} >
-                        <label>
-                            Name:
-                        </label>
+                    <form onSubmit={handleSubmit}>
+                        <label>Name:</label>
                         <input
                             required
                             className="form-control p-3"
@@ -106,16 +112,14 @@ const Body = ({ onClose }) => {
                             type="text"
                             name="Name"
                             style={{
-                                width: "100%"
+                                width: "100%",
                             }}
                             width={"100%"}
                             value={formData.Name}
                             onChange={handleChange}
                         />
                         <div className="form-group">
-                            <label>
-                                Industry:
-                            </label>
+                            <label>Industry:</label>
                             <input
                                 required
                                 className="form-control p-3"
@@ -127,9 +131,7 @@ const Body = ({ onClose }) => {
                             />
                         </div>
                         <div className="form-group">
-                            <label>
-                                Logo:
-                            </label>
+                            <label>Logo:</label>
                             <input
                                 required
                                 className="form-control p-3"
@@ -142,25 +144,25 @@ const Body = ({ onClose }) => {
                         </div>
                         {formData.Address.map((address, index) => (
                             <div className="form-group" key={index}>
-                                <div className="form-group d-flex gap-2" >
+                                <div className="form-group d-flex gap-2">
                                     <div className="d-flex flex-grow-1 flex-column ">
-                                        <label>
-                                            Personal Address:
-                                        </label>
+                                        <label>Personal Address:</label>
                                         <input
                                             required
                                             className="form-control p-3"
                                             placeholder={"Personal Address"}
                                             type="text"
                                             name={`Address[${index}].personalAddress`}
-                                            value={formData.Address.personalAddress}
-                                            onChange={(e) => handleChange(e, index)}
+                                            value={
+                                                formData.Address.personalAddress
+                                            }
+                                            onChange={(e) =>
+                                                handleChange(e, index)
+                                            }
                                         />
                                     </div>
                                     <div className="d-flex flex-grow-1 flex-column ">
-                                        <label>
-                                            Pincode:
-                                        </label>
+                                        <label>Pincode:</label>
                                         <input
                                             required
                                             className="form-control p-3"
@@ -168,15 +170,15 @@ const Body = ({ onClose }) => {
                                             type="text"
                                             name={`Address[${index}].pinCode`}
                                             value={formData.Address.pinCode}
-                                            onChange={(e) => handleChange(e, index)}
+                                            onChange={(e) =>
+                                                handleChange(e, index)
+                                            }
                                         />
                                     </div>
                                 </div>
                                 <div className="form-group d-flex gap-2">
                                     <div className="d-flex flex-grow-1 flex-column ">
-                                        <label>
-                                            State:
-                                        </label>
+                                        <label>State:</label>
                                         <input
                                             required
                                             className="form-control p-3"
@@ -184,13 +186,13 @@ const Body = ({ onClose }) => {
                                             type="text"
                                             name={`Address[${index}].state`}
                                             value={formData.Address.state}
-                                            onChange={(e) => handleChange(e, index)}
+                                            onChange={(e) =>
+                                                handleChange(e, index)
+                                            }
                                         />
                                     </div>
                                     <div className="d-flex flex-grow-1 flex-column ">
-                                        <label>
-                                            City:
-                                        </label>
+                                        <label>City:</label>
                                         <input
                                             required
                                             className="form-control p-3"
@@ -198,16 +200,16 @@ const Body = ({ onClose }) => {
                                             type="text"
                                             name={`Address[${index}].city`}
                                             value={formData.Address.city}
-                                            onChange={(e) => handleChange(e, index)}
+                                            onChange={(e) =>
+                                                handleChange(e, index)
+                                            }
                                         />
                                     </div>
                                 </div>
                             </div>
                         ))}
                         <div className="form-group">
-                            <label>
-                                Tagline:
-                            </label>
+                            <label>Tagline:</label>
                             <input
                                 required
                                 className="form-control p-3"
@@ -220,9 +222,7 @@ const Body = ({ onClose }) => {
                         </div>
 
                         <div className="form-group">
-                            <label>
-                                Websites:(Comma(,) saperated)
-                            </label>
+                            <label>Websites:(Comma(,) saperated)</label>
                             <input
                                 required
                                 className="form-control p-3"
@@ -234,9 +234,7 @@ const Body = ({ onClose }) => {
                             />
                         </div>
                         <div className="form-group">
-                            <label>
-                                Established Year:
-                            </label>
+                            <label>Established Year:</label>
                             <input
                                 required
                                 className="form-control p-3"
@@ -248,9 +246,7 @@ const Body = ({ onClose }) => {
                             />
                         </div>
                         <div className="form-group">
-                            <label>
-                                Description:(Comma(,) saperated)
-                            </label>
+                            <label>Description:(Comma(,) saperated)</label>
                             <input
                                 required
                                 className="form-control p-3"
@@ -262,9 +258,7 @@ const Body = ({ onClose }) => {
                             />
                         </div>
                         <div className="form-group">
-                            <label>
-                                Owner Name:
-                            </label>
+                            <label>Owner Name:</label>
                             <input
                                 required
                                 className="form-control p-3"
@@ -276,9 +270,7 @@ const Body = ({ onClose }) => {
                             />
                         </div>
                         <div className="form-group">
-                            <label>
-                                Owner Email:
-                            </label>
+                            <label>Owner Email:</label>
                             <input
                                 required
                                 className="form-control p-3"
@@ -290,9 +282,7 @@ const Body = ({ onClose }) => {
                             />
                         </div>
                         <div className="form-group">
-                            <label>
-                                HR Name:
-                            </label>
+                            <label>HR Name:</label>
                             <input
                                 required
                                 className="form-control p-3"
@@ -304,9 +294,7 @@ const Body = ({ onClose }) => {
                             />
                         </div>
                         <div className="form-group">
-                            <label>
-                                HR Email:
-                            </label>
+                            <label>HR Email:</label>
                             <input
                                 required
                                 className="form-control p-3"
@@ -317,10 +305,14 @@ const Body = ({ onClose }) => {
                                 onChange={handleChange}
                             />
                         </div>
-                        <button type="submit" className="bg-primary-subtle btn mt-3 text-center">Submit</button>
+                        <button
+                            type="submit"
+                            className="bg-primary-subtle btn mt-3 text-center"
+                        >
+                            Submit
+                        </button>
                     </form>
                 </div>
-
             </div>
         </div>
     );

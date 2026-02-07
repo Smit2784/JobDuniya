@@ -6,7 +6,7 @@ import React, {
     useState,
 } from "react";
 import Button from "../../Hoc/Button";
-import css from "./style.module.css";
+
 import Sidebar from "../../Shared/Sidebar";
 import Tab from "../../Shared/Tab";
 import Dashboard from "./Dashboard";
@@ -18,40 +18,41 @@ import useAPI from "../../Hooks/useAPI.jsx";
 import { GlobalState } from "../../main";
 import { ActiveModal } from "../../main.jsx";
 import SignUp from "../../Modals/SignUp.jsx";
+import Loader from "../../Shared/Loader.jsx";
 
 const RenderPage = createContext();
 const Root = () => {
     const api = useAPI();
     const [currentState, setCurrentState] = useContext(GlobalState);
     const [activeModalState, setActiveModalState] = useContext(ActiveModal);
+    const [loading, setLoading] = useState(true);
 
-    // Safely check if currentState exists and has an isProfileComplete property
-    const renderCompo =
-        currentState && currentState.isProfileComplete ? "dashboard" : "isnew";
     const [page, setPage] = useState("dashboard");
-    console.log(currentState?.isProfileComplete);
 
     useEffect(() => {
-        if (currentState && currentState.isProfileComplete) {
-            setPage("dashboard");
-        } else {
-            // If currentState is loaded but profile is not complete, go to isnew
-            // If currentState is empty (initial load), stay on dashboard or show loader
-            if (currentState) setPage("isnew");
+        if (!loading) {
+            if (currentState && currentState.isProfileComplete) {
+                setPage("dashboard");
+            } else if (currentState) {
+                // If currentState is loaded but profile is not complete, go to isnew
+                setPage("isnew");
+            }
         }
-    }, [currentState]);
+    }, [currentState, loading]);
+
     useEffect(() => {
         const fetchApi = async () => {
-            const id = localStorage.getItem("id");
-            const response = await api.getREQUEST(`company/${id}`);
-            setCurrentState(response[0]);
+            try {
+                const id = localStorage.getItem("id");
+                const response = await api.getREQUEST(`company/${id}`);
+                setCurrentState(response[0]);
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            } finally {
+                setLoading(false);
+            }
         };
         fetchApi();
-    }, []);
-
-    useEffect(() => {
-        console.log(renderCompo);
-        setPage(renderCompo);
     }, []);
 
     const renderScreen = useCallback(() => {
@@ -78,10 +79,15 @@ const Root = () => {
                 break;
         }
     }, [page]);
+
+    if (loading) {
+        return <Loader />;
+    }
+
     return (
         <>
             <RenderPage.Provider value={[page, setPage]}>
-                <div className={css.main}>
+                <div className="flex">
                     <Sidebar />
                     {renderScreen()}
                 </div>

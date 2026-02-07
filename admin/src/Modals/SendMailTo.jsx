@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "../render-model/Modal";
-import css from "./sendmail.module.css";
+
 import { toast } from "react-toastify";
 import useAPI from "../Hooks/useAPI";
 
@@ -45,28 +45,28 @@ const Body = ({ onClose }) => {
     };
 
     // Clear the form fields after submission
-
+ 
     return (
-        <div className={css.sendMailModal}>
-            <div className={css.header}>
-                <h5 className={css.title}>
+        <div className="w-[600px] max-w-[95vw] bg-white rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] font-sans flex flex-col overflow-hidden max-[600px]:w-[95%]">
+            <div className="bg-gradient-to-br from-[#0284c7] to-[#23a6f0] p-[1.5rem_2rem] text-white flex justify-between items-center max-[600px]:p-[1.25rem]">
+                <h5 className="m-0 text-[1.25rem] font-semibold flex items-center gap-3">
                     <i className="fa-regular fa-envelope"></i>
                     Send Email to Applicant
                 </h5>
-                <button className={css.closeButton} onClick={onClose}>
+                <button className="bg-white/20 border-none w-8 h-8 rounded-lg cursor-pointer flex items-center justify-center transition-all duration-200 text-white text-[1rem] hover:bg-white/30 hover:scale-105" onClick={onClose}>
                     <i className="fa fa-times"></i>
                 </button>
             </div>
 
-            <div className={css.body}>
+            <div className="p-8 bg-white max-[600px]:p-[1.25rem]">
                 <form onSubmit={handleSubmit} method="POST">
-                    <div className={css.formGroup}>
-                        <label htmlFor="recipient" className={css.label}>
+                    <div className="mb-6">
+                        <label htmlFor="recipient" className="block mb-2 text-[#1e293b] font-medium text-[0.95rem]">
                             Recipient's Email
                         </label>
                         <input
                             type="email"
-                            className={css.input}
+                            className="w-full p-[0.75rem_1rem] border border-[#e2e8f0] rounded-lg text-[0.95rem] text-[#0f172a] transition-all duration-200 bg-[#f8fafc] focus:outline-none focus:border-[#3b82f6] focus:bg-white focus:ring-[3px] focus:ring-[#3b82f6]/10"
                             id="recipient"
                             name="recipient"
                             value={formData.recipient}
@@ -76,13 +76,13 @@ const Body = ({ onClose }) => {
                         />
                     </div>
 
-                    <div className={css.formGroup}>
-                        <label htmlFor="subject" className={css.label}>
+                    <div className="mb-6">
+                        <label htmlFor="subject" className="block mb-2 text-[#1e293b] font-medium text-[0.95rem]">
                             Subject
                         </label>
                         <input
                             type="text"
-                            className={css.input}
+                            className="w-full p-[0.75rem_1rem] border border-[#e2e8f0] rounded-lg text-[0.95rem] text-[#0f172a] transition-all duration-200 bg-[#f8fafc] focus:outline-none focus:border-[#3b82f6] focus:bg-white focus:ring-[3px] focus:ring-[#3b82f6]/10"
                             id="subject"
                             name="subject"
                             placeholder="Enter email subject"
@@ -92,12 +92,12 @@ const Body = ({ onClose }) => {
                         />
                     </div>
 
-                    <div className={css.formGroup}>
-                        <label htmlFor="message" className={css.label}>
+                    <div className="mb-6">
+                        <label htmlFor="message" className="block mb-2 text-[#1e293b] font-medium text-[0.95rem]">
                             Message
                         </label>
                         <textarea
-                            className={css.textarea}
+                            className="w-full p-[0.75rem_1rem] border border-[#e2e8f0] rounded-lg text-[0.95rem] text-[#0f172a] transition-all duration-200 bg-[#f8fafc] focus:outline-none focus:border-[#3b82f6] focus:bg-white focus:ring-[3px] focus:ring-[#3b82f6]/10 resize-y min-h-[120px]"
                             id="message"
                             name="message"
                             rows="5"
@@ -108,17 +108,17 @@ const Body = ({ onClose }) => {
                         ></textarea>
                     </div>
 
-                    <div className={css.footer}>
+                    <div className="flex justify-end gap-4 mt-8">
                         <button
                             type="button"
                             onClick={onClose}
-                            className={`${css.btn} ${css.btnCancel}`}
+                            className="p-[0.75rem_1.5rem] rounded-lg font-semibold text-[0.95rem] cursor-pointer transition-all duration-200 border-none bg-[#f1f5f9] text-[#64748b] hover:bg-[#e2e8f0] hover:text-[#475569]"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className={`${css.btn} ${css.btnSend}`}
+                            className="p-[0.75rem_1.5rem] rounded-lg font-semibold text-[0.95rem] cursor-pointer transition-all duration-200 border-none bg-[#0284c7] text-white flex items-center gap-2 hover:bg-[#0369a1] hover:-translate-y-px hover:shadow-[0_4px_12px_rgba(2,132,199,0.2)]"
                         >
                             <i className="fa-regular fa-paper-plane"></i>
                             Send Email

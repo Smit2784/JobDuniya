@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import Modal from "../../render-model/Modal";
 import Swal from "sweetalert2";
-import css from "./jobs.module.css";
+
 import { RefreshState } from "../../App";
 import { GlobalState } from "../../main";
 import useAPI from "../../Hooks/useAPI";
@@ -48,7 +48,7 @@ const Body = ({ onClose }) => {
 
     useEffect(() => {
         fetch();
-    }, []);
+    }, [activeModalState]);
 
     const jobSchemaKeys = [
         "Description",
@@ -110,9 +110,11 @@ const Body = ({ onClose }) => {
     console.log(data);
 
     return (
-        <div className={css.tableContainer}>
-            <div className={css.scrollableTable}>
-                <table className={`table table-hover ${css.table}`}>
+        <div className="bg-white rounded-2xl shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05),0_2px_4px_-1px_rgba(0,0,0,0.03)] w-full overflow-hidden flex flex-col border border-[#e2e8f0]">
+            <div className="overflow-y-auto h-[calc(100vh-200px)] scrollbar-thin scrollbar-thumb-[#cbd5e1] scrollbar-track-transparent scrollbar-thumb-rounded-md hover:scrollbar-thumb-[#94a3b8]">
+                <table
+                    className={`table table-hover mb-0 w-full border-separate border-spacing-0`}
+                >
                     {isRefreshing && (
                         <thead
                             style={{
@@ -153,6 +155,7 @@ const Body = ({ onClose }) => {
                                 <thead>
                                     <tr>
                                         <th
+                                            className="bg-[#f8fafc] border-b border-[#e2e8f0] text-[#64748b] font-semibold py-[18px] px-6 text-[0.85rem] uppercase tracking-[0.05em] sticky top-0 z-10"
                                             style={{
                                                 width: "65%",
                                                 paddingLeft: "32px",
@@ -160,16 +163,10 @@ const Body = ({ onClose }) => {
                                         >
                                             <div className="d-flex align-items-center">
                                                 <div>
-                                                    <div
-                                                        className={css.jobTitle}
-                                                    >
+                                                    <div className="font-bold text-[1.15rem] text-[#1e293b] mb-[6px] tracking-[-0.01em]">
                                                         {e.Title}
                                                     </div>
-                                                    <div
-                                                        className={
-                                                            css.jobPosition
-                                                        }
-                                                    >
+                                                    <div className="text-[#475569] text-[0.95rem] font-medium mb-2 flex items-center gap-2">
                                                         <i
                                                             className="fa-solid fa-briefcase text-muted me-1"
                                                             style={{
@@ -179,10 +176,8 @@ const Body = ({ onClose }) => {
                                                         ></i>
                                                         {e.Position}
                                                     </div>
-                                                    <div
-                                                        className={css.jobMeta}
-                                                    >
-                                                        <i className="fa-regular fa-clock"></i>
+                                                    <div className="text-[#64748b] text-[0.85rem] bg-[#f1f5f9] inline-flex py-1 px-[10px] rounded-[20px] items-center gap-[6px] font-medium">
+                                                        <i className="fa-regular fa-clock text-[0.8em] text-[#94a3b8]"></i>
                                                         Posted{" "}
                                                         {moment(
                                                             e.JobPostedTime.split(
@@ -195,7 +190,7 @@ const Body = ({ onClose }) => {
                                             </div>
                                         </th>
                                         <th
-                                            className="text-center"
+                                            className="text-center bg-[#f8fafc] border-b border-[#e2e8f0] text-[#64748b] font-semibold py-[18px] px-6 text-[0.85rem] uppercase tracking-[0.05em] sticky top-0 z-10"
                                             style={{
                                                 width: "35%",
                                                 paddingRight: "32px",
@@ -203,7 +198,7 @@ const Body = ({ onClose }) => {
                                         >
                                             <div className="d-flex justify-content-end align-items-center gap-3">
                                                 <button
-                                                    className={css.actionBtn}
+                                                    className="py-[10px] px-4 rounded-[10px] font-semibold text-[0.9rem] border border-transparent transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] inline-flex items-center gap-1.5"
                                                     onClick={() =>
                                                         handleHide(e._id, e)
                                                     }
@@ -211,9 +206,7 @@ const Body = ({ onClose }) => {
                                                     {hide.includes(e._id) ? (
                                                         <>
                                                             <span
-                                                                className={
-                                                                    css.btnView
-                                                                }
+                                                                className="text-[#0f172a] bg-white border border-[#e2e8f0] shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-[#f8fafc] hover:border-[#cbd5e1] hover:-translate-y-[1px] hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)]"
                                                                 style={{
                                                                     border: "none",
                                                                     padding:
@@ -227,7 +220,7 @@ const Body = ({ onClose }) => {
                                                                 Hide
                                                             </span>
                                                             <div
-                                                                className={`${css.chevron} rotate-180`}
+                                                                className={`w-8 h-8 flex items-center justify-center rounded-full transition-all duration-200 text-[#94a3b8] hover:bg-[#f1f5f9] hover:text-[#475569] rotate-180`}
                                                             >
                                                                 <i className="fa-solid fa-chevron-up"></i>
                                                             </div>
@@ -235,9 +228,7 @@ const Body = ({ onClose }) => {
                                                     ) : (
                                                         <>
                                                             <span
-                                                                className={
-                                                                    css.btnView
-                                                                }
+                                                                className="text-[#0f172a] bg-white border border-[#e2e8f0] shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-[#f8fafc] hover:border-[#cbd5e1] hover:-translate-y-[1px] hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)]"
                                                                 style={{
                                                                     border: "none",
                                                                     padding:
@@ -250,18 +241,14 @@ const Body = ({ onClose }) => {
                                                             >
                                                                 View Details
                                                             </span>
-                                                            <div
-                                                                className={
-                                                                    css.chevron
-                                                                }
-                                                            >
+                                                            <div className="w-8 h-8 flex items-center justify-center rounded-full transition-all duration-200 text-[#94a3b8] hover:bg-[#f1f5f9] hover:text-[#475569]">
                                                                 <i className="fa-solid fa-chevron-down"></i>
                                                             </div>
                                                         </>
                                                     )}
                                                 </button>
                                                 <button
-                                                    className={`${css.actionBtn} ${css.btnDelete}`}
+                                                    className="py-[10px] px-4 rounded-[10px] font-semibold text-[0.9rem] border transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] inline-flex items-center gap-1.5 text-[#ef4444] bg-transparent border-[#fee2e2] hover:bg-[#fee2e2] hover:text-[#dc2626] hover:border-[#fecaca] hover:-translate-y-[1px]"
                                                     onClick={() =>
                                                         handleDelete(e._id)
                                                     }
@@ -299,16 +286,8 @@ const Body = ({ onClose }) => {
                                                     colSpan="2"
                                                     style={{ padding: "0" }}
                                                 >
-                                                    <div
-                                                        className={
-                                                            css.detailRow
-                                                        }
-                                                    >
-                                                        <span
-                                                            className={
-                                                                css.detailKey
-                                                            }
-                                                        >
+                                                    <div className="py-3 px-4 border-b border-dashed border-[#e2e8f0] flex items-baseline last:border-b-0">
+                                                        <span className="font-semibold text-[#64748b] text-[0.8rem] w-[30%] min-w-[150px] uppercase tracking-[0.05em]">
                                                             {key
                                                                 .replace(
                                                                     /([A-Z])/g,
@@ -316,11 +295,7 @@ const Body = ({ onClose }) => {
                                                                 )
                                                                 .trim()}
                                                         </span>
-                                                        <span
-                                                            className={
-                                                                css.detailValue
-                                                            }
-                                                        >
+                                                        <span className="text-[#334155] text-[0.95rem] flex-1 leading-[1.6]">
                                                             {value.length >
                                                             0 ? (
                                                                 Array.isArray(
