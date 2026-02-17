@@ -1,19 +1,15 @@
 import React, { useCallback, useMemo, useState } from "react";
-import "../../../Style/singup.css";
 import ProfessionBox from "../../Common/ProfessionBox";
 import Lottie from "lottie-react";
-import classes from "../../../Style/inputBoxs.module.css";
 import "react-toastify/dist/ReactToastify.css";
-import Stepper from "react-stepper-horizontal";
+import Stepper from "../../Common/Stepper";
 import FormButton from "../../Common/FormButton";
 import me from "../../../assets/Je3eTqQJrt.json";
 import FormContainer from "../../Common/FormContainer";
-import "../../../Style/login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { isValidStep6 } from "../../../Auth/isValidate";
 import InputText from "../validateInputs";
 import useAPI from "../../../Hooks/USER/useAPI";
-
 
 const Step6 = ({ setScreen }) => {
     const lottie = (
@@ -25,24 +21,18 @@ const Step6 = ({ setScreen }) => {
     );
 
     const api = useAPI();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [skills, setSkills] = useState([]);
     const [profession, setProfession] = useState("");
     const [input, setInput] = useState([]);
     const [langauges, setLanguages] = useState([]);
-    const[description , setDescription]  = useState("");
+    const [description, setDescription] = useState("");
     console.log(description);
 
-
     const isValidateStep6 = useMemo(
-        () =>
-            isValidStep6(
-                skills, profession, langauges
-            ),
-        [
-            skills, profession, langauges
-        ]
+        () => isValidStep6(skills, profession, langauges),
+        [skills, profession, langauges],
     );
 
     const handleEnterSkillsEvent = (e) => {
@@ -61,13 +51,18 @@ const Step6 = ({ setScreen }) => {
 
     const handleSubmit = useCallback(async () => {
         const id = localStorage.getItem("upd_id");
-        const data = await api.patchREQUEST("updateDetails", "users", id, {langauges , profession ,skills ,description});
+        const data = await api.patchREQUEST("updateDetails", "users", id, {
+            langauges,
+            profession,
+            skills,
+            description,
+        });
         console.log(data);
         navigate("/loginasuser");
+    }, [profession, skills, langauges]);
 
-    }, [
-        profession , skills ,langauges
-    ]);
+    const inputClass =
+        "w-full flex p-2 px-4 text-[#23A6F0] text-[13px] font-normal leading-7 border border-[#adadad] rounded-lg items-start gap-4 flex-grow self-stretch tracking-wider focus:outline-none focus:border-[#23A6F0] focus:ring-1 focus:ring-[#23A6F0] transition-all";
 
     return (
         <FormContainer
@@ -75,10 +70,15 @@ const Step6 = ({ setScreen }) => {
             arrayValuesLang={langauges}
             setArraySkill={setSkills}
             setArrayLang={setLanguages}
-            
             navigat={
-                <p className="--navLink">
-                    Already have an account : <Link to={"/login"}>Login !</Link>
+                <p className="m-0 text-sm text-gray-600">
+                    Already have an account :{" "}
+                    <Link
+                        to={"/login"}
+                        className="text-[#23A6F0] hover:underline font-medium"
+                    >
+                        Login !
+                    </Link>
                 </p>
             }
             heading={"Sign Up"}
@@ -104,7 +104,7 @@ const Step6 = ({ setScreen }) => {
                 <input
                     onChange={(e) => setInput(e.target.value)}
                     type={"text"}
-                    className={`${classes.input}`}
+                    className={inputClass}
                     onKeyUp={(e) => handleEnterSkillsEvent(e)}
                     placeholder="Skills*(press enter to add)"
                     require={true}
@@ -114,33 +114,39 @@ const Step6 = ({ setScreen }) => {
                 <input
                     onChange={(e) => setInput(e.target.value)}
                     type={"text"}
-                    className={`${classes.input}`}
+                    className={inputClass}
                     onKeyUp={(e) => handleEnterLangaugeEvent(e)}
                     placeholder="Langauge known*(press enter to add)"
                     require={true}
                 />
             }
             textbox6={
-                <InputText 
+                <InputText
                     inputType={"text"}
-                    onChange={(e => setDescription(e))}
+                    onChange={(e) => setDescription(e)}
                     placeHolder={"Describe your self"}
                 />
             }
             button1={
                 <FormButton
-                    className={"--btn"}
+                    className={
+                        "w-full py-3 px-4 bg-[#23A6F0] text-white text-lg font-medium rounded-lg hover:bg-[#1a8cd8] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    }
                     text={"back"}
                     onClick={() => setScreen("step5")}
                 />
             }
             button2={
                 <FormButton
-                    className={!isValidateStep6 ? "--btnDisabled" : "--btn"}
+                    className={
+                        !isValidateStep6
+                            ? "w-full py-3 px-4 bg-blue-50 text-gray-400 text-lg font-medium rounded-lg border border-gray-200 cursor-not-allowed"
+                            : "w-full py-3 px-4 bg-[#23A6F0] text-white text-lg font-medium rounded-lg hover:bg-[#1a8cd8] transition-colors"
+                    }
                     isDisabled={!isValidateStep6}
                     text={"Get Started"}
                     onClick={() => {
-                        handleSubmit()
+                        handleSubmit();
                     }}
                 />
             }

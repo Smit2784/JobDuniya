@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import FormSelectBox from "../../Common/FormSelectBox";
 import Cookies from "js-cookie";
 import useAPI from "../../../Hooks/USER/useAPI";
-import css from "../../../Style/profile_modal.module.css";
+// import css from "../../../Style/profile_modal.module.css";
 
 function EditAddress() {
     const [personalAddress, setPersonalAddress] = useState("");
@@ -29,11 +29,13 @@ function EditAddress() {
 
     return (
         <div className="w-100">
-            <div className={css.formGroup}>
-                <label className={css.label}>Personal Address</label>
+            <div className="mb-6">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Personal Address
+                </label>
                 <input
                     type="text"
-                    className={css.input}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                     placeholder="Full Address"
                     required
                     name="univercity"
@@ -41,11 +43,13 @@ function EditAddress() {
                 />
             </div>
 
-            <div className={css.formGroup}>
-                <label className={css.label}>Pincode</label>
+            <div className="mb-6">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Pincode
+                </label>
                 <input
                     type="text"
-                    className={css.input}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                     placeholder="Pincode"
                     required
                     name="school"
@@ -53,11 +57,13 @@ function EditAddress() {
                 />
             </div>
 
-            <div className={css.formGroup}>
-                <label className={css.label}>State</label>
+            <div className="mb-6">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    State
+                </label>
                 <FormSelectBox
                     type="text"
-                    className={css.input}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                     arrayKey="states"
                     selectedState={stateValue}
                     stateValue={handleState}
@@ -67,10 +73,12 @@ function EditAddress() {
                 />
             </div>
 
-            <div className={css.formGroup}>
-                <label className={css.label}>City</label>
+            <div className="mb-6">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    City
+                </label>
                 <FormSelectBox
-                    className={css.input}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                     arrayKey="cities"
                     selectedState={stateValue}
                     stateValue={handleState}
@@ -81,7 +89,7 @@ function EditAddress() {
             </div>
 
             <button
-                className={`${css.saveBtn}`}
+                className="bg-gradient-to-br from-blue-600 to-blue-700 text-white font-semibold px-8 py-3 rounded-lg border-none shadow-lg shadow-blue-500/20 transition-all duration-200 w-full mt-4 text-base hover:-translate-y-px hover:shadow-xl hover:brightness-110 cursor-pointer"
                 onClick={() => handleSubmit()}
             >
                 Save Address

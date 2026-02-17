@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import useAPI from "../../../Hooks/USER/useAPI";
 import Cookies from "js-cookie";
 import useFirestorage from "../../../Hooks/OTHER/useFirestorage";
-import css from "../../../Style/profile_modal.module.css";
+// import css from "../../../Style/profile_modal.module.css";
 
 const EditEducation = () => {
     const api = useAPI();
@@ -48,11 +48,13 @@ const EditEducation = () => {
         <div className="w-100">
             <div className="row mb-3">
                 <div className="col-md-6">
-                    <div className={css.formGroup}>
-                        <label className={css.label}>University</label>
+                    <div className="mb-6">
+                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                            University
+                        </label>
                         <input
                             type="text"
-                            className={css.input}
+                            className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                             placeholder="University Name"
                             required
                             name="univercity"
@@ -61,11 +63,13 @@ const EditEducation = () => {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <div className={css.formGroup}>
-                        <label className={css.label}>School</label>
+                    <div className="mb-6">
+                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                            School
+                        </label>
                         <input
                             type="text"
-                            className={css.input}
+                            className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                             placeholder="School Name"
                             required
                             name="school"
@@ -75,12 +79,14 @@ const EditEducation = () => {
                 </div>
             </div>
 
-            <div className={css.formGroup}>
-                <label className={css.label}>Degree Level</label>
+            <div className="mb-6">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Degree Level
+                </label>
                 <input
                     type="text"
                     placeholder="Comma separated (e.g. Bachelors, Masters)"
-                    className={css.input}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                     name="degreeLevel"
                     onChange={(e) => setDegreeLevel(e.target.value)}
                 />
@@ -88,22 +94,26 @@ const EditEducation = () => {
 
             <div className="row mb-3">
                 <div className="col-md-6">
-                    <div className={css.formGroup}>
-                        <label className={css.label}>Start Date</label>
+                    <div className="mb-6">
+                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                            Start Date
+                        </label>
                         <input
                             type="date"
-                            className={css.input}
+                            className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                             name="startDateSchool"
                             onChange={(e) => setStartDateSchool(e.target.value)}
                         />
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <div className={css.formGroup}>
-                        <label className={css.label}>End Date</label>
+                    <div className="mb-6">
+                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                            End Date
+                        </label>
                         <input
                             type="date"
-                            className={css.input}
+                            className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                             name="endDateSchool"
                             onChange={(e) => setEndDateSchool(e.target.value)}
                         />
@@ -111,41 +121,47 @@ const EditEducation = () => {
                 </div>
             </div>
 
-            <div className={css.formGroup}>
-                <label className={css.label}>Institution Name</label>
+            <div className="mb-6">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Institution Name
+                </label>
                 <input
                     type="text"
                     placeholder="Institution Name"
-                    className={css.input}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                     name="institutionName"
                     onChange={(e) => setInstitutionName(e.target.value)}
                 />
             </div>
 
-            <div className={css.formGroup}>
-                <label className={css.label}>GPA</label>
+            <div className="mb-6">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    GPA
+                </label>
                 <input
                     type="text"
                     placeholder="GPA"
-                    className={css.input}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                     name="gpa"
                     onChange={(e) => setGpa(e.target.value)}
                 />
             </div>
 
-            <div className={css.formGroup}>
-                <label className={css.label}>Certifications</label>
+            <div className="mb-6">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Certifications
+                </label>
                 <input
                     type="text"
                     placeholder="Comma separated certifications"
-                    className={css.input}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                     name="certifications"
                     onChange={(e) => setCertifications(e.target.value)}
                 />
             </div>
 
             <button
-                className={`${css.saveBtn}`}
+                className="bg-gradient-to-br from-blue-600 to-blue-700 text-white font-semibold px-8 py-3 rounded-lg border-none shadow-lg shadow-blue-500/20 transition-all duration-200 w-full mt-4 text-base hover:-translate-y-px hover:shadow-xl hover:brightness-110 cursor-pointer"
                 onClick={() => handleSubmit()}
             >
                 Save Education

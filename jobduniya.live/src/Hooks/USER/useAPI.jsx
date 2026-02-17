@@ -14,7 +14,7 @@ const useAPI = () => {
             setSpinnerState(true);
             try {
                 const RESPONSE = await fetch(
-                    `${process.env.REACT_APP_LOCAL_URL}${PATH}`,
+                    `${import.meta.env.VITE_LOCAL_URL}${PATH}`,
                     {
                         headers: {
                             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const useAPI = () => {
             }
             try {
                 const RESPONSE = await fetch(
-                    `${process.env.REACT_APP_LOCAL_URL}${PATH}`,
+                    `${import.meta.env.VITE_LOCAL_URL}${PATH}`,
                     {
                         headers: {
                             "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const useAPI = () => {
             try {
                 setSpinnerState(true);
                 const RESPONSE = await fetch(
-                    `${process.env.REACT_APP_LOCAL_URL}${PATH}`,
+                    `${import.meta.env.VITE_LOCAL_URL}${PATH}`,
                     {
                         headers: {
                             "Content-Type": "application/json",
@@ -118,7 +118,7 @@ const useAPI = () => {
         async (PATH, COLLECTION_NAME, WHERE) => {
             try {
                 const RESPONSE = await fetch(
-                    `${process.env.REACT_APP_LOCAL_URL}${PATH}`,
+                    `${import.meta.env.VITE_LOCAL_URL}${PATH}`,
                     {
                         headers: {
                             "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const useAPI = () => {
             setSpinnerState(true);
             try {
                 const RESPONSE = await fetch(
-                    `${process.env.REACT_APP_LOCAL_URL}${PATH}`,
+                    `${import.meta.env.VITE_LOCAL_URL}${PATH}`,
                     {
                         headers: {
                             "Content-Type": "application/json",

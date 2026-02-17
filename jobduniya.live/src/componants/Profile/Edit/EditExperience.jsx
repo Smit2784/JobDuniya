@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import useAPI from "../../../Hooks/USER/useAPI";
 import Cookies from "js-cookie";
-import css from "../../../Style/profile_modal.module.css";
+// import css from "../../../Style/profile_modal.module.css";
 
 function EditExperience() {
     const [jobTitle, setJobTitle] = useState("");
@@ -60,11 +60,13 @@ function EditExperience() {
         <div className="w-100">
             <div className="row mb-3">
                 <div className="col-md-6">
-                    <div className={css.formGroup}>
-                        <label className={css.label}>Job Title</label>
+                    <div className="mb-6">
+                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                            Job Title
+                        </label>
                         <input
                             type="text"
-                            className={css.input}
+                            className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                             placeholder="Job Title"
                             required
                             name="jobTitle"
@@ -73,11 +75,13 @@ function EditExperience() {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <div className={css.formGroup}>
-                        <label className={css.label}>Company Name</label>
+                    <div className="mb-6">
+                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                            Company Name
+                        </label>
                         <input
                             type="text"
-                            className={css.input}
+                            className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                             placeholder="Company Name"
                             required
                             name="companyName"
@@ -87,11 +91,13 @@ function EditExperience() {
                 </div>
             </div>
 
-            <div className={css.formGroup}>
-                <label className={css.label}>User Type</label>
+            <div className="mb-6">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    User Type
+                </label>
                 <input
                     type="text"
-                    className={css.input}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                     placeholder="User Type"
                     required
                     name="userType"
@@ -101,22 +107,26 @@ function EditExperience() {
 
             <div className="row mb-3">
                 <div className="col-md-6">
-                    <div className={css.formGroup}>
-                        <label className={css.label}>Start Date</label>
+                    <div className="mb-6">
+                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                            Start Date
+                        </label>
                         <input
                             type="date"
-                            className={css.input}
+                            className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                             name="startDateWork"
                             onChange={(e) => setStartDateWork(e.target.value)}
                         />
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <div className={css.formGroup}>
-                        <label className={css.label}>End Date</label>
+                    <div className="mb-6">
+                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                            End Date
+                        </label>
                         <input
                             type="date"
-                            className={css.input}
+                            className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                             name="endDateSchool"
                             onChange={(e) => setEndDateWork(e.target.value)}
                         />
@@ -124,24 +134,28 @@ function EditExperience() {
                 </div>
             </div>
 
-            <div className={css.formGroup}>
-                <label className={css.label}>Responsibilities</label>
+            <div className="mb-6">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Responsibilities
+                </label>
                 <input
                     type="text"
                     placeholder="Comma separated responsibilities"
-                    className={css.input}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                     name="responsibilitie"
                     onChange={(e) => setResponsibilities(e.target.value)}
                     onKeyUp={(e) => handleEnterResponsibilitesEvent(e)}
                 />
             </div>
 
-            <div className={css.formGroup}>
-                <label className={css.label}>Achievements</label>
+            <div className="mb-6">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Achievements
+                </label>
                 <input
                     type="text"
                     placeholder="Comma separated achievements"
-                    className={css.input}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                     name="achievements"
                     onChange={(e) => setAchievements(e.target.value)}
                     onKeyUp={(e) => handleEnterAchievementEvent(e)}
@@ -149,7 +163,7 @@ function EditExperience() {
             </div>
 
             <button
-                className={`${css.saveBtn}`}
+                className="bg-gradient-to-br from-blue-600 to-blue-700 text-white font-semibold px-8 py-3 rounded-lg border-none shadow-lg shadow-blue-500/20 transition-all duration-200 w-full mt-4 text-base hover:-translate-y-px hover:shadow-xl hover:brightness-110 cursor-pointer"
                 onClick={() => handleSubmit()}
             >
                 Save Experience

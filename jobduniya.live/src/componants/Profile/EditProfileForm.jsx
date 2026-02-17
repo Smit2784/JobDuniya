@@ -1,6 +1,6 @@
 import React, { useContext, useState, useCallback, useEffect } from "react";
 import DataList from "./assets/DataList";
-import css from "../../Style/profile_modal.module.css";
+// import css from "../../Style/profile_modal.module.css";
 import ProfessionBox from "./assets/ProfessionBox";
 import EditEducation from "./Edit/EditEducation";
 import EditExperience from "./Edit/EditExperience";
@@ -34,7 +34,7 @@ const EditProfileForm = () => {
     // const handleFileChange = (event) => {
     //     try {
     //         const file = event.target.files[0];
-
+    //
     //         if (file) {
     //             setProfilePicture(URL.createObjectURL(file));
     //         } else {
@@ -50,7 +50,7 @@ const EditProfileForm = () => {
         formData.append("file", file);
 
         const res = await axios.post(
-            `${process.env.REACT_APP_LOCAL_URL} `,
+            `${import.meta.env.VITE_LOCAL_URL} `,
             formData,
             {
                 headers: { "Content-Type": "multipart/form-data" },
@@ -130,25 +130,29 @@ const EditProfileForm = () => {
     // }, [url])
     return (
         <>
-            <div className={css.modalContainer}>
-                <div className={css.header}>
-                    <h2 className={css.title}>Edit Profile</h2>
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[800px] max-h-[90vh] rounded-2xl bg-white shadow-2xl z-[1000] overflow-y-auto border border-slate-200 animate-[slideUp_0.3s_cubic-bezier(0.16,1,0.3,1)] font-[Inter]">
+                <div className="flex justify-between items-center px-8 py-6 border-b border-slate-100 bg-white sticky top-0 z-10">
+                    <h2 className="text-2xl font-bold text-slate-900 bg-gradient-to-br from-blue-700 to-blue-500 bg-clip-text text-transparent m-0 tracking-tight">
+                        Edit Profile
+                    </h2>
                     <button
-                        className={css.closeBtn}
+                        className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center cursor-pointer transition-all duration-200 text-slate-500 hover:bg-red-100 hover:text-red-500 hover:rotate-90 border-none"
                         onClick={() => setIsEditProfile(false)}
                     >
                         <i className="fa fa-close"></i>
                     </button>
                 </div>
 
-                <div className={css.body}>
+                <div className="p-8 bg-slate-50">
                     <div className="row">
                         <div className="col-md-6">
-                            <div className={css.formGroup}>
-                                <label className={css.label}>First Name</label>
+                            <div className="mb-6">
+                                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                                    First Name
+                                </label>
                                 <input
                                     type="text"
-                                    className={css.input}
+                                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                                     placeholder="First Name"
                                     onChange={(e) =>
                                         setFirstName(e.target.value)
@@ -157,11 +161,13 @@ const EditProfileForm = () => {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <div className={css.formGroup}>
-                                <label className={css.label}>Last Name</label>
+                            <div className="mb-6">
+                                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                                    Last Name
+                                </label>
                                 <input
                                     type="text"
-                                    className={css.input}
+                                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                                     placeholder="Last Name"
                                     onChange={(e) =>
                                         setLastName(e.target.value)
@@ -171,22 +177,22 @@ const EditProfileForm = () => {
                         </div>
                     </div>
 
-                    <div className={css.uploadSection + " mb-4"}>
+                    <div className="flex items-center gap-5 p-5 bg-white border border-dashed border-slate-300 rounded-xl mb-6">
                         <div className="d-flex align-items-center gap-3 w-100">
                             <div className="flex-grow-1">
-                                <label className={css.label}>
+                                <label className="block text-sm font-semibold text-slate-700 mb-2">
                                     Profile Picture
                                 </label>
                                 <input
                                     type="file"
-                                    className={css.input}
+                                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                                     onChange={(e) => handleFileChange(e)}
                                 />
                             </div>
                             <div>
                                 <ProfilePreview
                                     image={profileImage}
-                                    className={css.uploadPreview}
+                                    className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md"
                                 />
                             </div>
                         </div>
@@ -194,12 +200,14 @@ const EditProfileForm = () => {
 
                     <div className="row">
                         <div className="col-md-6">
-                            <div className={css.formGroup}>
-                                <label className={css.label}>Languages</label>
+                            <div className="mb-6">
+                                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                                    Languages
+                                </label>
                                 <input
                                     list="langauge"
                                     placeholder="Comma separated"
-                                    className={css.input}
+                                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                                     onChange={(e) =>
                                         setLanguages(e.target.value)
                                     }
@@ -209,12 +217,14 @@ const EditProfileForm = () => {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <div className={css.formGroup}>
-                                <label className={css.label}>Profession</label>
+                            <div className="mb-6">
+                                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                                    Profession
+                                </label>
                                 <input
                                     list="profession"
                                     placeholder="Profession"
-                                    className={css.input}
+                                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                                     onChange={(e) =>
                                         setProfession(e.target.value)
                                     }
@@ -224,75 +234,83 @@ const EditProfileForm = () => {
                         </div>
                     </div>
 
-                    <div className={css.formGroup}>
-                        <label className={css.label}>Skills</label>
+                    <div className="mb-6">
+                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                            Skills
+                        </label>
                         <input
                             type="text"
                             placeholder="Comma separated (e.g. React, Node.js)"
-                            className={css.input}
+                            className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-[0.95rem] text-slate-800 transition-all duration-200 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] hover:border-slate-300"
                             onChange={(e) => setSkills(e.target.value)}
                             onKeyUp={(e) => handleEnterSkillsEvent(e)}
                         />
                     </div>
 
                     <button
-                        className={`${css.saveBtn}`}
+                        className="bg-gradient-to-br from-blue-600 to-blue-700 text-white font-semibold px-8 py-3 rounded-lg border-none shadow-lg shadow-blue-500/20 transition-all duration-200 w-full mt-4 text-base hover:-translate-y-px hover:shadow-xl hover:brightness-110 cursor-pointer"
                         onClick={() => handleSubmit()}
                     >
                         Save Changes
                     </button>
 
-                    <hr className="my-4" style={{ borderColor: "#e5e7eb" }} />
+                    <hr className="my-6 border-slate-200" />
 
                     {/* Education Section */}
-                    <div className={css.sectionCard}>
-                        <div className={css.sectionHeader}>
-                            <h3 className={css.sectionTitle}>Education</h3>
+                    <div className="bg-white border border-slate-200 rounded-xl p-5 mb-4 transition-all duration-200 hover:shadow-md hover:border-blue-200">
+                        <div className="flex justify-between items-center mb-0">
+                            <h3 className="text-base font-semibold text-slate-600 m-0">
+                                Education
+                            </h3>
                             <button
-                                className={css.actionBtn}
+                                className="bg-blue-50 text-blue-500 px-4 py-2 rounded-md font-medium border border-transparent transition-all duration-200 hover:bg-blue-100 hover:text-blue-700 cursor-pointer"
                                 onClick={() => setEducation(!education)}
                             >
                                 {education ? "Close" : "Edit"}
                             </button>
                         </div>
                         {education && (
-                            <div className="mt-3">
+                            <div className="mt-5">
                                 <EditEducation />
                             </div>
                         )}
                     </div>
 
                     {/* Address Section */}
-                    <div className={css.sectionCard}>
-                        <div className={css.sectionHeader}>
-                            <h3 className={css.sectionTitle}>Address</h3>
+                    <div className="bg-white border border-slate-200 rounded-xl p-5 mb-4 transition-all duration-200 hover:shadow-md hover:border-blue-200">
+                        <div className="flex justify-between items-center mb-0">
+                            <h3 className="text-base font-semibold text-slate-600 m-0">
+                                Address
+                            </h3>
                             <button
-                                className={css.actionBtn}
+                                className="bg-blue-50 text-blue-500 px-4 py-2 rounded-md font-medium border border-transparent transition-all duration-200 hover:bg-blue-100 hover:text-blue-700 cursor-pointer"
                                 onClick={() => setAddress(!address)}
                             >
                                 {address ? "Close" : "Edit"}
                             </button>
                         </div>
                         {address && (
-                            <div className="mt-3">
+                            <div className="mt-5">
                                 <EditAddress />
                             </div>
                         )}
                     </div>
 
                     {/* Experience Section */}
-                    <div className={css.sectionCard}>
-                        <div className={css.sectionHeader}>
-                            <h3 className={css.sectionTitle}>Experience</h3>
+                    <div className="bg-white border border-slate-200 rounded-xl p-5 mb-4 transition-all duration-200 hover:shadow-md hover:border-blue-200">
+                        <div className="flex justify-between items-center mb-0">
+                            <h3 className="text-base font-semibold text-slate-600 m-0">
+                                Experience
+                            </h3>
                             <button
-                                className={css.actionBtn}
+                                className="bg-blue-50 text-blue-500 px-4 py-2 rounded-md font-medium border border-transparent transition-all duration-200 hover:bg-blue-100 hover:text-blue-700 cursor-pointer"
                                 onClick={() => setExperience(!experience)}
                             >
                                 {experience ? "Close" : "Edit"}
                             </button>
                         </div>
                         {experience && (
-                            <div className="mt-3">
+                            <div className="mt-5">
                                 <EditExperience />
                             </div>
                         )}

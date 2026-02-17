@@ -1,14 +1,11 @@
 import React, { useCallback, useMemo, useState } from "react";
-import "../../../Style/singup.css";
-import classes from "../../../Style/inputBoxs.module.css";
 import Lottie from "lottie-react";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import Stepper from "react-stepper-horizontal";
+import Stepper from "../../Common/Stepper";
 import FormButton from "../../Common/FormButton";
 import me from "../../../assets/Je3eTqQJrt.json";
 import FormContainer from "../../Common/FormContainer";
-import "../../../Style/login.css";
 import InputText from "../validateInputs";
 import { isValidStep4 } from "../../../Auth/isValidate";
 import useAPI from "../../../Hooks/USER/useAPI";
@@ -36,7 +33,7 @@ const Step4 = ({ setScreen }) => {
 
     const isValidateStep4 = useMemo(
         () => isValidStep4(institutionName, endDateSchool, startDateSchool),
-        [institutionName, startDateSchool, endDateSchool]
+        [institutionName, startDateSchool, endDateSchool],
     );
 
     const handleEnterDegreeEvent = (e) => {
@@ -68,7 +65,7 @@ const Step4 = ({ setScreen }) => {
                     univercity,
                 },
             ],
-        }); 
+        });
         console.log(data);
         setScreen("step5");
     }, [
@@ -82,6 +79,9 @@ const Step4 = ({ setScreen }) => {
         school,
     ]);
 
+    const inputClass =
+        "w-full flex p-2 px-4 text-[#23A6F0] text-[13px] font-normal leading-7 border border-[#adadad] rounded-lg items-start gap-4 flex-grow self-stretch tracking-wider focus:outline-none focus:border-[#23A6F0] focus:ring-1 focus:ring-[#23A6F0] transition-all";
+
     return (
         <FormContainer
             heading={"Sign Up"}
@@ -94,8 +94,14 @@ const Step4 = ({ setScreen }) => {
                 "Unlock your potential by sharing your educational journey because every degree is a stepping stone to success!"
             }
             navigat={
-                <p className="--navLink">
-                    Already have an account : <Link to={"/login"}>Login !</Link>
+                <p className="m-0 text-sm text-gray-600">
+                    Already have an account :{" "}
+                    <Link
+                        to={"/login"}
+                        className="text-[#23A6F0] hover:underline font-medium"
+                    >
+                        Login !
+                    </Link>
                 </p>
             }
             slogan={
@@ -119,7 +125,7 @@ const Step4 = ({ setScreen }) => {
                     onChange={(e) => setInput(e.target.value)}
                     id="degree"
                     type={"text"}
-                    className={`${classes.input}`}
+                    className={inputClass}
                     onKeyUp={(e) => handleEnterDegreeEvent(e)}
                     placeholder="Type of degree obtained.(press enter to add)"
                     require={true}
@@ -156,7 +162,7 @@ const Step4 = ({ setScreen }) => {
                     onChange={(e) => setInput(e.target.value)}
                     id="degree"
                     type={"text"}
-                    className={`${classes.input}`}
+                    className={inputClass}
                     onKeyUp={(e) => handleEnterCertificationEvent(e)}
                     placeholder="write your certification courses(press enter to add)"
                     require={true}
@@ -180,14 +186,20 @@ const Step4 = ({ setScreen }) => {
             }
             button1={
                 <FormButton
-                    className={"--btn"}
+                    className={
+                        "w-full py-3 px-4 bg-[#23A6F0] text-white text-lg font-medium rounded-lg hover:bg-[#1a8cd8] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    }
                     text={"back"}
                     onClick={() => setScreen("step3")}
                 />
             }
             button2={
                 <FormButton
-                    className={!isValidateStep4 ? "--btnDisabled" : "--btn"}
+                    className={
+                        !isValidateStep4
+                            ? "w-full py-3 px-4 bg-blue-50 text-gray-400 text-lg font-medium rounded-lg border border-gray-200 cursor-not-allowed"
+                            : "w-full py-3 px-4 bg-[#23A6F0] text-white text-lg font-medium rounded-lg hover:bg-[#1a8cd8] transition-colors"
+                    }
                     isDisabled={!isValidateStep4}
                     text={"Next"}
                     onClick={() => {

@@ -1,6 +1,4 @@
-import React, { useCallback, useState, useContext } from "react";
-import "./ResetPassword.css";
-import css from "../../Style/inputBoxs.module.css";
+import React, { useCallback, useState } from "react";
 import useAPI from "../../Hooks/USER/useAPI";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +15,7 @@ const ResetPassword = ({ close }) => {
     const handleClose = useCallback(() => {
         setIsClose(!isClose);
         close(false);
-    }, [isClose]);
+    }, [isClose, close]);
 
     const handleEmailSubmit = async (e) => {
         e.preventDefault();
@@ -78,57 +76,92 @@ const ResetPassword = ({ close }) => {
         }
     };
 
+    const inputClasses =
+        "w-full p-2 mb-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors";
+    const btnClasses =
+        "w-full bg-[#007bff] text-white py-2 px-4 rounded-lg hover:bg-[#0056b3] transition-colors font-medium border-none cursor-pointer";
+
     return (
-        <div className="forgot-password-container">
+        <div className="fixed inset-0 z-[12336677] flex items-center justify-center bg-black/50 backdrop-blur-sm">
             <ToastContainer />
-            <div className="forgot-password-popup">
-                <button className="close-button" onClick={() => handleClose()}>
-                    x
+            <div className="bg-white p-5 rounded-lg shadow-lg relative max-w-xl w-full mx-4">
+                <button
+                    className="absolute top-2 right-2 p-2 rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-700 transition-colors"
+                    onClick={() => handleClose()}
+                    aria-label="Close"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                        />
+                    </svg>
                 </button>
-                <div className="popup-content">
+                <div className="mt-4">
                     {step === 1 && (
                         <form onSubmit={handleEmailSubmit}>
-                            <label>Email:</label>
+                            <label className="block mb-1 text-sm font-medium text-gray-700">
+                                Email:
+                            </label>
                             <input
                                 type="email"
                                 value={email}
-                                className={`${css.input} mb-2 mt-2`}
+                                className={inputClasses}
                                 onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter your email"
                             />
-                            <button type="submit" className="bgbtn btn">
+                            <button type="submit" className={btnClasses}>
                                 Submit
                             </button>
                         </form>
                     )}
                     {step === 2 && (
                         <form onSubmit={handleOtpSubmit}>
-                            <label>OTP:</label>
+                            <label className="block mb-1 text-sm font-medium text-gray-700">
+                                OTP:
+                            </label>
                             <input
                                 type="text"
                                 value={otp}
-                                className={`${css.input} mb-2 mt-2`}
+                                className={inputClasses}
                                 onChange={(e) => setOtp(e.target.value)}
+                                placeholder="Enter 6-digit OTP"
                             />
-                            <button type="submit" className="btn bgbtn">
+                            <button type="submit" className={btnClasses}>
                                 Submit
                             </button>
                         </form>
                     )}
                     {step === 3 && (
                         <form onSubmit={handlePasswordReset}>
-                            <label>New Password:</label>
+                            <label className="block mb-1 text-sm font-medium text-gray-700">
+                                New Password:
+                            </label>
                             <input
                                 type="password"
-                                className={`${css.input} mb-2 mt-2`}
+                                className={inputClasses}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Enter new password"
                             />
-                            <button type="submit" className="btn bgbtn">
+                            <button type="submit" className={btnClasses}>
                                 Reset Password
                             </button>
                         </form>
                     )}
-                    {/* {message && <p className="message">{message}</p>} */}
+                    {message && (
+                        <p className="mt-2 text-sm text-center font-medium text-green-600">
+                            {message}
+                        </p>
+                    )}
                 </div>
             </div>
         </div>

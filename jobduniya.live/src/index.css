@@ -1,13 +1,11 @@
 /* src/index.css */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss";
 
-:root{
+:root {
     overflow: hidden;
 }
 
-.term-contant h1 {
+/* .term-contant h1 {
     position: relative;
     margin-bottom: 20px;
     padding-bottom: 10px;
@@ -15,20 +13,20 @@
     font-weight: 700;
     color: #000000;
     display: inline-block;
- }
- .term-contant h1::after {
+} */
+/* .term-contant h1::after {
     position: absolute;
     content: "";
     width: 0%;
     left: 0;
     bottom: 0;
     background: #eeeeee;
- }
+}
 
- .term-contant h1::after:hover {
+.term-contant h1::after:hover {
     width: 100%;
- }
- .underline-hover::before {
+} */
+/* .underline-hover::before {
     content: "";
     position: absolute;
     width: 0;
@@ -37,31 +35,31 @@
     left: 0;
     background-color: #0085ff;
     transition: width 0.3s ease;
- }
- .underline-hover:hover::before {
+}
+.underline-hover:hover::before {
     width: 90%;
     background-color: #0085ff;
- }
+} */
 
- h3 {
+h3 {
     display: inline-block;
     position: relative;
- }
+}
 
- h3:after {
+h3:after {
     position: absolute;
     content: "";
     width: 0%;
     left: 0;
     bottom: 0;
     background: #eeeeee;
- }
+}
 
- h3:after:hover {
+h3:after:hover {
     width: 90%;
- }
+}
 
- h3::before {
+h3::before {
     content: "";
     position: absolute;
     width: 0;
@@ -70,17 +68,15 @@
     left: 0;
     background-color: #0085ff;
     transition: width 0.3s ease;
- }
+}
 
- h3:hover:before {
+h3:hover:before {
     width: 90%;
     background-color: #0085ff;
- }
-
-
+}
 
 .bodyTermPage {
-    font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
     padding: 25px;
     height: 100%;
     color: #333;
@@ -164,14 +160,13 @@
     align-items: center;
 }
 
-.down-footer {
+/* .down-footer {
     width: 100%;
     background-color: #acc2e4;
     color: white;
     display: flex;
     justify-content: space-around;
     align-items: center;
-
 }
 
 .--waring {
@@ -190,7 +185,7 @@
 .footer-li li a {
     color: white;
     text-decoration: none;
-}
+} */
 
 @media screen and (max-width: 821px) {
     .up-left {
@@ -220,23 +215,23 @@
         text-align: center;
     }
 
-    .down-footer {
+/* .down-footer {
         flex-direction: column-reverse;
-    }
+    }*/
 
-    .down-footer .leftPara {
+    /* .down-footer .leftPara {
         margin-top: 1rem;
-    }
+    } */
 
     .footer-li {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
+        align-items: center; 
+        /* justify-content: center;
         line-height: 25px;
-        margin: 1rem auto;
-    }
+        margin: 1rem auto;*/
+    } 
 }
 
 .flexCheckbox {
@@ -270,14 +265,12 @@
     /* Center the image */
 }
 
-
 .licon {
     font-size: 1em;
     white-space: nowrap;
 }
 
-
-@media (max-width:400px) {
+@media (max-width: 400px) {
     .fs-6 {
         font-size: smaller !important;
     }
@@ -286,53 +279,53 @@
 :root {
     --pbg: #edf1f5;
     --pfont: #2b2b2b;
-    --text-color: #252B42;
+    --text-color: #252b42;
     --second-text-color: #737373;
     --second-border-color: #adadad;
-    --light-gray-1: #FAFAFA;
-    --primary-color: #23A6F0;   
-    --success-text-color: #2DC071;
-    --muted-color: #BDBDBD;
-    --secondary-color-1: #23856D;
-    --dark-background-color: #252B42
+    --light-gray-1: #fafafa;
+    --primary-color: #23a6f0;
+    --success-text-color: #2dc071;
+    --muted-color: #bdbdbd;
+    --secondary-color-1: #23856d;
+    --dark-background-color: #252b42;
 }
 
-.fc{
+.fc {
     color: var(--primary-color);
 }
 
-.bgbtn{
+.bgbtn {
     background-color: #23a5f0a1;
 }
 
-.bgbtn:hover{
-    background-color: #23A6F0;
-    color: #FAFAFA;
+.bgbtn:hover {
+    background-color: #23a6f0;
+    color: #fafafa;
 }
 
-.bgbtnred{
+.bgbtnred {
     background-color: #f03e23a1;
 }
 
-.bgbtnred:hover{
+.bgbtnred:hover {
     background-color: #f02323;
-    color: #FAFAFA;
+    color: #fafafa;
 }
 
-.followBtn{
+.followBtn {
     background-color: #23a5f0a1;
     color: white;
 }
-.followBtn:hover{
-    background-color: #23A6F0;
+.followBtn:hover {
+    background-color: #23a6f0;
     color: var(--dark-background-color);
 }
 
-.tab-content{
+.tab-content {
     overflow: scroll;
 }
 
-.center{
+.center {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -344,8 +337,7 @@
     width: 100%;
 }
 
-
-.form-control-default{
+.form-control-default {
     border: none;
     border-radius: 10px;
     width: 100%;
@@ -357,13 +349,13 @@
     border-right: 2px solid var(--primary-color);
 }
 
-.form-control-default:focus{
+.form-control-default:focus {
     border-bottom: 3px solid var(--text-color);
     border-left: 2px solid var(--text-color);
     border-right: 2px solid var(--text-color);
 }
 
-.success{
+.success {
     color: var(--success-text-color);
     background-color: #16f5297c;
     padding: 10px;
@@ -372,7 +364,7 @@
     cursor: pointer;
 }
 
-.successActive{
+.successActive {
     background-color: #23856d91;
     color: rgb(194, 219, 157);
     padding: 10px;
@@ -380,13 +372,12 @@
     font-weight: 700;
 }
 
-.success:hover{
+.success:hover {
     background-color: #0eff00;
     color: #ffffff;
     font-weight: 500;
-
 }
-.reject{
+.reject {
     color: rgb(173, 2, 2);
     background-color: #8523233f;
     padding: 10px;
@@ -395,20 +386,19 @@
     cursor: pointer;
 }
 
-.rejectActive{
+.rejectActive {
     background-color: #ff000085;
     color: rgb(255, 230, 230);
     padding: 10px;
     border-radius: 10px;
 }
 
-.reject:hover{
+.reject:hover {
     background-color: #ff0404;
     color: rgb(247, 230, 230);
     font-weight: 500;
-
 }
-.panding{
+.panding {
     color: orange;
     background-color: rgba(252, 180, 45, 0.391);
     padding: 10px;
@@ -417,312 +407,310 @@
     cursor: pointer;
 }
 
-.pandingActive{
+.pandingActive {
     background-color: rgba(229, 173, 32, 0.527);
     color: rgb(255, 255, 255);
     padding: 10px;
     border-radius: 10px;
 }
 
-.panding:hover{
+.panding:hover {
     background-color: #ffa500;
     color: rgb(255, 255, 255);
     font-weight: 500;
-
 }
 
-.fontDefaultTitle{
+.fontDefaultTitle {
     font-weight: 600;
 }
 
-.appImageContainer{
+.appImageContainer {
     margin-top: 15px;
     width: 100%;
     max-width: 100px;
 }
 
-.appImage{
+.appImage {
     width: 100%;
 }
 
-.hand{
+.hand {
     cursor: pointer;
 }
-
 
 *::-webkit-scrollbar {
     height: 10px;
     width: 5px;
-  }
-  *::-webkit-scrollbar-track {
+}
+*::-webkit-scrollbar-track {
     border-radius: 5px;
     /* background-color: #DFE9EB; */
-  }
-  
-  *::-webkit-scrollbar-track:hover {
-    background-color: #C6CFD1;
-  }
-  
-  *::-webkit-scrollbar-track:active {
-    background-color: #B8C0C2;
-  }
-  
-  *::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: #23A6F0;
-  }
-  
-  *::-webkit-scrollbar-thumb:hover {
-    background-color: #1E8ECD;
-  }
-  
-  *::-webkit-scrollbar-thumb:active {
-    background-color: #1C86C1;
-  }
+}
 
-  .main-box {
+*::-webkit-scrollbar-track:hover {
+    background-color: #c6cfd1;
+}
+
+*::-webkit-scrollbar-track:active {
+    background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #23a6f0;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #1e8ecd;
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background-color: #1c86c1;
+}
+
+.main-box {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
- }
- .content-box {
+}
+.content-box {
     border: 1px solid #d6d7e0;
     padding: 28px;
     margin: 13px;
     background-color: white;
     height: 92%;
     width: 340px;
- }
+}
 
- .line1 {
+.line1 {
     display: flex;
     gap: 20px;
     align-items: center;
     margin-bottom: 30px;
- }
- .img-box {
+}
+.img-box {
     border: 1px solid black;
     padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
- }
+}
 
- .img-box img {
+.img-box img {
     width: 32px;
- }
- .sub-h {
+}
+.sub-h {
     font-size: 16px;
     color: #000;
     font-weight: 600;
- }
+}
 
- .sub-p {
+.sub-p {
     font-size: 14px;
     color: #000;
     font-weight: 500;
- }
+}
 
- .content-box h6 {
+.content-box h6 {
     color: #000;
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 25px;
- }
+}
 
- .mid-line {
+.mid-line {
     display: flex;
     gap: 10px;
     align-items: center;
     margin-bottom: 20px;
- }
+}
 
- .job-c {
+.job-c {
     display: inline-block;
     padding: 6px 12px;
     background-color: #f3f3fc;
     color: #443fde;
- }
+}
 
- .job-h {
+.job-h {
     padding: 6px 12px;
     background-color: #fef7f1;
     color: #c98b40;
- }
+}
 
- .last-box {
+.last-box {
     display: flex;
     gap: 20px;
     align-items: center;
- }
+}
 
- .loc-box,
- .d-box {
+.loc-box,
+.d-box {
     display: flex;
     align-items: center;
     font-size: 14px;
     color: #606476;
     font-weight: 600;
     gap: 5px;
- }
+}
 
- @media (max-width: 576px) {
+@media (max-width: 576px) {
     .space-1 {
-       padding: 40px 24px 40px;
+        padding: 40px 24px 40px;
     }
 
     .mid-box h2 {
-       font-size: 35px;
-       width: 100%;
+        font-size: 35px;
+        width: 100%;
     }
 
     .mid-box p {
-       width: 100%;
+        width: 100%;
     }
 
     .space-2 {
-       padding: 80px 24px;
+        padding: 80px 24px;
     }
- }
- @media (min-width: 576px) {
+}
+@media (min-width: 576px) {
     .space-1 {
-       padding: 40px 24px 40px;
+        padding: 40px 24px 40px;
     }
 
     .mid-box h2 {
-       font-size: 35px;
-       width: 100%;
+        font-size: 35px;
+        width: 100%;
     }
 
     .mid-box p {
-       width: 100%;
+        width: 100%;
     }
 
     .space-2 {
-       padding: 80px 24px;
+        padding: 80px 24px;
     }
- }
- @media (min-width: 768px) {
+}
+@media (min-width: 768px) {
     .space-1 {
-       padding: 40px 24px 40px;
+        padding: 40px 24px 40px;
     }
 
     .mid-box h2 {
-       font-size: 45px;
-       width: 729px;
+        font-size: 45px;
+        width: 729px;
     }
 
     .mid-box p {
-       width: 644px;
+        width: 644px;
     }
 
     .space-2 {
-       padding: 80px 24px;
+        padding: 80px 24px;
     }
- }
- @media (min-width: 992px) {
+}
+@media (min-width: 992px) {
     .space-1 {
-       padding: 40px 24px 40px;
+        padding: 40px 24px 40px;
     }
 
     .mid-box h2 {
-       font-size: 45px;
-       width: 729px;
+        font-size: 45px;
+        width: 729px;
     }
 
     .mid-box p {
-       width: 644px;
+        width: 644px;
     }
 
     .space-2 {
-       padding: 80px 24px;
+        padding: 80px 24px;
     }
- }
- @media (min-width: 1200px) {
+}
+@media (min-width: 1200px) {
     .space-1 {
-       padding: 40px 250px 40px;
+        padding: 40px 250px 40px;
     }
 
     .mid-box h2 {
-       font-size: 45px;
-       width: 729px;
+        font-size: 45px;
+        width: 729px;
     }
 
     .mid-box p {
-       width: 644px;
+        width: 644px;
     }
 
     .box1 {
-       flex: 3;
+        flex: 3;
     }
 
     .box2 {
-       flex: 2;
+        flex: 2;
     }
 
     .box3 {
-       flex: 1;
+        flex: 1;
     }
 
     .space-2 {
-       padding: 100px 200px;
+        padding: 100px 200px;
     }
- }  
+}
 
- .ellips{
+.ellips {
     overflow: hidden;
     display: -webkit-box;
     overflow-wrap: break-word;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+    line-clamp: 1;
     line-height: 1;
-    height: 30px;    
- }
+    height: 30px;
+}
 
- .btn-container {
+.btn-container {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-  }
-  
-  .btn-container i {
+}
+
+.btn-container i {
     display: inline-block;
     position: relative;
     top: -9px;
+}
 
-  }
-
-  .upp{
+.upp {
     z-index: 100000000000000000000000000000000000;
-  }
-  
-  label {
+}
+
+label {
     font-size: 13px;
     color: #424242;
     font-weight: 500;
-  }
-  
-  .btn-color-mode-switch {
+}
+
+.btn-color-mode-switch {
     display: inline-block;
     margin: 0px;
     position: relative;
-  }
-  
-  .btn-color-mode-switch > label.btn-color-mode-switch-inner {
+}
+
+.btn-color-mode-switch > label.btn-color-mode-switch-inner {
     margin: 0px;
     width: 140px;
     display: flex;
     height: 50px;
-    background: #E0E0E0;
+    background: #e0e0e0;
     border-radius: 26px;
     overflow: hidden;
     position: relative;
     transition: all 0.3s ease;
     display: block;
-  }
-  
-  .btn-color-mode-switch > label.btn-color-mode-switch-inner:before {
+}
+
+.btn-color-mode-switch > label.btn-color-mode-switch-inner:before {
     content: attr(data-on);
     position: absolute;
     font-size: 12px;
@@ -732,9 +720,9 @@
     font-weight: 500;
     top: 15px;
     right: 20px;
-  }
-  
-  .btn-color-mode-switch > label.btn-color-mode-switch-inner:after {
+}
+
+.btn-color-mode-switch > label.btn-color-mode-switch-inner:after {
     content: attr(data-off);
     width: 70px;
     height: 46px;
@@ -750,16 +738,16 @@
     transition: all 0.3s ease;
     box-shadow: 0px 0px 6px -2px #111;
     padding: 5px 0px;
-  }
-  
-  .btn-color-mode-switch > .alert {
+}
+
+.btn-color-mode-switch > .alert {
     display: none;
-    background: #FF9800;
+    background: #ff9800;
     border: none;
     color: #fff;
-  }
-  
-  .btn-color-mode-switch input[type="checkbox"] {
+}
+
+.btn-color-mode-switch input[type="checkbox"] {
     cursor: pointer;
     width: 50px;
     height: 25px;
@@ -768,38 +756,44 @@
     top: 0;
     z-index: 1;
     margin: 0px;
-  }
-  
-  .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner {
+}
+
+.btn-color-mode-switch
+    input[type="checkbox"]:checked
+    + label.btn-color-mode-switch-inner {
     background: #c8c8c8;
     color: #000000;
-  }
-  
-  .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:after {
+}
+
+.btn-color-mode-switch
+    input[type="checkbox"]:checked
+    + label.btn-color-mode-switch-inner:after {
     content: attr(data-on);
     left: 68px;
     background: #f9f7f7;
-  }
-  
-  .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:before {
+}
+
+.btn-color-mode-switch
+    input[type="checkbox"]:checked
+    + label.btn-color-mode-switch-inner:before {
     content: attr(data-off);
     right: auto;
     left: 20px;
-  }
-  
-  .btn-color-mode-switch input[type="checkbox"]:checked ~ .alert {
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked ~ .alert {
     display: block;
-  }
-  
-  .dark-preview {
+}
+
+.dark-preview {
     background: #0d0d0d;
-  }
-  
-  .white-preview {
+}
+
+.white-preview {
     background: #fff;
-  }
-  
-  .badge{
+}
+
+.badge {
     position: relative;
     /* bottom: 10p */
-  }
+}

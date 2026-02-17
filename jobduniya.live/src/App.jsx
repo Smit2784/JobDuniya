@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import MyModel from "./componants/Common/MyModel";
@@ -22,7 +22,6 @@ const App = () => {
     const [modell, setModell] = useState(false);
     return (
         <>
-
             {modell ? <MyModel setModell={setModell}></MyModel> : ""}
             <BrowserRouter>
                 <ToastContainer
@@ -42,7 +41,10 @@ const App = () => {
                 />
                 <Routes>
                     <Route element={<Layout />}>
-                        <Route path="/" element={<Home setModell={setModell} />} />
+                        <Route
+                            path="/"
+                            element={<Home setModell={setModell} />}
+                        />
                         <Route path="/saved" element={<Nearbyusers />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/postajob" element={<Postajob />} />

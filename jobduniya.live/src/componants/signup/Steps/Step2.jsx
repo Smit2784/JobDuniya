@@ -1,19 +1,15 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import "../../../Style/singup.css";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import "react-toastify/dist/ReactToastify.css";
-import css from "../../../Style/inputBoxs.module.css";
-import Stepper from "react-stepper-horizontal";
+import Stepper from "../../Common/Stepper";
 import useAPI from "../../../Hooks/USER/useAPI";
 import FormButton from "../../Common/FormButton";
 import me from "../../../assets/Je3eTqQJrt.json";
 import FormContainer from "../../Common/FormContainer";
-import "../../../Style/login.css";
 import InputText from "../validateInputs";
 import { isValidStep2 } from "../../../Auth/isValidate";
 import ProfilePreview from "./profilePreview";
-import useFirestorage from "../../../Hooks/OTHER/useFirestorage";
 import axios from "axios";
 
 const Step2 = ({ setScreen }) => {
@@ -29,16 +25,14 @@ const Step2 = ({ setScreen }) => {
     const [lastName, setLastName] = useState("");
     const [profileImage, setprofileImage] = useState("");
 
-    // const upload = useFirestorage();
     const api = useAPI();
-    // const url = upload.imageUrl;
 
     const uploadProfileImage = async (file) => {
         const formData = new FormData();
         formData.append("file", file);
 
         const res = await axios.post(
-            `${process.env.REACT_APP_LOCAL_URL}upload`,
+            `${import.meta.env.VITE_LOCAL_URL}upload`,
             formData,
             {
                 headers: { "Content-Type": "multipart/form-data" },
@@ -64,10 +58,6 @@ const Step2 = ({ setScreen }) => {
             console.error(err);
         }
     }, []);
-
-    // useEffect(() => {
-    //     setprofileImage(url);
-    // }, [url]);
 
     useEffect(() => {
         console.log("Profile Image", profileImage);
@@ -98,18 +88,24 @@ const Step2 = ({ setScreen }) => {
             leftSection={lottie}
             slogan={<Stepper steps={[{}, {}, {}, {}, {}, {}]} activeStep={1} />}
             navigat={
-                <p className="--navLink">
-                    Already have an account : <Link to={"/login"}>Login !</Link>
+                <p className="m-0 text-sm text-gray-600">
+                    Already have an account :{" "}
+                    <Link
+                        to={"/login"}
+                        className="text-[#23A6F0] hover:underline font-medium"
+                    >
+                        Login !
+                    </Link>
                 </p>
             }
-            textbox1={
+            textbox2={
                 <InputText
                     inputType={"text"}
                     placeHolder={"First Name*"}
                     onChange={(e) => setFirstName(e)}
                 />
             }
-            textbox2={
+            textbox3={
                 <InputText
                     inputType={"text"}
                     placeHolder={"Last Name*"}
@@ -118,7 +114,7 @@ const Step2 = ({ setScreen }) => {
             }
             textbox4={
                 <input
-                    className={css.input}
+                    className="w-full flex p-2 px-4 text-[#23A6F0] text-[13px] font-normal leading-7 border border-[#adadad] rounded-lg items-start gap-4 flex-grow self-stretch tracking-wider focus:outline-none focus:border-[#23A6F0] focus:ring-1 focus:ring-[#23A6F0] transition-all"
                     type="file"
                     onChange={(e) => {
                         handleFileChange(e);
@@ -128,14 +124,20 @@ const Step2 = ({ setScreen }) => {
             textbox5={<ProfilePreview image={profileImage && profileImage} />}
             button1={
                 <FormButton
-                    className={"--btn"}
+                    className={
+                        "w-full py-3 px-4 bg-[#23A6F0] text-white text-lg font-medium rounded-lg hover:bg-[#1a8cd8] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    }
                     text={"back"}
                     onClick={() => setScreen("step1")}
                 />
             }
             button2={
                 <FormButton
-                    className={isValidateStep2 ? "--btnDisabled" : "--btn"}
+                    className={
+                        isValidateStep2
+                            ? "w-full py-3 px-4 bg-blue-50 text-gray-400 text-lg font-medium rounded-lg border border-gray-200 cursor-not-allowed"
+                            : "w-full py-3 px-4 bg-[#23A6F0] text-white text-lg font-medium rounded-lg hover:bg-[#1a8cd8] transition-colors"
+                    }
                     text={"next"}
                     isDisabled={isValidateStep2}
                     onClick={() => {

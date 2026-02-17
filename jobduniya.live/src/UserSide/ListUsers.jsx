@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import css from "./Style/listUsers.module.css";
+// import css from "./Style/listUsers.module.css";
 // import "../Style/jobview.css"; // Commented out to prevent conflict if cleaner slate needed
 import useAPI from "../Hooks/USER/useAPI";
 import Cookies from "js-cookie";
@@ -93,25 +93,27 @@ const ListUsers = () => {
     }, []);
 
     return (
-        <div className={css.container}>
-            <div className={css.headerSection}>
-                <div className={css.titleBox}>
-                    <h1 className={css.title}>Recommended for you</h1>
-                    <span className={css.resultCount}>
+        <div className="w-full max-w-7xl mx-auto mt-20 mb-10 px-6 min-h-[80vh]">
+            <div className="mb-10 flex flex-wrap gap-6 justify-between items-center">
+                <div className="flex flex-col gap-2">
+                    <h1 className="text-3xl font-bold text-slate-900 leading-tight m-0">
+                        Recommended for you
+                    </h1>
+                    <span className="text-base text-slate-500 font-medium">
                         {length} Connections Found
                     </span>
                 </div>
-                <div className={css.searchBox}>
+                <div className="flex-1 max-w-[400px] relative">
                     <input
                         type="text"
-                        className={css.searchInput}
+                        className="w-full px-5 py-3 rounded-full border border-slate-300 bg-slate-50 text-base outline-none transition-all duration-300 text-slate-800 focus:border-blue-500 focus:bg-white focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)]"
                         placeholder="Search for people..."
                         onChange={(e) => setKeyword(e.target.value)}
                     />
                 </div>
             </div>
 
-            <div className={css.gridContainer}>
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-8 mb-16">
                 {user &&
                     Array.isArray(user) &&
                     user?.map((e) => (
@@ -138,8 +140,10 @@ const ListUsers = () => {
                     ))}
             </div>
 
-            <div className={css.companiesSection}>
-                <span className={css.sectionTitle}>Companies</span>
+            <div className="mt-20 text-center">
+                <span className="text-3xl font-bold text-slate-800 mb-8 block">
+                    Companies
+                </span>
                 <CompanyProfile />
             </div>
         </div>

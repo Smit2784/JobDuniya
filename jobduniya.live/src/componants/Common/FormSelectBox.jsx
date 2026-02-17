@@ -9,16 +9,15 @@ const FormSelectBox = ({
     city,
     selectedState,
     selectedCity,
-    state
+    state,
 }) => {
-
     const allStates = State.getStatesOfCountry("IN");
     const allCities = City.getCitiesOfState("IN", selectedState);
 
     const handleChange = (e) => {
         const value = e.target.value;
         const name = e.target.selectedOptions[0];
-        
+
         if (arrayKey === "states") {
             stateValue(value);
             state(name.id);
@@ -31,7 +30,11 @@ const FormSelectBox = ({
     const renderOptions = useMemo(() => {
         if (arrayKey === "states") {
             return allStates.map((state) => (
-                <option key={state.isoCode} value={state.isoCode} id={state.name}>
+                <option
+                    key={state.isoCode}
+                    value={state.isoCode}
+                    id={state.name}
+                >
                     {state.name}
                 </option>
             ));
@@ -45,7 +48,7 @@ const FormSelectBox = ({
     }, [allStates, stateValue, city, selectedState]);
 
     return (
-        <div className="--allinput">
+        <div className="w-full flex flex-col items-start gap-1">
             <select
                 className={className}
                 onChange={handleChange}
@@ -54,7 +57,7 @@ const FormSelectBox = ({
                 <option value="">{arrayKey}</option>
                 {renderOptions}
             </select>
-            <span>{warning}</span>
+            <span className="text-red-500 text-xs font-medium">{warning}</span>
         </div>
     );
 };

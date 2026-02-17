@@ -8,14 +8,14 @@
 // const LoginMain = () => {
 //     const [screen ,setScreen] = useState("user")
 //     const naviget = useNavigate();
-//     useEffect(() => {   
+//     useEffect(() => {
 //         const token = Cookies.get("token");
 //         if (token) {
 //             naviget("/");
 //         }
 //     }, [])
 //     return (
-        
+
 //                 <LoginAsUser />
 //     )
 // }

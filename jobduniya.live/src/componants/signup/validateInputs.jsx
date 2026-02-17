@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useState } from "react";
-import classes from "../../Style/inputBoxs.module.css";
 
 const InputText = ({
     onChange,
@@ -47,36 +46,47 @@ const InputText = ({
                 }
             }
         },
-        [type],
+        [type, warning, minLength, maxLength, inputType, onChange],
     );
 
     const renderEyeButton = useMemo(() => {
+        const eyeClass =
+            "absolute right-[5%] top-[31%] cursor-pointer text-gray-400 hover:text-[#23A6F0] transition-colors";
         if (type === "password") {
             return (
                 <i
-                    className={`${classes.eyediv} ${"ri-eye-off-line"}`}
+                    className={`${eyeClass} ri-eye-off-line`}
                     onClick={() => setType("text")}
                 />
             );
         } else {
             return (
                 <i
-                    className={`${classes.eyediv} ${"ri-eye-line"}`}
+                    className={`${eyeClass} ri-eye-line`}
                     onClick={() => setType("password")}
                 />
             );
         }
     }, [type]);
+
     return (
-        <div className={classes.inputText}>
-            <label className={classes.inputLabel} htmlFor={id}>
+        <div className="w-full flex flex-col items-start justify-start gap-1 z-10">
+            <label
+                className="text-[#23A6F0] text-sm font-medium capitalize"
+                htmlFor={id}
+            >
                 {label}
             </label>
-            <div className={classes.inputdiv}>
+            <div className="relative w-full">
                 <input
-                    className={`${classes.input} ${
-                        warningState !== "" ? classes.inputerror : ""
-                    }`}
+                    className={`
+                        w-full flex p-2 px-4 text-[#23A6F0] text-[13px] font-normal leading-7 
+                        border border-[#adadad] rounded-lg items-start gap-4 flex-grow self-stretch tracking-wider
+                        focus:outline-none focus:border-[#23A6F0] focus:ring-1 focus:ring-[#23A6F0] transition-all
+                        placeholder:text-[13px] placeholder:text-[rgb(0,38,127)]
+                        ${warningState !== "" ? "focus:outline-red-500 border-red-500 focus:border-red-500" : ""}
+                        disabled:bg-gray-100 disabled:cursor-not-allowed
+                    `}
                     type={type}
                     name={id}
                     placeholder={placeHolder}
@@ -91,7 +101,9 @@ const InputText = ({
                 />
                 {password && renderEyeButton}
             </div>
-            <span className={classes.warning}>{warningState}</span>
+            <span className="text-red-500 text-xs font-medium">
+                {warningState}
+            </span>
         </div>
     );
 };

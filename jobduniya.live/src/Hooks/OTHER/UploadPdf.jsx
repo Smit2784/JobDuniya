@@ -20,7 +20,7 @@ const useUploadPdf = () => {
 
         try {
             const res = await axios.post(
-                `${process.env.REACT_APP_LOCAL_URL}resume`,
+                `${import.meta.env.VITE_LOCAL_URL}resume`,
                 formData,
                 {
                     headers: { "Content-Type": "multipart/form-data" },

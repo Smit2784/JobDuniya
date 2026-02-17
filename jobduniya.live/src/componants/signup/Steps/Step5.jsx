@@ -1,16 +1,12 @@
 import React, { useCallback, useMemo, useState } from "react";
-import "../../../Style/singup.css";
 import Lottie from "lottie-react";
-import classes from "../../../Style/inputBoxs.module.css";
-
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import Stepper from "react-stepper-horizontal";
+import Stepper from "../../Common/Stepper";
 import FormButton from "../../Common/FormButton";
 import me from "../../../assets/Je3eTqQJrt.json";
 import useAPI from "../../../Hooks/USER/useAPI";
 import FormContainer from "../../Common/FormContainer";
-import "../../../Style/login.css";
 import InputText from "../validateInputs";
 import { isValidStep5 } from "../../../Auth/isValidate";
 
@@ -96,6 +92,9 @@ const Step5 = ({ setScreen }) => {
         achievements,
     ]);
 
+    const inputClass =
+        "w-full flex p-2 px-4 text-[#23A6F0] text-[13px] font-normal leading-7 border border-[#adadad] rounded-lg items-start gap-4 flex-grow self-stretch tracking-wider focus:outline-none focus:border-[#23A6F0] focus:ring-1 focus:ring-[#23A6F0] transition-all";
+
     return (
         <FormContainer
             heading={"Sign Up"}
@@ -106,9 +105,10 @@ const Step5 = ({ setScreen }) => {
             setArrayAch={setAchievements}
             title={
                 <>
-                    <div className="flexCheckbox">
+                    <div className="flex items-center gap-2 text-sm text-gray-700">
                         <input
                             type="checkbox"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                             onChange={() => {
                                 if (!isFresher) {
                                     setJobTitle("");
@@ -128,8 +128,14 @@ const Step5 = ({ setScreen }) => {
                 </>
             }
             navigat={
-                <p className="--navLink">
-                    Already have an account : <Link to={"/login"}>Login !</Link>
+                <p className="m-0 text-sm text-gray-600">
+                    Already have an account :{" "}
+                    <Link
+                        to={"/login"}
+                        className="text-[#23A6F0] hover:underline font-medium"
+                    >
+                        Login !
+                    </Link>
                 </p>
             }
             slogan={
@@ -193,7 +199,7 @@ const Step5 = ({ setScreen }) => {
                 <input
                     onChange={(e) => setInput(e.target.value)}
                     type={"text"}
-                    className={`${classes.input}`}
+                    className={inputClass}
                     onKeyUp={(e) => handleEnterResponsibilitesEvent(e)}
                     placeholder="Responsiblities*(press enter to add)"
                     require={false}
@@ -204,7 +210,7 @@ const Step5 = ({ setScreen }) => {
                 <input
                     onChange={(e) => setInput(e.target.value)}
                     type={"text"}
-                    className={`${classes.input}`}
+                    className={inputClass}
                     onKeyUp={(e) => handleEnterAchievementEvent(e)}
                     placeholder="Achievements*(press enter to add)"
                     require={false}
@@ -213,14 +219,18 @@ const Step5 = ({ setScreen }) => {
             }
             button1={
                 <FormButton
-                    className={"--btn"}
+                    className={
+                        "w-full py-3 px-4 bg-[#23A6F0] text-white text-lg font-medium rounded-lg hover:bg-[#1a8cd8] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    }
                     text={"back"}
                     onClick={() => setScreen("step4")}
                 />
             }
             button2={
                 <FormButton
-                    className={"--btn"}
+                    className={
+                        "w-full py-3 px-4 bg-[#23A6F0] text-white text-lg font-medium rounded-lg hover:bg-[#1a8cd8] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    }
                     text={"Next"}
                     onClick={() => {
                         handleSubmit();

@@ -55,7 +55,7 @@ const Home = ({ setModell }) => {
         <>
             {/* { Check() &&  */}
             <>
-                <div className="home--">
+                <div className="w-full overflow-scroll h-[calc(100vh-100px)]">
                     <section className={home.section1}>
                         <header className={home.header}>
                             <div className={home.contentLeft}>

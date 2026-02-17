@@ -1,21 +1,17 @@
-import React, { useMemo,useCallback, useState } from "react";
-import "../../../Style/singup.css";
+import React, { useMemo, useCallback, useState } from "react";
 import Lottie from "lottie-react";
 import "react-toastify/dist/ReactToastify.css";
-import { Autocomplete } from '@lob/react-address-autocomplete'
-import Stepper from "react-stepper-horizontal";
+import Stepper from "../../Common/Stepper";
 import FormButton from "../../Common/FormButton";
 import FormSelectBox from "../../Common/FormSelectBox";
 import me from "../../../assets/Je3eTqQJrt.json";
 import { Link } from "react-router-dom";
 import useAPI from "../../../Hooks/USER/useAPI";
 import FormContainer from "../../Common/FormContainer";
-import "../../../Style/login.css";
 import InputText from "../validateInputs";
 import { isValidStep3 } from "../../../Auth/isValidate";
 
 const Step3 = ({ setScreen }) => {
-
     const lottie = (
         <Lottie
             animationData={me}
@@ -27,9 +23,9 @@ const Step3 = ({ setScreen }) => {
     const [personalAddress, setPersonalAddress] = useState("");
     const [pinCode, setPinCode] = useState("");
     const [stateValue, setStateValue] = useState("");
-    
+
     const api = useAPI();
-    
+
     const [state, setState] = useState("");
     const handleState = (stateValue) => {
         setStateValue(stateValue);
@@ -40,16 +36,21 @@ const Step3 = ({ setScreen }) => {
         setCity(city);
     };
 
-    const isValidateStep3 = useMemo(() => isValidStep3(stateValue, city, personalAddress, pinCode), [stateValue, city, personalAddress, pinCode]);
+    const isValidateStep3 = useMemo(
+        () => isValidStep3(stateValue, city, personalAddress, pinCode),
+        [stateValue, city, personalAddress, pinCode],
+    );
 
     const handleSubmit = useCallback(async () => {
         const id = localStorage.getItem("upd_id");
-        const data = await api.patchREQUEST("updateDetails", "users", id, { location:
-            [{personalAddress,pinCode,state,city}]
-        })
-        setScreen("step4")
-    }, [  stateValue , city ,personalAddress,pinCode ])
+        const data = await api.patchREQUEST("updateDetails", "users", id, {
+            location: [{ personalAddress, pinCode, state, city }],
+        });
+        setScreen("step4");
+    }, [stateValue, city, personalAddress, pinCode]);
 
+    const inputSelectClass =
+        "w-full p-2 px-4 text-[#23A6F0] text-[13px] font-normal leading-7 border border-[#adadad] rounded-lg bg-white focus:outline-none focus:border-[#23A6F0] focus:ring-1 focus:ring-[#23A6F0] transition-all";
 
     return (
         <FormContainer
@@ -59,8 +60,14 @@ const Step3 = ({ setScreen }) => {
                 "Rooted in City, thriving in State, and always ready to embrace the next exciting chapter wherever life takes me."
             }
             navigat={
-                <p className="--navLink">
-                    Already have an account : <Link to={"/login"}>Login !</Link>
+                <p className="m-0 text-sm text-gray-600">
+                    Already have an account :{" "}
+                    <Link
+                        to={"/login"}
+                        className="text-[#23A6F0] hover:underline font-medium"
+                    >
+                        Login !
+                    </Link>
                 </p>
             }
             slogan={
@@ -81,7 +88,7 @@ const Step3 = ({ setScreen }) => {
                 <FormSelectBox
                     type="text"
                     // warning="states"
-                    className="--input"
+                    className={inputSelectClass}
                     arrayKey="states"
                     selectedState={stateValue}
                     stateValue={handleState}
@@ -92,7 +99,7 @@ const Step3 = ({ setScreen }) => {
             }
             textbox3={
                 <FormSelectBox
-                    className={"--input"}
+                    className={inputSelectClass}
                     arrayKey="cities"
                     selectedState={stateValue}
                     stateValue={handleState}
@@ -111,7 +118,9 @@ const Step3 = ({ setScreen }) => {
             }
             button1={
                 <FormButton
-                    className={"--btn"}
+                    className={
+                        "w-full py-3 px-4 bg-[#23A6F0] text-white text-lg font-medium rounded-lg hover:bg-[#1a8cd8] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    }
                     text={"back"}
                     onClick={() => {
                         setScreen("step2");
@@ -120,16 +129,20 @@ const Step3 = ({ setScreen }) => {
             }
             button2={
                 <FormButton
-                    className={!isValidateStep3 ? "--btnDisabled" : "--btn"}
+                    className={
+                        !isValidateStep3
+                            ? "w-full py-3 px-4 bg-blue-50 text-gray-400 text-lg font-medium rounded-lg border border-gray-200 cursor-not-allowed"
+                            : "w-full py-3 px-4 bg-[#23A6F0] text-white text-lg font-medium rounded-lg hover:bg-[#1a8cd8] transition-colors"
+                    }
                     isDisabled={!isValidateStep3}
                     text={"next"}
                     onClick={() => {
-                        handleSubmit()
+                        handleSubmit();
                     }}
                 />
             }
         />
-    )
-}
+    );
+};
 
-export default Step3
+export default Step3;

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import css from "../../Style/profile.module.css";
+// import css from "../../Style/profile.module.css";
 import { Link } from "react-router-dom";
 import BasicInfo from "../Profile/BasicInfo";
 import Title from "../Profile/Title";
@@ -36,15 +36,19 @@ const Profile = () => {
     const id = Cookies.get("id");
 
     const call = useCallback(async () => {
-        const data = await api.getREQUEST(`profile/${Cookies.get("id")}`);
+        const currentId = Cookies.get("id");
+        if (!currentId || currentId === "null" || currentId === "undefined")
+            return;
+
+        const data = await api.getREQUEST(`profile/${currentId}`);
         if (data[0]) {
             setProfile(data[0]);
         }
-        const id = Cookies.get("id");
-        const users = await api.getREQUEST(`getFollowings/${id}`);
+
+        const users = await api.getREQUEST(`getFollowings/${currentId}`);
         // console.log(users);
         setLn(users[0]?.targetId?.length);
-        const com = await api.getREQUEST(`fetchConnectedCompany/${id}`);
+        const com = await api.getREQUEST(`fetchConnectedCompany/${currentId}`);
         console.log(com);
         setLnc(com[0]?.targetId?.length);
         // if (data[0]) {
@@ -86,11 +90,11 @@ const Profile = () => {
                 ) : (
                     ""
                 )}
-                <section className={css.profileSection}>
-                    <div className="container">
+                <section className="bg-slate-50 min-h-screen py-8">
+                    <div className="container mx-auto px-4">
                         <Title title={"User Profile"} />
-                        <div className="row">
-                            <div className="col-lg-4">
+                        <div className="flex flex-col lg:flex-row gap-6">
+                            <div className="w-full lg:w-1/3 flex flex-col gap-6">
                                 <BasicInfo
                                     firstName={profile.firstName}
                                     lastName={profile.lastName}
@@ -106,12 +110,12 @@ const Profile = () => {
                                         profile?.location[0]?.state
                                     }
                                 />
-                                <div className={css.card}>
+                                <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                                     <Skills data={profile && profile?.skills} />
                                 </div>
                             </div>
-                            <div className="col-lg-8">
-                                <div className={css.card}>
+                            <div className="w-full lg:w-2/3 flex flex-col gap-6">
+                                <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                                     <SensetiveInfo
                                         ln={ln}
                                         lnc={lnc}
@@ -122,12 +126,12 @@ const Profile = () => {
                                         langauge={profile.langauges}
                                     />
                                 </div>
-                                <div className={css.tabsContainer}>
+                                <div className="flex border-b justify-center gap-10 border-slate-200 bg-white rounded-t-xl px-4 pt-2 shadow-sm">
                                     <button
-                                        className={`${css.tab} ${
+                                        className={`px-6 py-3 font-semibold text-sm transition-all border-b-2 ${
                                             screen === "education"
-                                                ? css.activeTab
-                                                : ""
+                                                ? "border-blue-500 text-blue-600"
+                                                : "border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300"
                                         }`}
                                         onClick={() => setScreen("education")}
                                     >
@@ -135,10 +139,10 @@ const Profile = () => {
                                         Education
                                     </button>
                                     <button
-                                        className={`${css.tab} ${
+                                        className={`px-6 py-3 font-semibold text-sm transition-all border-b-2 ${
                                             screen === "experience"
-                                                ? css.activeTab
-                                                : ""
+                                                ? "border-blue-500 text-blue-600"
+                                                : "border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300"
                                         }`}
                                         onClick={() => setScreen("experience")}
                                     >
@@ -146,10 +150,10 @@ const Profile = () => {
                                         Experience
                                     </button>
                                     {/* <button
-                                        className={`${css.tab} ${
+                                        className={`px-6 py-3 font-semibold text-sm transition-all border-b-2 ${
                                             screen === "peoples"
-                                                ? css.activeTab
-                                                : ""
+                                                ? "border-blue-500 text-blue-600"
+                                                : "border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300"
                                         }`}
                                         onClick={() => setScreen("peoples")}
                                     >
@@ -158,12 +162,9 @@ const Profile = () => {
                                     </button> */}
                                 </div>
 
-                                <div
-                                    className={css.card}
-                                    style={{ minHeight: "200px" }}
-                                >
+                                <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 min-h-[200px]">
                                     {screen === "education" ? (
-                                        <div className={css.timelineContainer}>
+                                        <div className="pl-4 border-l-2 border-slate-100 space-y-8">
                                             <Education
                                                 univercity={
                                                     profile.education &&
@@ -211,7 +212,7 @@ const Profile = () => {
                                     )}
 
                                     {screen === "experience" ? (
-                                        <div className={css.timelineContainer}>
+                                        <div className="pl-4 border-l-2 border-slate-100 space-y-8">
                                             <Experience
                                                 userType={
                                                     profile.experience &&
@@ -253,9 +254,9 @@ const Profile = () => {
                                     ) : (
                                         ""
                                     )}
-{/* 
+                                    {/* 
                                     {screen === "peoples" ? (
-                                        <div className={css.grid}>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                             {user &&
                                                 user.map((e) => {
                                                     return (

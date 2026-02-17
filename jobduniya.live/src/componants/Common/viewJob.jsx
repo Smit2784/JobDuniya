@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment/moment";
-import css from "../../Style/jobview.css";
+import css from "../../Style/jobview.module.css";
 const ViewJob = ({
     setViewJob,
     viewJob,

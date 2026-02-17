@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Card from "../../UserSide/Components/Card";
 import Cookies from "js-cookie";
 import useAPI from "../../Hooks/USER/useAPI";
-import css from "../../UserSide/Style/listUsers.module.css";
+// import css from "../../UserSide/Style/listUsers.module.css";
 const CompanyProfile = () => {
     const [company, setCompany] = useState([]);
     const [keyword, setKeyword] = useState("");
@@ -10,9 +10,11 @@ const CompanyProfile = () => {
     const [connectedCompany, setConnectedCompany] = useState([]);
     const [loading, setLoading] = useState(false);
     const api = useAPI();
-    const id = localStorage.getItem("upd_id");
+    const id = Cookies.get("id");
 
     useEffect(() => {
+        if (!id || id === "null" || id === "undefined") return;
+
         const getUser = async () => {
             const data = await api.getREQUEST(`notFollowedCompany/${id}/0`);
             if (data) {
@@ -39,7 +41,7 @@ const CompanyProfile = () => {
         };
         getUser();
         fetchConnections();
-    }, []);
+    }, [id]);
 
     // console.log(compnay);
     // console.log(company);
@@ -95,7 +97,7 @@ const CompanyProfile = () => {
     }, []);
     return (
         <>
-            <div className={css.gridContainer} style={{ marginBottom: "20px" }}>
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-8 mb-4">
                 {Array.isArray(company) &&
                     [...company, ...connectedCompany]?.map((e) => {
                         return (
@@ -123,7 +125,7 @@ const CompanyProfile = () => {
                     })}
             </div>
             <div className="d-flex justify-content-end w-100 p-2">
-                <span className={css.seeAllBtn}>
+                <span className="inline-flex items-center text-blue-500 font-semibold cursor-pointer transition-all duration-200 text-base hover:text-blue-700 hover:translate-x-1">
                     See all{" "}
                     <i
                         className="fa fa-chevron-right ms-2"

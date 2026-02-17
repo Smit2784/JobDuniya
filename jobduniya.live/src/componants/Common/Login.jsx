@@ -24,7 +24,6 @@
 //   const [close, setClose] = useState("");
 //   const [progress, setProgress] = useState(0);
 
-
 //   return (
 //     <>
 
@@ -90,7 +89,7 @@
 //     useEffect(() => {
 //         if (token){
 //             naviget("/");
-//         } 
+//         }
 //     })
 //     return (
 //         <>

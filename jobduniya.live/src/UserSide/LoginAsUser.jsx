@@ -1,13 +1,13 @@
 import React, { useContext, useMemo, useState } from "react";
 import FormButton from "../componants/Common/FormButton";
-import server from "../assets/server.json"
+import server from "../assets/server.json";
 import me from "../assets/me.json";
 import { ToastContainer, toast } from "react-toastify";
 import Cookies from "js-cookie";
 import FormContainer from "../componants/Common/FormContainer";
 import InputText from "../componants/signup/validateInputs";
 import { getApp } from "firebase/app";
-import 'firebase/auth';
+import "firebase/auth";
 import { useNavigate, Link, json } from "react-router-dom";
 import Lottie from "lottie-react";
 import NavbarBeforeLogin from "../componants/login/NavbarBeforeLogin";
@@ -18,8 +18,8 @@ import useAPI from "../Hooks/USER/useAPI";
 const LoginAsUser = ({ setScreen }) => {
     const api = useAPI();
     const navigate = useNavigate();
-    
-    const [setSpinnerState, spinner] = useContext(EnableSpinner)
+
+    const [setSpinnerState, spinner] = useContext(EnableSpinner);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -27,38 +27,42 @@ const LoginAsUser = ({ setScreen }) => {
     const [serverError, setServerError] = useState(false);
     const memo = useMemo(() => {
         return errorMessage;
-    }, [errorMessage])
+    }, [errorMessage]);
 
     const handleSubmit = async () => {
-        try{
+        try {
             if (email.length >= 2 && password.length >= 2) {
-                const RESPONSE = await api.postREQUEST("login", JSON.stringify({ email, password }));
-                console.log("res" , RESPONSE)
-                if(RESPONSE?.data) {
-                    const userId = RESPONSE.id
-                    await api.postREQUEST("userWhoPerformFollow", JSON.stringify({ userId }));
-                    await api.postREQUEST("userWhoPerformFollowToCompany", JSON.stringify({ userId }));
-                    Cookies.set("id"  ,RESPONSE.id)
-                    Cookies.set("token" ,RESPONSE.token)
-                    localStorage.setItem("data",JSON.stringify(RESPONSE.data));
-                    toast.success("Login Successfully")
+                const RESPONSE = await api.postREQUEST(
+                    "login",
+                    JSON.stringify({ email, password }),
+                );
+                console.log("res", RESPONSE);
+                if (RESPONSE?.data) {
+                    const userId = RESPONSE.id;
+                    await api.postREQUEST(
+                        "userWhoPerformFollow",
+                        JSON.stringify({ userId }),
+                    );
+                    await api.postREQUEST(
+                        "userWhoPerformFollowToCompany",
+                        JSON.stringify({ userId }),
+                    );
+                    Cookies.set("id", RESPONSE.id);
+                    Cookies.set("token", RESPONSE.token);
+                    localStorage.setItem("data", JSON.stringify(RESPONSE.data));
+                    toast.success("Login Successfully");
                     navigate("/");
                 } else {
-                    setErrorMessage(RESPONSE.error)
-                    console.log(RESPONSE)
+                    setErrorMessage(RESPONSE.error);
+                    console.log(RESPONSE);
                 }
-            }
-            else {
+            } else {
                 setErrorMessage("Provide Email and Password");
             }
+        } catch (e) {
+            console.log("call--e", e);
         }
-        catch(e){
-            console.log('call--e', e)
-        }
-       
-    }
-    
-
+    };
 
     return (
         <>
@@ -94,21 +98,24 @@ const LoginAsUser = ({ setScreen }) => {
                     <InputText
                         inputType={"password"}
                         password={true}
-                        
                         placeHolder={"Password"}
                         onChange={(e) => setPassword(e)}
                     />
                 }
                 button2={
                     <FormButton
-                        className={"--btn"}
+                        className={
+                            "w-full py-3 px-4 bg-[#23A6F0] text-white text-lg font-medium rounded-lg hover:bg-[#1a8cd8] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        }
                         text={"Login"}
                         onClick={() => handleSubmit()}
                     />
                 }
                 button1={
                     <FormButton
-                        className={"--btn"}
+                        className={
+                            "w-full py-3 px-4 bg-[#23A6F0] text-white text-lg font-medium rounded-lg hover:bg-[#1a8cd8] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        }
                         text={"Forgot Password"}
                         onClick={() => setClose(true)}
                     />
