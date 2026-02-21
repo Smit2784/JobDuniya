@@ -6,7 +6,6 @@ import React, {
     useState,
 } from "react";
 import useUploadPdf from "../../Hooks/OTHER/UploadPdf";
-import styles from "./Style/apply.module.css";
 import success from "../../assets/success.json";
 import Lottie from "lottie-react";
 import { ActiveModal } from "../..";
@@ -131,51 +130,51 @@ const Apply = ({ jobs }) => {
     }, [userEmail, phoneNumber]);
 
     return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.cardContainer}>
-                <div className={styles.header}>
-                    <h3 className={styles.title}>
+        <div className="fixed inset-0 top-0 left-0 w-full h-full bg-slate-900/60 backdrop-blur-sm z-100000 flex justify-center items-center animate-[fadeIn_0.3s_ease-out]">
+            <div className="w-full max-w-[600px] bg-white rounded-3xl p-8 shadow-2xl border border-slate-200/80 relative max-h-[90vh] overflow-y-auto animate-[slideUp_0.4s_cubic-bezier(0.16,1,0.3,1)]">
+                <div className="flex justify-between items-center mb-6">
+                    <h3 className="text-2xl font-bold text-slate-800 m-0">
                         Apply to {data.company?.Name}
                     </h3>
                     <div
-                        className={styles.closeBtn}
+                        className="w-9 h-9 rounded-full border border-slate-200 bg-slate-50 text-slate-500 flex items-center justify-center cursor-pointer transition-all hover:bg-red-50 hover:text-red-500 hover:border-red-100 hover:rotate-90"
                         onClick={() => setActiveModalState("")}
                     >
                         <i className="fa fa-times"></i>
                     </div>
                 </div>
 
-                <div className={styles.progressContainer}>
+                <div className="h-1.5 bg-slate-100 rounded-full mb-8 overflow-hidden">
                     <div
-                        className={styles.progressBar}
+                        className="h-full bg-linear-to-r from-blue-600 to-blue-500 rounded-full transition-all duration-400 ease-in-out"
                         style={{ width: progress === "0%" ? "10%" : progress }}
                     ></div>
                 </div>
 
                 {form === "form1" && (
                     <div className="animate__animated animate__fadeIn">
-                        <span className={styles.sectionTitle}>
+                        <span className="text-lg font-semibold text-slate-700 mb-5 block">
                             Contact Info
                         </span>
 
-                        <div className={styles.profileSection}>
-                            <div className={styles.imageWrapper}>
+                        <div className="flex items-center gap-5 p-4 bg-slate-50 rounded-2xl mb-6 border border-slate-200">
+                            <div className="w-16 h-16 rounded-xl overflow-hidden border-2 border-white shadow-sm">
                                 <img
-                                    className={styles.appImage}
+                                    className="w-full h-full object-cover"
                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIBYfT1otzlFrFgIErgyxOyBbO37OM5JsaUA&usqp=CAU"
                                     alt="Profile"
                                 />
                             </div>
-                            <div className={styles.userInfo}>
-                                <span className={styles.userName}>
+                            <div className="flex flex-col gap-1">
+                                <span className="font-bold text-slate-900 text-lg">
                                     {user.firstName} {user.lastName}
                                 </span>
-                                <span className={styles.userRole}>
+                                <span className="text-sm text-slate-500">
                                     Student at{" "}
                                     {user.education &&
                                         user.education[0]?.univercity}
                                 </span>
-                                <span className={styles.userLocation}>
+                                <span className="text-xs text-slate-400 flex items-center gap-1">
                                     <i className="fa fa-map-marker-alt"></i>
                                     {user.location &&
                                         user.location[0]?.city},{" "}
@@ -184,40 +183,42 @@ const Apply = ({ jobs }) => {
                             </div>
                         </div>
 
-                        <div className={styles.formGroup}>
-                            <label className={styles.label}>
+                        <div className="mb-5">
+                            <label className="block mb-2 font-medium text-slate-600 text-sm">
                                 Email address
                             </label>
                             <input
                                 type="email"
                                 placeholder="name@example.com"
-                                className={`${styles.input} ${!userEmail && errorMsg ? styles.inputError : ""}`}
+                                className={`w-full p-3 rounded-xl border-2 border-slate-200 text-base transition-all text-slate-800 outline-none bg-white focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] placeholder:text-slate-300 ${!userEmail && errorMsg ? "border-red-500 focus:shadow-[0_0_0_4px_rgba(239,68,68,0.1)]" : ""}`}
                                 onChange={handleInput1}
                                 defaultValue={user.email}
                             />
                             {errorMsg && (
-                                <span className={styles.errorText}>
+                                <span className="text-red-500 text-xs mt-1.5 block">
                                     {errorMsg}
                                 </span>
                             )}
                         </div>
 
-                        <div className={styles.formGroup}>
-                            <label className={styles.label}>Phone number</label>
+                        <div className="mb-5">
+                            <label className="block mb-2 font-medium text-slate-600 text-sm">
+                                Phone number
+                            </label>
                             <input
                                 type="text"
                                 maxLength={10}
                                 inputMode="numeric"
                                 placeholder="10-digit mobile number"
-                                className={styles.input}
+                                className="w-full p-3 rounded-xl border-2 border-slate-200 text-base transition-all text-slate-800 outline-none bg-white focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] placeholder:text-slate-300"
                                 onChange={handleInput2}
                                 defaultValue={user.phone}
                             />
                         </div>
 
-                        <div className={styles.footer}>
+                        <div className="flex justify-end mt-8 pt-6 border-t border-dashed border-slate-200">
                             <button
-                                className={`${styles.btn} ${isTrue ? styles.disabledBtn : styles.primaryBtn}`}
+                                className={`px-8 py-3 rounded-xl font-semibold text-base cursor-pointer border-none transition-all ${isTrue ? "bg-slate-200 text-slate-400 cursor-not-allowed transform-none shadow-none" : "bg-linear-to-br from-blue-600 to-blue-700 text-white shadow-md hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"}`}
                                 onClick={handleNext1}
                                 disabled={isTrue}
                             >
@@ -229,10 +230,12 @@ const Apply = ({ jobs }) => {
 
                 {form === "form2" && (
                     <div className="animate__animated animate__fadeIn">
-                        <span className={styles.sectionTitle}>Resume / CV</span>
+                        <span className="text-lg font-semibold text-slate-700 mb-5 block">
+                            Resume / CV
+                        </span>
 
-                        <div className={styles.formGroup}>
-                            <div className={styles.fileInputWrapper}>
+                        <div className="mb-5">
+                            <div className="relative border-2 border-dashed border-slate-300 rounded-2xl p-8 text-center transition-all cursor-pointer bg-slate-50 hover:border-blue-500 hover:bg-blue-50">
                                 <i
                                     className="fa fa-cloud-upload-alt fa-3x"
                                     style={{
@@ -251,7 +254,7 @@ const Apply = ({ jobs }) => {
                                 <input
                                     type="file"
                                     accept="application/pdf"
-                                    className={styles.fileInput}
+                                    className="absolute w-full h-full top-0 left-0 opacity-0 cursor-pointer"
                                     onChange={handleChange}
                                 />
                                 {selectedFile && (
@@ -275,11 +278,11 @@ const Apply = ({ jobs }) => {
                                 upload.uploadProgress < 100 && (
                                     <div style={{ marginTop: "16px" }}>
                                         <div
-                                            className={styles.progressContainer}
+                                            className="h-1.5 bg-slate-100 rounded-full mb-8 overflow-hidden"
                                             style={{ marginBottom: "8px" }}
                                         >
                                             <div
-                                                className={styles.progressBar}
+                                                className="h-full bg-linear-to-r from-blue-600 to-blue-500 rounded-full transition-all duration-400 ease-in-out"
                                                 style={{
                                                     width: `${upload.uploadProgress}%`,
                                                 }}
@@ -298,10 +301,10 @@ const Apply = ({ jobs }) => {
                                 )}
                         </div>
 
-                        <div className={styles.footer}>
+                        <div className="flex justify-end mt-8 pt-6 border-t border-dashed border-slate-200">
                             {!cv ? (
                                 <button
-                                    className={`${styles.btn} ${!selectedFile ? styles.disabledBtn : styles.primaryBtn}`}
+                                    className={`px-8 py-3 rounded-xl font-semibold text-base cursor-pointer border-none transition-all ${!selectedFile ? "bg-slate-200 text-slate-400 cursor-not-allowed transform-none shadow-none" : "bg-linear-to-br from-blue-600 to-blue-700 text-white shadow-md hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"}`}
                                     onClick={() =>
                                         upload.handleUpload(selectedFile)
                                     }
@@ -311,7 +314,7 @@ const Apply = ({ jobs }) => {
                                 </button>
                             ) : (
                                 <button
-                                    className={`${styles.btn} ${styles.primaryBtn}`}
+                                    className="px-8 py-3 rounded-xl font-semibold text-base cursor-pointer border-none transition-all bg-linear-to-br from-blue-600 to-blue-700 text-white shadow-md hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
                                     onClick={handleNext2}
                                 >
                                     Submit Application
@@ -338,14 +341,14 @@ const Apply = ({ jobs }) => {
                         </p>
 
                         <div
-                            className={styles.footer}
+                            className="flex justify-end mt-8 pt-6 border-t border-dashed border-slate-200"
                             style={{
                                 justifyContent: "center",
                                 borderTop: "none",
                             }}
                         >
                             <button
-                                className={`${styles.btn} ${styles.primaryBtn}`}
+                                className="px-8 py-3 rounded-xl font-semibold text-base cursor-pointer border-none transition-all bg-linear-to-br from-blue-600 to-blue-700 text-white shadow-md hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
                                 onClick={() => setActiveModalState("")}
                             >
                                 Return to Jobs
@@ -355,7 +358,7 @@ const Apply = ({ jobs }) => {
                 )}
 
                 {form !== "form3" && (
-                    <div className={styles.disclaimer}>
+                    <div className="text-xs text-slate-400 mt-6 text-center leading-relaxed">
                         Submitting this application won’t change your JobDuniya
                         profile.
                         <br />

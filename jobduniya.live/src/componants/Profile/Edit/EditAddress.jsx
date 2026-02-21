@@ -28,7 +28,7 @@ function EditAddress() {
     }, [stateValue, city, personalAddress, pinCode]);
 
     return (
-        <div className="w-100">
+        <div className="w-full">
             <div className="mb-6">
                 <label className="block text-sm font-semibold text-slate-700 mb-2">
                     Personal Address
@@ -89,7 +89,7 @@ function EditAddress() {
             </div>
 
             <button
-                className="bg-gradient-to-br from-blue-600 to-blue-700 text-white font-semibold px-8 py-3 rounded-lg border-none shadow-lg shadow-blue-500/20 transition-all duration-200 w-full mt-4 text-base hover:-translate-y-px hover:shadow-xl hover:brightness-110 cursor-pointer"
+                className="bg-linear-to-br from-blue-600 to-blue-700 text-white font-semibold px-8 py-3 rounded-lg border-none shadow-lg shadow-blue-500/20 transition-all duration-200 w-full mt-4 text-base hover:-translate-y-px hover:shadow-xl hover:brightness-110 cursor-pointer"
                 onClick={() => handleSubmit()}
             >
                 Save Address

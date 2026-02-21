@@ -130,9 +130,9 @@ const EditProfileForm = () => {
     // }, [url])
     return (
         <>
-            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[800px] max-h-[90vh] rounded-2xl bg-white shadow-2xl z-[1000] overflow-y-auto border border-slate-200 animate-[slideUp_0.3s_cubic-bezier(0.16,1,0.3,1)] font-[Inter]">
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[800px] max-h-[90vh] rounded-2xl bg-white shadow-2xl z-1000 overflow-y-auto border border-slate-200 animate-[slideUp_0.3s_cubic-bezier(0.16,1,0.3,1)] font-[Inter]">
                 <div className="flex justify-between items-center px-8 py-6 border-b border-slate-100 bg-white sticky top-0 z-10">
-                    <h2 className="text-2xl font-bold text-slate-900 bg-gradient-to-br from-blue-700 to-blue-500 bg-clip-text text-transparent m-0 tracking-tight">
+                    <h2 className="text-2xl font-bold bg-linear-to-br from-blue-700 to-blue-500 bg-clip-text text-transparent m-0 tracking-tight">
                         Edit Profile
                     </h2>
                     <button
@@ -144,8 +144,8 @@ const EditProfileForm = () => {
                 </div>
 
                 <div className="p-8 bg-slate-50">
-                    <div className="row">
-                        <div className="col-md-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
                             <div className="mb-6">
                                 <label className="block text-sm font-semibold text-slate-700 mb-2">
                                     First Name
@@ -160,7 +160,7 @@ const EditProfileForm = () => {
                                 />
                             </div>
                         </div>
-                        <div className="col-md-6">
+                        <div>
                             <div className="mb-6">
                                 <label className="block text-sm font-semibold text-slate-700 mb-2">
                                     Last Name
@@ -178,8 +178,8 @@ const EditProfileForm = () => {
                     </div>
 
                     <div className="flex items-center gap-5 p-5 bg-white border border-dashed border-slate-300 rounded-xl mb-6">
-                        <div className="d-flex align-items-center gap-3 w-100">
-                            <div className="flex-grow-1">
+                        <div className="flex items-center gap-3 w-full">
+                            <div className="flex-1">
                                 <label className="block text-sm font-semibold text-slate-700 mb-2">
                                     Profile Picture
                                 </label>
@@ -198,8 +198,8 @@ const EditProfileForm = () => {
                         </div>
                     </div>
 
-                    <div className="row">
-                        <div className="col-md-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
                             <div className="mb-6">
                                 <label className="block text-sm font-semibold text-slate-700 mb-2">
                                     Languages
@@ -216,7 +216,7 @@ const EditProfileForm = () => {
                                 <DataList Id={"langauge"} />
                             </div>
                         </div>
-                        <div className="col-md-6">
+                        <div>
                             <div className="mb-6">
                                 <label className="block text-sm font-semibold text-slate-700 mb-2">
                                     Profession
@@ -248,7 +248,7 @@ const EditProfileForm = () => {
                     </div>
 
                     <button
-                        className="bg-gradient-to-br from-blue-600 to-blue-700 text-white font-semibold px-8 py-3 rounded-lg border-none shadow-lg shadow-blue-500/20 transition-all duration-200 w-full mt-4 text-base hover:-translate-y-px hover:shadow-xl hover:brightness-110 cursor-pointer"
+                        className="bg-linear-to-br from-blue-600 to-blue-700 text-white font-semibold px-8 py-3 rounded-lg border-none shadow-lg shadow-blue-500/20 transition-all duration-200 w-full mt-4 text-base hover:-translate-y-px hover:shadow-xl hover:brightness-110 cursor-pointer"
                         onClick={() => handleSubmit()}
                     >
                         Save Changes

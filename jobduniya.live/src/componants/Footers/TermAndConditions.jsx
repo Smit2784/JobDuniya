@@ -20,18 +20,18 @@ const TermAndConditions = () => {
                     />
                 }
             />
-            <div class="bodyTermPage">
-                <div class="containerTermPage">
-                    <div className="Heading">
-                        <h3>
+            <div className="flex flex-col items-center justify-center h-full p-6 text-[#333] font-serif bg-linear-to-b from-[#4285f4] via-white to-white min-h-[calc(100%-25px)]">
+                <div className="w-4/5 h-[534px] p-6 flex flex-col bg-white rounded-lg shadow-[0_0_20px_rgba(77,76,76,0.234)] max-sm:p-8">
+                    <div className="flex flex-col items-center pb-2.5 text-[#4285f4]">
+                        <h3 className="relative inline-block after:absolute after:content-[''] after:w-0 after:left-0 after:bottom-0 after:bg-[#eeeeee] after:hover:w-[90%] before:absolute before:content-[''] before:w-0 before:h-[2px] before:-bottom-px before:left-0 before:bg-[#0085ff] before:transition-all before:duration-300 before:hover:w-[90%]">
                             <strong>
-                                <i class="fa fa-book"></i> Terms &amp;
+                                <i className="fa fa-book"></i> Terms &amp;
                                 Conditions
                             </strong>
                         </h3>
                     </div>
-                    <div className="mainTermPage">
-                        <p class="pTermPage">
+                    <div className="w-full h-[415px] flex overflow-scroll justify-start items-center flex-col p-5">
+                        <p className="leading-[1.6] mb-4">
                             The User of the Job Portal / website (hereinafter
                             referred to as <strong>“User”</strong>) agrees to
                             the following terms and conditions, including any
@@ -45,10 +45,10 @@ const TermAndConditions = () => {
                             caption <strong>“Terms &amp; Conditions”</strong>{" "}
                             below.
                         </p>
-                        <h2 class="pTermPage">
+                        <h2 className="leading-[1.6] mb-4">
                             <strong>Purpose of the Job portal:</strong>
                         </h2>
-                        <p class="pTermPage">
+                        <p className="leading-[1.6] mb-4">
                             The purpose of the job portal is to reduce the job
                             search gap between technical freshers viz. students
                             of passed out Diploma, Bachelor, Master with
@@ -59,7 +59,7 @@ const TermAndConditions = () => {
                             <strong>Terms &amp; Conditions:</strong>
                         </h2>
 
-                        <p class="pTermPage">
+                        <p className="leading-[1.6] mb-4">
                             <strong>1.</strong> These Terms and Conditions and
                             the Privacy Policy Statement which are hereby
                             incorporated as if set forth fully herein, represent
@@ -67,25 +67,25 @@ const TermAndConditions = () => {
                             for the use of and access to the Services and/or
                             other contents of the Job Portal.
                         </p>
-                        <p class="pTermPage">
+                        <p className="leading-[1.6] mb-4">
                             <strong>2.</strong> The job portal reserves the
                             right to decline service/registration to any person
                             at any point of time without giving any prior
                             notice. It is clarified that registering with the
                             portal does not guarantee employment.
                         </p>
-                        <p class="pTermPage">
+                        <p className="leading-[1.6] mb-4">
                             <strong>3.</strong> The User agrees that the
                             services of the job portal, once subscribed to by
                             the User are not refundable and all amount/s paid
                             shall stand appropriated.
                         </p>
-                        <p class="pTermPage">
+                        <p className="leading-[1.6] mb-4">
                             <strong>4.</strong> Nothing in this Agreement shall
                             be deemed to confer any third-party rights or
                             benefits.
                         </p>
-                        <p class="pTermPage">
+                        <p className="leading-[1.6] mb-4">
                             <strong>5.</strong> The job portal authorizes the
                             User to view and access the content available on or
                             from the Job Portal solely for their personal use.
@@ -105,7 +105,7 @@ const TermAndConditions = () => {
                             networked computer environment for any purpose is
                             prohibited.
                         </p>
-                        <p class="pTermPage">
+                        <p className="leading-[1.6] mb-4">
                             <strong>6.</strong> The User shall be solely
                             responsible for maintaining the confidentiality of
                             their account and passwords. The User shall be
@@ -114,7 +114,7 @@ const TermAndConditions = () => {
                             The User agrees to immediately notify the Company of
                             any unauthorized use of his Account and Password.
                         </p>
-                        <p class="pTermPage">
+                        <p className="leading-[1.6] mb-4">
                             <strong>7.</strong> The job portal reserves the
                             right to modify, suspend, cancel, discontinue or
                             terminate the services of the Job Portal or reject
@@ -123,7 +123,7 @@ const TermAndConditions = () => {
                             without assigning any reason whatsoever to the User
                             and without any liability to the job portal.
                         </p>
-                        <p class="pTermPage">
+                        <p className="leading-[1.6] mb-4">
                             <strong>8.</strong> The User shall be responsible
                             for use of the Job Portal, for any entries/posts
                             that he uploads/makes, and for any consequences
@@ -148,7 +148,7 @@ const TermAndConditions = () => {
                             termination of the User’s right to access the job
                             portal.
                         </p>
-                        <p class="pTermPage">
+                        <p className="leading-[1.6] mb-4">
                             <strong>9.</strong> The Users are prohibited from
                             violating or attempting to violate the security of
                             the Job Portal, including,{" "}
@@ -179,7 +179,7 @@ const TermAndConditions = () => {
                             prosecuting Users who are involved in such
                             violations.
                         </p>
-                        <p class="pTermPage">
+                        <p className="leading-[1.6] mb-4">
                             <strong>10.</strong> The contents of specific
                             postings made by the User are posted and are the
                             responsibility of the User who makes such postings.
@@ -205,7 +205,7 @@ const TermAndConditions = () => {
                             provisions of laws while uploading any contents on
                             the Job Portal.
                         </p>
-                        <p class="pTermPage">
+                        <p className="leading-[1.6] mb-4">
                             <strong>11.</strong> The job portal specifically
                             prohibits the posting of User’s content, which
                             provides the following and/or has the effect of the
@@ -213,25 +213,25 @@ const TermAndConditions = () => {
                             and is not a comprehensive list of all prohibited
                             User Content. <strong>The User Content:-</strong>
                             <ol>
-                                <p class="pTermPage">
+                                <p className="leading-[1.6] mb-4">
                                     <strong>1.</strong> is implicitly or
                                     explicitly offensive, such as User Content
                                     that engages in, endorses or promotes
                                     racism, bigotry, hatred or physical harm of
                                     any kind against any group or individual;
                                 </p>
-                                <p class="pTermPage">
+                                <p className="leading-[1.6] mb-4">
                                     <strong>2.</strong> harass, incites
                                     harassment or advocates harassment of
                                     another group or individual;
                                 </p>
-                                <p class="pTermPage">
+                                <p className="leading-[1.6] mb-4">
                                     <strong>3.</strong> involves the
                                     transmission of “junk mail”, “chain
                                     letters,” or unsolicited mass mailing or
                                     “spamming”;
                                 </p>
-                                <p class="pTermPage">
+                                <p className="leading-[1.6] mb-4">
                                     <strong>4.</strong> promotes or endorses
                                     false or misleading information or illegal
                                     activities or conduct that is abusive,
@@ -239,7 +239,7 @@ const TermAndConditions = () => {
                                     or which amounts to contempt of any judicial
                                     authority;
                                 </p>
-                                <p class="pTermPage">
+                                <p className="leading-[1.6] mb-4">
                                     <strong>5.</strong> promotes or endorses an
                                     illegal or unauthorized use of any
                                     copyrighted work, such as providing or
@@ -251,17 +251,17 @@ const TermAndConditions = () => {
                                     music or other media or links to pirated
                                     music or other media files;
                                 </p>
-                                <p class="pTermPage">
+                                <p className="leading-[1.6] mb-4">
                                     <strong>6.</strong> contains restricted or
                                     password only access pages, or hidden pages
                                     or images;
                                 </p>
-                                <p class="pTermPage">
+                                <p className="leading-[1.6] mb-4">
                                     <strong>7.</strong> displays or links to
                                     obscene, indecent pornographic, material of
                                     any kind;
                                 </p>
-                                <p class="pTermPage">
+                                <p className="leading-[1.6] mb-4">
                                     <strong>8.</strong> provides instructional
                                     information about illegal activities or
                                     other activities prohibited by these Terms,

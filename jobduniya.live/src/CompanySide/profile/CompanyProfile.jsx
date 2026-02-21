@@ -68,10 +68,7 @@ function ProjectStatusCard() {
                     Web Design
                 </p>
                 <div className="w-full bg-slate-100 rounded-full h-2 mb-4">
-                    <div
-                        className="bg-blue-500 h-2 rounded-full"
-                        style={{ width: "80%" }}
-                    ></div>
+                    <div className="bg-blue-500 h-2 rounded-full w-[80%]"></div>
                 </div>
                 {/* Add more progress bars for other project statuses */}
             </div>

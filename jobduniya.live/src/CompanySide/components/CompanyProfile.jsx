@@ -124,13 +124,10 @@ const CompanyProfile = () => {
                         );
                     })}
             </div>
-            <div className="d-flex justify-content-end w-100 p-2">
+            <div className="flex justify-end w-full p-2">
                 <span className="inline-flex items-center text-blue-500 font-semibold cursor-pointer transition-all duration-200 text-base hover:text-blue-700 hover:translate-x-1">
                     See all{" "}
-                    <i
-                        className="fa fa-chevron-right ms-2"
-                        style={{ fontSize: "0.8em" }}
-                    ></i>
+                    <i className="fa fa-chevron-right ml-2 text-[0.8em]"></i>
                 </span>
             </div>
         </>

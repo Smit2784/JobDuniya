@@ -57,9 +57,9 @@ function EditExperience() {
     ]);
 
     return (
-        <div className="w-100">
-            <div className="row mb-3">
-                <div className="col-md-6">
+        <div className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
+                <div>
                     <div className="mb-6">
                         <label className="block text-sm font-semibold text-slate-700 mb-2">
                             Job Title
@@ -74,7 +74,7 @@ function EditExperience() {
                         />
                     </div>
                 </div>
-                <div className="col-md-6">
+                <div>
                     <div className="mb-6">
                         <label className="block text-sm font-semibold text-slate-700 mb-2">
                             Company Name
@@ -105,8 +105,8 @@ function EditExperience() {
                 />
             </div>
 
-            <div className="row mb-3">
-                <div className="col-md-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
+                <div>
                     <div className="mb-6">
                         <label className="block text-sm font-semibold text-slate-700 mb-2">
                             Start Date
@@ -119,7 +119,7 @@ function EditExperience() {
                         />
                     </div>
                 </div>
-                <div className="col-md-6">
+                <div>
                     <div className="mb-6">
                         <label className="block text-sm font-semibold text-slate-700 mb-2">
                             End Date
@@ -163,7 +163,7 @@ function EditExperience() {
             </div>
 
             <button
-                className="bg-gradient-to-br from-blue-600 to-blue-700 text-white font-semibold px-8 py-3 rounded-lg border-none shadow-lg shadow-blue-500/20 transition-all duration-200 w-full mt-4 text-base hover:-translate-y-px hover:shadow-xl hover:brightness-110 cursor-pointer"
+                className="bg-linear-to-br from-blue-600 to-blue-700 text-white font-semibold px-8 py-3 rounded-lg border-none shadow-lg shadow-blue-500/20 transition-all duration-200 w-full mt-4 text-base hover:-translate-y-px hover:shadow-xl hover:brightness-110 cursor-pointer"
                 onClick={() => handleSubmit()}
             >
                 Save Experience

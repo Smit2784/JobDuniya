@@ -3,7 +3,6 @@ import useAPI from "../../Hooks/USER/useAPI";
 import ViewJob from "./viewJob";
 import JobCard from "./JobCard";
 import Cookies from "js-cookie";
-import css from "../../Style/searchSection.module.css";
 
 const SearchSection = () => {
     const [jobType, setJobType] = useState("Remote");
@@ -150,16 +149,16 @@ const SearchSection = () => {
     };
 
     return (
-        <div className={css.searchContainer}>
+        <div className="bg-slate-50 py-12 min-h-[80vh]">
             <div className="container">
-                <div className={css.searchCard}>
+                <div className="bg-white rounded-2xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05),0_8px_10px_-6px_rgba(0,0,0,0.01)] border border-slate-200 p-10 mb-8 transition-transform duration-200">
                     <div className="row">
                         <div className="col-md-10">
-                            <div className={css.inputsRow}>
-                                <div className={css.inputGroup}>
+                            <div className="flex flex-col md:flex-row gap-6 items-center md:items-stretch">
+                                <div className="flex-1 relative">
                                     <input
                                         type="text"
-                                        className={css.searchInput}
+                                        className="w-full py-3.5 px-5 pl-12 text-base text-slate-800 bg-slate-100 border border-transparent rounded-xl transition-all duration-200 focus:bg-white focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/15 placeholder:text-slate-400"
                                         placeholder="Job title, Keyword, or Company"
                                         onChange={(e) =>
                                             setKeyword(e.target.value)
@@ -167,10 +166,10 @@ const SearchSection = () => {
                                         value={keyword}
                                     />
                                 </div>
-                                <div className={css.inputGroup}>
+                                <div className="flex-1 relative">
                                     <input
                                         list="location"
-                                        className={css.searchInput}
+                                        className="w-full py-3.5 px-5 pl-12 text-base text-slate-800 bg-slate-100 border border-transparent rounded-xl transition-all duration-200 focus:bg-white focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/15 placeholder:text-slate-400"
                                         placeholder="City, State, or Zipcode"
                                         onChange={(e) =>
                                             setLocation(e.target.value)
@@ -185,7 +184,7 @@ const SearchSection = () => {
                         </div>
                         <div className="col-md-2 d-flex align-items-center mt-3 mt-md-0">
                             <button
-                                className={css.searchButton}
+                                className="w-full md:w-auto bg-linear-to-br from-blue-500 to-blue-600 text-white font-semibold py-3.5 px-8 rounded-xl border-none cursor-pointer transition-transform duration-100 shadow-sm hover:-translate-y-px hover:shadow-lg hover:shadow-blue-600/20 active:translate-y-px whitespace-nowrap"
                                 onClick={HandleSearch}
                             >
                                 Search
@@ -194,47 +193,34 @@ const SearchSection = () => {
                     </div>
                 </div>
 
-                <div className={css.resultsHeader}>
+                <div className="text-center mb-8">
                     <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
-                        <h1 className={`${css.resultCount} mb-0`}>
+                        <h1 className="text-slate-700 font-bold text-2xl mb-2 clasmb-0">
                             {length} Jobs Found
                         </h1>
-                        {/* <div className={css.controlsBox}>
-                            <div className={css.filterWrapper}>
-                                <select
-                                    className={css.filterSelect}
-                                    onChange={(e) => handleSort(e.target.value)}
-                                    defaultValue="All"
-                                >
-                                    <option value="All">All Jobs</option>
-                                    <option value="Date">Latest First</option>
-                                    <option value="City">Near You</option>
-                                </select>
-                            </div>
-                        </div> */}
                     </div>
 
-                    <div className={css.tabsContainer}>
+                    <div className="flex justify-center gap-4 mb-10 border-b border-slate-200 pb-4">
                         <button
-                            className={`${css.tabItem} ${jobType === "All" ? css.activeTab : ""}`}
+                            className={`px-6 py-3 rounded-full font-medium cursor-pointer transition-all duration-200 border border-transparent bg-transparent hover:text-blue-500 hover:bg-blue-50 ${jobType === "All" ? "bg-blue-50 text-blue-600 border-blue-200 font-semibold" : "text-slate-500"}`}
                             onClick={() => filterJobs("All")}
                         >
                             All
                         </button>
                         <button
-                            className={`${css.tabItem} ${jobType === "Remote" ? css.activeTab : ""}`}
+                            className={`px-6 py-3 rounded-full font-medium cursor-pointer transition-all duration-200 border border-transparent bg-transparent hover:text-blue-500 hover:bg-blue-50 ${jobType === "Remote" ? "bg-blue-50 text-blue-600 border-blue-200 font-semibold" : "text-slate-500"}`}
                             onClick={() => filterJobs("Remote")}
                         >
                             Remote
                         </button>
                         <button
-                            className={`${css.tabItem} ${jobType === "FullTime" ? css.activeTab : ""}`}
+                            className={`px-6 py-3 rounded-full font-medium cursor-pointer transition-all duration-200 border border-transparent bg-transparent hover:text-blue-500 hover:bg-blue-50 ${jobType === "FullTime" ? "bg-blue-50 text-blue-600 border-blue-200 font-semibold" : "text-slate-500"}`}
                             onClick={() => filterJobs("FullTime")}
                         >
                             Full Time
                         </button>
                         <button
-                            className={`${css.tabItem} ${jobType === "PartTime" ? css.activeTab : ""}`}
+                            className={`px-6 py-3 rounded-full font-medium cursor-pointer transition-all duration-200 border border-transparent bg-transparent hover:text-blue-500 hover:bg-blue-50 ${jobType === "PartTime" ? "bg-blue-50 text-blue-600 border-blue-200 font-semibold" : "text-slate-500"}`}
                             onClick={() => filterJobs("PartTime")}
                         >
                             Part Time
@@ -242,7 +228,7 @@ const SearchSection = () => {
                     </div>
                 </div>
 
-                <div className={css.jobsList}>
+                <div className="h-[60vh] overflow-y-auto pr-2">
                     {jobs &&
                         jobs.map((e) => (
                             <div key={e._id}>
@@ -284,7 +270,6 @@ const SearchSection = () => {
         </div>
     );
 };
-
 export default SearchSection;
 
 // import React, { useCallback, useEffect, useState } from "react";
