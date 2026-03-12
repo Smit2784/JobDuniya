@@ -82,7 +82,7 @@ const ResetPassword = ({ close }) => {
         "w-full bg-[#007bff] text-white py-2 px-4 rounded-lg hover:bg-[#0056b3] transition-colors font-medium border-none cursor-pointer";
 
     return (
-        <div className="fixed inset-0 z-[12336677] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div className="fixed inset-0 z-12336677 flex items-center justify-center bg-black/50 backdrop-blur-sm">
             <ToastContainer />
             <div className="bg-white p-5 rounded-lg shadow-lg relative max-w-xl w-full mx-4">
                 <button

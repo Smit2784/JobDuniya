@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import useAPI from "../../../Hooks/USER/useAPI";
 import Cookies from "js-cookie";
-import useFirestorage from "../../../Hooks/OTHER/useFirestorage";
 // import css from "../../../Style/profile_modal.module.css";
 
 const EditEducation = () => {

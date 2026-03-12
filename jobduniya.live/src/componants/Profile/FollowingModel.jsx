@@ -36,7 +36,7 @@ const Body = ({ onClose }) => {
                     </div>
                 </div>
 
-                <div className="p-4 overflow-y-auto custom-scrollbar flex-grow">
+                <div className="p-4 overflow-y-auto custom-scrollbar grow">
                     <div className="mb-4">
                         <input
                             type="text"
@@ -53,7 +53,7 @@ const Body = ({ onClose }) => {
                                         className="flex items-center p-3 bg-white border border-slate-100 rounded-xl hover:shadow-md transition-all duration-200 group"
                                         key={e._id}
                                     >
-                                        <div className="flex-shrink-0 mr-4">
+                                        <div className="shrink-0 mr-4">
                                             <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm">
                                                 <img
                                                     src={e.profileImage}
@@ -66,7 +66,7 @@ const Body = ({ onClose }) => {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="flex-grow min-w-0 mr-3">
+                                        <div className="grow min-w-0 mr-3">
                                             <h6 className="text-sm font-bold text-slate-900 truncate mb-0.5">
                                                 {e.firstName} {e.lastName}
                                             </h6>
@@ -74,7 +74,7 @@ const Body = ({ onClose }) => {
                                                 {e.profession || "User"}
                                             </p>
                                         </div>
-                                        <div className="flex-shrink-0">
+                                        <div className="shrink-0">
                                             <button
                                                 className="px-4 py-1.5 text-xs font-semibold text-slate-500 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors"
                                                 onClick={() => {
