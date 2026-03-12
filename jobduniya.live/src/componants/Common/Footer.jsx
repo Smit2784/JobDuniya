@@ -3,7 +3,7 @@ import logoFooter from "../../Images/logoFooter.png";
 
 const Footer = () => {
     return (
-        <footer className="relative pt-20 pb-6 bg-gradient-to-br from-slate-900 to-slate-800 text-slate-200 overflow-hidden font-[Inter] border-t border-white/10 before:absolute before:top-0 before:left-0 before:w-full before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-blue-500 before:to-transparent before:opacity-50">
+        <footer className="relative pt-20 pb-6 bg-linear-to-br from-slate-900 to-slate-800 text-slate-200 overflow-hidden font-[Inter] border-t border-white/10 before:absolute before:top-0 before:left-0 before:w-full before:h-1px before:bg-linear-to-r before:from-transparent before:via-blue-500 before:to-transparent before:opacity-50">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {/* About Section */}

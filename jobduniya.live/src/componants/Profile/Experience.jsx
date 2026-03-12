@@ -11,63 +11,69 @@ const Experience = ({
     achievements,
 }) => {
     return (
-        <div className="flex flex-col md:flex-row gap-6 relative pb-6 border-b border-slate-100 last:border-0 last:pb-0">
-            <div className="hidden md:flex flex-col items-center w-[50px] shrink-0">
-                <div className="w-10 h-10 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-lg z-10">
-                    <i className="fa-solid fa-briefcase"></i>
+        <div className="flex flex-col md:flex-row gap-6 relative pb-8 group">
+            {/* Timeline Line */}
+            <div className="hidden md:flex flex-col items-center w-[50px] shrink-0 absolute left-0 top-0 bottom-0">
+                <div className="w-12 h-12 bg-white border-2 border-indigo-100 text-indigo-500 rounded-full flex items-center justify-center text-lg z-10 shadow-[0_4px_12px_rgb(99,102,241,0.15)] group-hover:border-indigo-300 group-hover:shadow-[0_4px_20px_rgb(99,102,241,0.4)] transition-all duration-300">
+                    <i className="fa-solid fa-briefcase group-hover:scale-110 group-hover:text-indigo-600 transition-transform duration-300"></i>
                 </div>
-                <div className="flex-grow w-0.5 bg-slate-100 mt-2 min-h-[20px]"></div>
+                <div className="w-0.5 bg-linear-to-b from-indigo-100 to-transparent grow mt-2 group-last:hidden"></div>
             </div>
-            <div className="flex-grow">
-                <h4 className="text-lg font-bold text-slate-900 mb-1">
-                    {jobTitle || "Job Role"}
-                </h4>
-                <div className="text-[0.95rem] font-semibold text-slate-700 mb-1 flex items-center gap-2">
-                    <i className="fa-regular fa-building text-slate-400"></i>
-                    {companyName || "Company Name"}
+            
+            <div className="grow md:ml-[70px] bg-white rounded-2xl p-6 border border-slate-100 shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:border-indigo-100 group-hover:translate-x-1">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-2">
+                    <div>
+                        <h4 className="text-xl font-extrabold text-slate-800 group-hover:text-indigo-600 transition-colors">
+                            {jobTitle || "Job Role"}
+                        </h4>
+                        <div className="text-[1rem] font-bold text-slate-600 mt-1 flex items-center gap-2">
+                            <i className="fa-regular fa-building text-indigo-400"></i>
+                            {companyName || "Company Name"}
+                        </div>
+                    </div>
+                    {/* {userType && (
+                        <div className="shrink-0 bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded border border-indigo-100 uppercase tracking-wider self-start">
+                            {userType}
+                        </div>
+                    )} */}
                 </div>
 
                 {(startDateWork || endDateWork) && (
-                    <span className="inline-block text-xs text-slate-500 bg-slate-100 px-3 py-1 rounded-full mb-3">
-                        {startDateWork} - {endDateWork || "Present"}
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-md mb-4 uppercase tracking-wider">
+                        <i className="fa-regular fa-calendar text-slate-400"></i>
+                        {startDateWork?.split("T")[0]} - {endDateWork?.split("T")[0] || "Present"}
                     </span>
                 )}
 
-                {userType && (
-                    <div
-                        style={{
-                            fontSize: "0.9rem",
-                            color: "#666",
-                            marginBottom: "0.5rem",
-                        }}
-                    >
-                        <strong>Type:</strong> {userType}
-                    </div>
-                )}
-
                 {(responsibilities?.length > 0 || achievements?.length > 0) && (
-                    <div className="mt-2 pl-5 text-slate-600 text-sm leading-relaxed">
+                    <div className="mt-2 text-slate-600 text-[0.95rem] leading-relaxed">
                         {responsibilities && responsibilities.length > 0 && (
-                            <div className="mb-2">
-                                <strong className="text-slate-700 block mb-1">
-                                    Responsibilities:
+                            <div className="mb-4">
+                                <strong className="text-sm font-bold text-slate-700 block mb-2 uppercase tracking-wider items-center gap-2">
+                                    <i className="fa-solid fa-list-check text-slate-400"></i> Responsibilities
                                 </strong>
-                                <ul className="list-disc pl-4 space-y-1">
+                                <ul className="list-none space-y-2">
                                     {responsibilities.map((e, i) => (
-                                        <li key={i}>{e}</li>
+                                        <li key={i} className="flex items-start gap-2 font-medium">
+                                            <div className="w-1.5 h-1.5 rounded bg-indigo-400 mt-2 shrink-0"></div>
+                                            {e}
+                                        </li>
                                     ))}
                                 </ul>
                             </div>
                         )}
 
                         {achievements && achievements.length > 0 && (
-                            <div>
-                                <strong className="text-slate-700 block mb-1">
-                                    Achievements:
+                            <div className="bg-linear-to-r from-amber-50 to-orange-50 rounded-xl p-4 border border-amber-100/50">
+                                <strong className="text-sm font-bold text-amber-800 mb-2 uppercase tracking-wider flex items-center gap-2">
+                                    <i className="fa-solid fa-trophy text-amber-500"></i> Key Achievements
                                 </strong>
-                                <ul className="list-disc pl-4 space-y-1">
+                                <ul className="list-none space-y-2">
                                     {achievements.map((e, i) => (
-                                        <li key={i}>{e}</li>
+                                        <li key={i} className="flex items-start gap-2 text-amber-900 font-medium text-sm">
+                                            <i className="fa-solid fa-star text-amber-400 mt-0.5 text-[10px]"></i>
+                                            {e}
+                                        </li>
                                     ))}
                                 </ul>
                             </div>

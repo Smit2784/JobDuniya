@@ -29,6 +29,7 @@ const SignIn = () => {
                 if (response.token) {
                     localStorage.setItem("token", response.token);
                     localStorage.setItem("id", response.data._id);
+                    localStorage.setItem("loginTimestamp", Date.now().toString());
                     toast.success("Login Successfully.");
                     setScreen("root");
                 } else {

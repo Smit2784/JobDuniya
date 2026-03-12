@@ -81,7 +81,7 @@ const InputText = ({
                 <input
                     className={`
                         w-full flex p-2 px-4 text-[#23A6F0] text-[13px] font-normal leading-7 
-                        border border-[#adadad] rounded-lg items-start gap-4 flex-grow self-stretch tracking-wider
+                        border border-[#adadad] rounded-lg items-start gap-4 grow self-stretch tracking-wider
                         focus:outline-none focus:border-[#23A6F0] focus:ring-1 focus:ring-[#23A6F0] transition-all
                         placeholder:text-[13px] placeholder:text-[rgb(0,38,127)]
                         ${warningState !== "" ? "focus:outline-red-500 border-red-500 focus:border-red-500" : ""}

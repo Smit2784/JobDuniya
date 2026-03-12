@@ -5,7 +5,6 @@ import ConnectionModel from "../componants/Profile/ConnectionModel";
 import ApplyModel from "../componants/Profile/ApplyModel";
 import FollowingModel from "../componants/Profile/FollowingModel";
 import Notifications from "../componants/Common/Notifications";
-import PostAJob from "../CompanySide/Modals/PostAJob";
 import TermsCondition from "../UserSide/terms&condition";
 
 const RenderModal = ({}) => {

@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import GlobalModel from "../../Global/GlobalModel";
 import ViewJob from "./viewJob";
 import Cookies from "js-cookie";
+import homeImg from "../../Images/home.jpg";
 const Home = ({ setModell }) => {
     const [data, setData] = useState("");
     const [imgLoading, setImgLoading] = useState(true);
@@ -73,9 +74,7 @@ const Home = ({ setModell }) => {
                             </div>
                             <div className="flex-1 min-w-[300px] flex justify-center items-center">
                                 <img
-                                    src={
-                                        "https://firebasestorage.googleapis.com/v0/b/jobduniya-ec494.appspot.com/o/home.jpg?alt=media&token=f250c6fd-124c-4f05-9ceb-37b03a276a55"
-                                    }
+                                    src={homeImg}
                                     alt=""
                                     sizes="1"
                                     className="w-full max-w-[550px] rounded-3xl shadow-[0_20px_40px_-10px_rgba(59,130,246,0.2)] transform perspective-[1000px] -rotate-y-1 hover:rotate-y-0 transition-transform duration-300"

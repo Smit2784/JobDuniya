@@ -1,9 +1,6 @@
 import React from "react";
 
 const Stepper = ({ steps = [], activeStep = 0 }) => {
-    // If steps is just a number of steps or an array of empty objects,
-    // we might need to handle it.
-    // The previous implementation used steps={[{}, {}, ...]} so we stick to array length.
 
     // Ensure activeStep is within bounds
     const safeActiveStep = Math.max(0, Math.min(activeStep, steps.length - 1));
@@ -33,11 +30,13 @@ const Stepper = ({ steps = [], activeStep = 0 }) => {
                         >
                             <div
                                 className={`
-                                    w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300 z-10 bg-white
+                                    w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300 z-10
                                     ${
-                                        isActive || isCompleted
+                                        isCompleted
                                             ? "border-[#23A6F0] bg-[#23A6F0] text-white"
-                                            : "border-gray-300 text-gray-400"
+                                            : isActive
+                                              ? "border-[#23A6F0] bg-white text-[#23A6F0]"
+                                              : "border-gray-300 bg-white text-gray-400"
                                     }
                                 `}
                             >

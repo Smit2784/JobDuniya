@@ -158,111 +158,119 @@ const Body = ({ style }) => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(380px,1fr))] gap-8 items-start md:grid-cols-1">
+            <div className="flex flex-col gap-4 w-full max-w-[1000px] mx-auto">
                 {data.length > 0 ? (
                     data.map((e) => (
                         <div
                             key={e._id}
-                            className="bg-white rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] border border-slate-200 transition-all duration-250 flex flex-col relative overflow-hidden h-full hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-1 before:bg-linear-to-r before:from-blue-500 before:to-blue-600 before:origin-left before:transition-transform before:duration-300 before:scale-x-0 hover:before:scale-x-100"
+                            className="w-full bg-white rounded-2xl p-6 border border-slate-200 transition-all duration-300 flex flex-col justify-between gap-6 relative overflow-hidden cursor-default hover:-translate-y-1 hover:shadow-lg hover:border-slate-400"
                         >
-                            <div className="p-6 flex-1">
-                                <div className="flex items-center gap-2 mb-5">
+                            <div className="flex flex-1 w-full">
+                                <div className="flex flex-col justify-center gap-2 grow">
                                     <span className="font-semibold text-slate-600 text-sm">
                                         {e?.jobId?.company?.Name}
                                     </span>
-                                </div>
-                                <h3 className="text-xl font-extrabold text-slate-800 mb-2 leading-tight tracking-tight">
-                                    {e.jobId.Title}
-                                </h3>
+                                    <h3 className="text-xl font-bold text-slate-900 m-0 leading-tight">
+                                        {e?.jobId?.Title}
+                                    </h3>
 
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wide bg-blue-50 text-blue-600 border border-blue-100">
-                                        <i className="fa-solid fa-briefcase"></i>{" "}
-                                        {e.jobId.Position}
-                                    </span>
-                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wide bg-slate-50 text-slate-500 border border-slate-200">
-                                        <i className="fa-regular fa-clock"></i>{" "}
-                                        {moment(
-                                            e.jobId.JobPostedTime?.split(
-                                                "T",
-                                            )[0],
-                                            "YYYYMMDD",
-                                        ).fromNow()}
-                                    </span>
-                                </div>
-
-                                {hide.includes(e.jobId._id) && filterData && (
-                                    <div className="m-0 mx-6 mb-6 bg-white border border-slate-200 rounded-lg animate-[fadeIn_0.3s_ease]">
-                                        {filterData.map(([key, value]) => (
-                                            <div
-                                                key={key}
-                                                className="flex p-4 border-b border-slate-100 last:border-b-0"
-                                            >
-                                                <span className="font-bold text-slate-400 w-[35%] text-[0.7rem] uppercase tracking-wider pt-0.5">
-                                                    {key
-                                                        .replace(
-                                                            /([A-Z])/g,
-                                                            " $1",
-                                                        )
-                                                        .trim()}
-                                                </span>
-                                                <span className="w-[65%] text-slate-700 text-sm font-medium leading-relaxed">
-                                                    {value &&
-                                                    value.length > 0 ? (
-                                                        Array.isArray(value) ? (
-                                                            value.join(", ")
-                                                        ) : (
-                                                            value
-                                                        )
-                                                    ) : (
-                                                        <span className="text-muted fst-italic">
-                                                            Not specified
-                                                        </span>
-                                                    )}
-                                                </span>
-                                            </div>
-                                        ))}
+                                    <div className="flex flex-wrap gap-4 items-center mt-1">
+                                        <div className="flex items-center gap-1.5 text-sm text-slate-500 font-medium">
+                                            <i className="fa-solid fa-briefcase text-slate-400 text-base"></i>
+                                            <span>{e?.jobId?.Position}</span>
+                                        </div>
+                                        <div className="flex items-center gap-1.5 text-sm text-slate-500 font-medium">
+                                            <i className="fa-regular fa-clock text-slate-400 text-base"></i>
+                                            <span>{e?.jobId?.JobType}</span>
+                                        </div>
+                                        <div className="flex items-center gap-1.5 text-sm text-slate-500 font-medium whitespace-break-spaces">
+                                            <i className="fa fa-location-dot text-slate-400 text-base"></i>
+                                            <span>{e?.jobId?.Location}</span>
+                                        </div>
+                                        <div className="flex items-center gap-1.5 text-sm text-slate-500 font-medium whitespace-break-spaces border-l border-slate-200 pl-4">
+                                            <i className="fa-solid fa-indian-rupee-sign text-slate-400 text-base"></i>
+                                            <span>{e?.jobId?.Salary}</span>
+                                        </div>
                                     </div>
-                                )}
+                                </div>
                             </div>
 
-                            <div className="p-4 px-6 bg-slate-50 border-t border-slate-200 grid grid-cols-2 gap-4">
-                                <button
-                                    className="p-2.5 border-none rounded-lg font-semibold cursor-pointer transition-all text-sm flex items-center justify-center gap-2 uppercase tracking-wide bg-slate-800 border border-slate-800 text-white hover:bg-slate-700 hover:border-slate-700 hover:-translate-y-px"
-                                    onClick={() =>
-                                        handleHide(e.jobId._id, e.jobId)
-                                    }
-                                >
-                                    {hide.includes(e.jobId._id) ? (
-                                        <>
-                                            <i className="fa fa-eye-slash"></i>
-                                            Hide Details
-                                        </>
-                                    ) : (
-                                        <>
-                                            <i className="fa fa-eye"></i> View
-                                            Details
-                                        </>
-                                    )}
-                                </button>
+                            {hide.includes(e.jobId._id) && filterData && (
+                                <div className="m-0 bg-slate-50 border border-slate-200 rounded-lg animate-[fadeIn_0.3s_ease] overflow-hidden mt-4">
+                                    {filterData.map(([key, value]) => (
+                                        <div
+                                            key={key}
+                                            className="flex p-3 px-5 border-b border-slate-200 last:border-b-0"
+                                        >
+                                            <span className="font-bold text-slate-500 w-[35%] text-[0.75rem] uppercase tracking-wider pt-0.5">
+                                                {key
+                                                    .replace(/([A-Z])/g, " $1")
+                                                    .trim()}
+                                            </span>
+                                            <span className="w-[65%] text-slate-800 text-sm font-medium leading-relaxed">
+                                                {value && value.length > 0 ? (
+                                                    Array.isArray(value) ? (
+                                                        value.join(", ")
+                                                    ) : (
+                                                        value
+                                                    )
+                                                ) : (
+                                                    <span className="text-muted fst-italic">
+                                                        Not specified
+                                                    </span>
+                                                )}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
 
-                                {toggle ? (
+                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end w-full pt-4 mt-2 border-t border-dashed border-slate-200 gap-4 sm:gap-0">
+                                <div className="flex flex-wrap gap-3">
                                     <button
-                                        onClick={() => handleDeleteApps(e._id)}
-                                        className="p-2.5 border-none rounded-lg font-semibold cursor-pointer transition-all text-sm flex items-center justify-center gap-2 uppercase tracking-wide bg-white border border-slate-200 text-slate-500 hover:bg-red-50 hover:text-red-500 hover:border-red-200"
+                                        className="border rounded-full font-semibold text-sm cursor-pointer transition-all duration-200 inline-flex items-center justify-center px-5 py-2 hover:bg-slate-100 bg-white border-slate-300 text-slate-700"
+                                        onClick={() =>
+                                            handleHide(e.jobId._id, e.jobId)
+                                        }
                                     >
-                                        <i className="fa-solid fa-file-circle-xmark"></i>
-                                        Cancel Apply
+                                        {hide.includes(e.jobId._id) ? (
+                                            <>
+                                                <i className="fa fa-eye-slash mr-2"></i>
+                                                Hide Details
+                                            </>
+                                        ) : (
+                                            <>
+                                                <i className="fa fa-eye mr-2"></i>
+                                                View Details
+                                            </>
+                                        )}
                                     </button>
-                                ) : (
-                                    <button
-                                        onClick={() => handleDelete(e._id)}
-                                        className="p-2.5 border-none rounded-lg font-semibold cursor-pointer transition-all text-sm flex items-center justify-center gap-2 uppercase tracking-wide bg-white border border-slate-200 text-slate-500 hover:bg-red-50 hover:text-red-500 hover:border-red-200"
-                                    >
-                                        <i className="fa-solid fa-bookmark"></i>
-                                        Unsave
-                                    </button>
-                                )}
+
+                                    {toggle ? (
+                                        <button
+                                            onClick={() => handleDeleteApps(e._id)}
+                                            className="border rounded-full font-semibold text-sm cursor-pointer transition-all duration-200 inline-flex items-center justify-center px-5 py-2 bg-white text-red-500 border-red-200 hover:bg-red-50"
+                                        >
+                                            <i className="fa-solid fa-file-circle-xmark mr-2"></i>
+                                            Cancel Apply
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={() => handleDelete(e._id)}
+                                            className="border rounded-full font-semibold text-sm cursor-pointer transition-all duration-200 inline-flex items-center justify-center px-5 py-2 bg-white text-red-500 border-red-200 hover:bg-red-50"
+                                        >
+                                            <i className="fa-solid fa-bookmark mr-2"></i>
+                                            Unsave
+                                        </button>
+                                    )}
+                                </div>
+                                <span className="text-xs text-slate-400 font-medium">
+                                    Posted{" "}
+                                    {moment(
+                                        e.jobId.JobPostedTime?.split("T")[0],
+                                        "YYYYMMDD",
+                                    ).fromNow()}
+                                </span>
                             </div>
                         </div>
                     ))

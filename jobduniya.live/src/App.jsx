@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import MyModel from "./componants/Common/MyModel";
 import Home from "./componants/Common/Home";
-import { useState } from "react";
+import Cookies from "js-cookie";
 import Signup from "./componants/signup/Signup";
 import Jobs from "./componants/Common/Jobs";
 
@@ -20,6 +20,34 @@ import LoginAsUser from "./UserSide/LoginAsUser";
 
 const App = () => {
     const [modell, setModell] = useState(false);
+
+    // 24 hours in milliseconds
+    const SESSION_TIME_LIMIT = 24 * 60 * 60 * 1000;
+
+    useEffect(() => {
+        const checkSession = () => {
+            const loginTimestamp = localStorage.getItem("userLoginTimestamp");
+            if (loginTimestamp) {
+                const now = Date.now();
+                if (now - parseInt(loginTimestamp, 10) > SESSION_TIME_LIMIT) {
+                    Cookies.remove("token");
+                    Cookies.remove("id");
+                    localStorage.removeItem("data");
+                    localStorage.removeItem("userLoginTimestamp");
+                    toast.info("Session expired. Please log in again.");
+                    setTimeout(() => {
+                        window.location.href = "/loginasuser";
+                    }, 2000);
+                }
+            }
+        };
+
+        checkSession();
+        const intervalId = setInterval(checkSession, 60 * 1000);
+
+        return () => clearInterval(intervalId);
+    }, []);
+
     return (
         <>
             {modell ? <MyModel setModell={setModell}></MyModel> : ""}

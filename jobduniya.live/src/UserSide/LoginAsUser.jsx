@@ -50,6 +50,7 @@ const LoginAsUser = ({ setScreen }) => {
                     Cookies.set("id", RESPONSE.id);
                     Cookies.set("token", RESPONSE.token);
                     localStorage.setItem("data", JSON.stringify(RESPONSE.data));
+                    localStorage.setItem("userLoginTimestamp", Date.now().toString());
                     toast.success("Login Successfully");
                     navigate("/");
                 } else {

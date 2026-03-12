@@ -12,15 +12,17 @@ const Education = ({
     certifications,
 }) => {
     return (
-        <div className="flex flex-col md:flex-row gap-6 relative pb-6 border-b border-slate-100 last:border-0 last:pb-0">
-            <div className="hidden md:flex flex-col items-center w-[50px] shrink-0">
-                <div className="w-10 h-10 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-lg z-10">
-                    <i className="fa-solid fa-graduation-cap"></i>
+        <div className="flex flex-col md:flex-row gap-6 relative pb-8 group">
+            {/* Timeline Line */}
+            <div className="hidden md:flex flex-col items-center w-[50px] shrink-0 absolute left-0 top-0 bottom-0">
+                <div className="w-12 h-12 bg-white border-2 border-blue-100 text-blue-500 rounded-full flex items-center justify-center text-lg z-10 shadow-[0_4px_12px_rgb(59,130,246,0.15)] group-hover:border-blue-300 group-hover:shadow-[0_4px_20px_rgb(59,130,246,0.4)] transition-all duration-300">
+                    <i className="fa-solid fa-graduation-cap group-hover:scale-110 group-hover:text-blue-600 transition-transform duration-300"></i>
                 </div>
-                <div className="flex-grow w-0.5 bg-slate-100 mt-2 min-h-[20px]"></div>
+                <div className="w-0.5 bg-linear-to-b from-blue-100 to-transparent grow mt-2 group-last:hidden"></div>
             </div>
-            <div className="flex-grow">
-                <h4 className="text-lg font-bold text-slate-900 mb-1">
+            
+            <div className="grow md:ml-[70px] bg-white rounded-2xl p-6 border border-slate-100 shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:border-blue-100 group-hover:translate-x-1">
+                <h4 className="text-xl font-extrabold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
                     {institutionName ||
                         school ||
                         univercity ||
@@ -28,37 +30,39 @@ const Education = ({
                 </h4>
 
                 {degreeLevel && (
-                    <div className="text-[0.95rem] font-semibold text-slate-700 mb-1 flex items-center gap-2">
-                        <i className="fa-solid fa-certificate text-slate-400"></i>
+                    <div className="text-[0.95rem] font-bold text-slate-600 mb-3 flex items-center gap-2">
+                        <i className="fa-solid fa-certificate text-blue-400"></i>
                         {degreeLevel.join(", ")}
                     </div>
                 )}
 
                 {(startDateSchool || endDateSchool) && (
-                    <span className="inline-block text-xs text-slate-500 bg-slate-100 px-3 py-1 rounded-full mb-3">
-                        {startDateSchool} - {endDateSchool || "Present"}
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-md mb-4 uppercase tracking-wider">
+                        <i className="fa-regular fa-calendar text-slate-400"></i>
+                        {startDateSchool?.split("T")[0]} - {endDateSchool?.split("T")[0] || "Present"}
                     </span>
                 )}
 
                 <div
-                    className="mt-2 pl-0 md:pl-0 text-slate-600 text-sm leading-relaxed"
-                    style={{ marginTop: "0.5rem" }}
+                    className="pl-0 md:pl-0 text-slate-600 text-[0.95rem] leading-relaxed"
                 >
                     {gpa && (
-                        <div className="mb-2 font-medium">
-                            <strong className="text-slate-700">GPA:</strong>{" "}
-                            {gpa}
+                        <div className="mb-3 font-medium bg-green-50 text-green-700 px-3 py-1.5 rounded-lg inline-block border border-green-100">
+                            <strong>GPA:</strong> {gpa}
                         </div>
                     )}
 
                     {certifications && certifications.length > 0 && (
-                        <div>
-                            <strong className="text-slate-700 block mb-1">
-                                Certifications:
+                        <div className="mt-2 bg-slate-50 rounded-xl p-4 border border-slate-100">
+                            <strong className="text-sm font-bold text-slate-700 block mb-2 uppercase tracking-wider items-center gap-2">
+                                <i className="fa-solid fa-award text-amber-500"></i> Certifications
                             </strong>
-                            <ul className="list-disc pl-4 space-y-1">
+                            <ul className="list-none space-y-2">
                                 {certifications.map((e, i) => (
-                                    <li key={i}>{e}</li>
+                                    <li key={i} className="flex items-start gap-2 text-sm font-medium">
+                                        <i className="fa-solid fa-check text-green-500 mt-1 text-[10px]"></i>
+                                        {e}
+                                    </li>
                                 ))}
                             </ul>
                         </div>
