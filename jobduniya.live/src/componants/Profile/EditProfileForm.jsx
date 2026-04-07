@@ -7,14 +7,12 @@ import EditExperience from "./Edit/EditExperience";
 import EditAddress from "./Edit/EditAddress";
 import ProfilePreview from "../signup/Steps/profilePreview";
 import { ToggleEdit } from "../Common/profile";
-import useFirestorage from "../../Hooks/OTHER/useFirestorage";
 import Cookies from "js-cookie";
 import useAPI from "../../Hooks/USER/useAPI";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 const EditProfileForm = () => {
-    // const upload = useFirestorage();
     const [profilePicture, setProfilePicture] = useState("");
     const [image, setImage] = useState("");
     const [isEditProfile, setIsEditProfile] = useContext(ToggleEdit);

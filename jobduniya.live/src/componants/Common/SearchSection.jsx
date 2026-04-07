@@ -3,9 +3,10 @@ import useAPI from "../../Hooks/USER/useAPI";
 import ViewJob from "./viewJob";
 import JobCard from "./JobCard";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 const SearchSection = () => {
-    const [jobType, setJobType] = useState("Remote");
+    const [jobType, setJobType] = useState("All");
     const [location, setLocation] = useState("");
     const [jobs, setJobs] = useState([]);
     const [viewJob, setViewJob] = useState("");
@@ -24,14 +25,16 @@ const SearchSection = () => {
                 const data = await api.getREQUEST("fetchAll/jobs/0/0");
                 console.log("SearchSection Data:", data);
                 if (Array.isArray(data)) {
+                    console.log("data", data);
                     setOriginalJobs(data);
 
                     // Filter initially
                     const initialFiltered = data.filter(
-                        (job) => job.JobType === "Remote",
+                        (job) => job.JobType === "All",
                     );
-                    setJobs(initialFiltered);
-                    setLength(initialFiltered.length);
+                    console.log("initialFiltered", initialFiltered);
+                    setJobs(data);
+                    setLength(data.length);
                 } else {
                     console.error("Data is not an array:", data);
                 }
@@ -73,6 +76,16 @@ const SearchSection = () => {
 
         fetchData();
         fetchUser();
+        const handleJobApplied = (event) => {
+            const { jobId } = event.detail;
+            setAppliedJobIds((prev) => new Set([...prev, jobId]));
+        };
+
+        window.addEventListener("jobApplied", handleJobApplied);
+
+        return () => {
+            window.removeEventListener("jobApplied", handleJobApplied);
+        };
     }, []); // Removed api dependency to avoid infinite loop
 
     const onCardClick = (id) => {
@@ -145,7 +158,14 @@ const SearchSection = () => {
 
     const perFormSave = async (jobId) => {
         const userId = Cookies.get("id");
-        await api.postREQUEST("savedJob", JSON.stringify({ userId, jobId }));
+        const response = await api.postREQUEST(
+            "savedJob",
+            JSON.stringify({ userId, jobId }),
+        );
+        if (response) {
+            setSavedJobIds((prev) => new Set([...prev, jobId]));
+            toast.success("Job saved successfully");
+        }
     };
 
     return (
@@ -200,7 +220,7 @@ const SearchSection = () => {
                         </h1>
                     </div>
 
-                    <div className="flex justify-center gap-4 mb-10 border-b border-slate-200 pb-4">
+                    <div className="flex justify-center gap-4 mb-5 border-b border-slate-200 pb-4">
                         <button
                             className={`px-6 py-3 rounded-full font-medium cursor-pointer transition-all duration-200 border border-transparent bg-transparent hover:text-blue-500 hover:bg-blue-50 ${jobType === "All" ? "bg-blue-50 text-blue-600 border-blue-200 font-semibold" : "text-slate-500"}`}
                             onClick={() => filterJobs("All")}
@@ -271,96 +291,3 @@ const SearchSection = () => {
     );
 };
 export default SearchSection;
-
-// import React, { useCallback, useEffect, useState } from "react";
-// import SearchFilterTabs from "../Tabs/SearchFilterTabs";
-// import useAPI from "../../Hooks/USER/useAPI";
-// const SearchSection = () => {
-//     const [keyword, setKeyWord] = useState("");
-//     const [location, setLocation] = useState("");
-//     const [jobs, setJobs] = useState([]);
-//     const api = useAPI();
-//     const HandleSearch = async () => {
-//         try {
-//             const items = await api.getREQUEST(search?keyword=${keyword}&location=${location}&tbl=jobs,);
-//             setJobs(items && items);
-//         } catch (error) {
-//             console.error('Error fetching data:', error);
-//         }
-//     }
-//     useEffect(() => {
-//         HandleSearch();
-//     }, [])
-
-//     return (
-//         <>
-//             <div className='center'>
-//                 <div class="container border card p-5">
-//                     <div class="row">
-//                         <div class="col-md-10 ">
-//                             <div class="row g-2 mb-2">
-//                                 <div class="col-md-6">
-//                                     <input type="text" class="form-control-default " placeholder="Job title , Keyword , Company" onChange={(e) => setKeyWord(e.target.value)} />
-//                                 </div>
-//                                 <div class="col-md-6">
-//                                     <input list='location' className='form-control-default' placeholder='State , City ,zipcode' onChange={(e) => setLocation(e.target.value)} />
-//                                     <datalist id="location">
-//                                         {/* {jobs.map((e) => {
-//                                             return <option className='opt' value="Safari"}</option>
-//                                         })} */}
-//                                     </datalist>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                         <div class="col-md-2 d-flex justify-content-between  align-items-center ">
-//                             <button
-//                                 class="btn bgbtn w-100"
-//                                 onClick={() => {
-//                                     HandleSearch();
-//                                 }}
-//                             >
-//                                 Search
-//                             </button>
-//                         </div>
-//                     </div>
-//                 </div>
-//                 <div className="container" style={{overflow:"scroll" , height:"50vh"}}>
-//                     <h1 className="mt-4 text-center mb-4 fs-3 text-info ">Job Listing</h1>
-//                     <hr className="mb-4" />
-//                     <div className="tab-class text-center">
-//                         <ul className="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
-//                             <li className="nav-item">
-//                                 <a className="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
-//                                     <h6 className="mt-n1 mb-0" onClick={() => {
-//                                         setKeyWord("remote")
-//                                     }}>Remote</h6>
-//                                 </a>
-//                             </li>
-//                             <li className="nav-item">
-//                                 <a className="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
-//                                     <h6 className="mt-n1 mb-0" onClick={() => setKeyWord("fulltime")}>Full Time</h6>
-//                                 </a>
-//                             </li>
-//                             <li className="nav-item">
-//                                 <a className="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
-//                                     <h6 className="mt-n1 mb-0" onClick={() => setKeyWord("parttime")}>Part Time</h6>
-//                                 </a>
-//                             </li>
-//                         </ul>
-//                         <div className="tab-content">
-//                             {jobs.map((e) => {
-//                                 return <SearchFilterTabs
-//                                     title={e.Title}
-
-//                                 />
-//                             })
-//                             }
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </>
-//     )
-// }
-
-// export default SearchSection;

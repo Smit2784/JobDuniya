@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import logoFooter from "../../Images/logoFooter.png";
 
+const supportLinks = [
+    { label: "About Us", path: "/about-us" },
+    { label: "Privacy & Policy", path: "/privacy-policy" },
+    { label: "Terms & Condition", path: "/terms-and-condition" },
+    { label: "Contact Us", path: "/contact-us" },
+    { label: "Get Help", path: "/get-help" },
+];
+
 const Footer = () => {
+    const [rating, setRating] = useState(0);
+    const [hoverRating, setHoverRating] = useState(0);
+
     return (
         <footer className="relative pt-20 pb-6 bg-linear-to-br from-slate-900 to-slate-800 text-slate-200 overflow-hidden font-[Inter] border-t border-white/10 before:absolute before:top-0 before:left-0 before:w-full before:h-1px before:bg-linear-to-r before:from-transparent before:via-blue-500 before:to-transparent before:opacity-50">
             <div className="container mx-auto px-4">
@@ -93,24 +105,18 @@ const Footer = () => {
                                 Support Links
                             </h3>
                         </div>
-                        <div className="flex flex-col space-y-2 w-full md:w-auto">
-                            {[
-                                "About Us",
-                                "Privacy & Policy",
-                                "Terms & Condition",
-                                "Contact Us",
-                                "Get Help",
-                            ].map((link, index) => (
-                                <a
+                        <div className="flex flex-col items-start space-y-2 w-full md:w-auto">
+                            {supportLinks.map((link, index) => (
+                                <Link
                                     key={index}
-                                    href="#"
+                                    to={link.path}
                                     className="block text-slate-400 no-underline py-1.5 text-[0.95rem] transition-all duration-300 hover:text-white hover:pl-3 relative group"
                                 >
                                     <span className="absolute left-0 opacity-0 transition-all duration-300 text-blue-400 group-hover:opacity-100 group-hover:left-0">
                                         ›
                                     </span>
-                                    {link}
-                                </a>
+                                    {link.label}
+                                </Link>
                             ))}
                         </div>
                     </div>
@@ -123,17 +129,17 @@ const Footer = () => {
                             </h3>
                         </div>
                         <div className="flex flex-col space-y-2 w-full md:w-auto mb-6">
-                            {["Contact Us", "Get Help"].map((link, index) => (
-                                <a
+                            {supportLinks.filter(l => l.label === "Contact Us" || l.label === "Get Help").map((link, index) => (
+                                <Link
                                     key={index}
-                                    href="#"
+                                    to={link.path}
                                     className="block text-slate-400 no-underline py-1.5 text-[0.95rem] transition-all duration-300 hover:text-white hover:pl-3 relative group"
                                 >
                                     <span className="absolute left-0 opacity-0 transition-all duration-300 text-blue-400 group-hover:opacity-100 group-hover:left-0">
                                         ›
                                     </span>
-                                    {link}
-                                </a>
+                                    {link.label}
+                                </Link>
                             ))}
                         </div>
 
@@ -142,14 +148,26 @@ const Footer = () => {
                                 How would you rate your experience with our
                                 website?
                             </h3>
-                            <div className="flex gap-2 justify-center md:justify-start group">
+                            <div className="flex gap-2 justify-center md:justify-start">
                                 {[1, 2, 3, 4, 5].map((star) => (
                                     <i
                                         key={star}
-                                        className="fa fa-star text-2xl text-slate-600 cursor-pointer transition-all duration-200 hover:text-amber-400 hover:scale-110 peer-hover:text-slate-600"
+                                        onClick={() => setRating(star)}
+                                        onMouseEnter={() => setHoverRating(star)}
+                                        onMouseLeave={() => setHoverRating(0)}
+                                        className={`fa fa-star text-2xl cursor-pointer transition-all duration-200 hover:scale-110 ${
+                                            star <= (hoverRating || rating)
+                                                ? "text-amber-400"
+                                                : "text-slate-600"
+                                        }`}
                                     ></i>
                                 ))}
                             </div>
+                            {rating > 0 && (
+                                <p className="text-sm text-slate-400 mt-3">
+                                    You rated us {rating}/5 ⭐ Thank you!
+                                </p>
+                            )}
                         </div>
                     </div>
                 </div>

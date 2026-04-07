@@ -56,7 +56,7 @@ const Home = ({ setModell }) => {
         <>
             {/* { Check() &&  */}
             <>
-                <div className="w-full overflow-scroll h-[calc(100vh-100px)]">
+                <div className="w-full">
                     <section className="w-full min-h-screen flex flex-col justify-start items-center bg-linear-to-br from-[#f0f9ff] to-[#e0f2fe] pt-20 overflow-hidden">
                         <header className="w-full max-w-7xl flex items-center justify-between p-6 sm:p-10 flex-wrap gap-10">
                             <div className="flex-1 min-w-[300px] flex flex-col gap-6 sm:items-center">
@@ -78,7 +78,7 @@ const Home = ({ setModell }) => {
                                     alt=""
                                     sizes="1"
                                     className="w-full max-w-[550px] rounded-3xl shadow-[0_20px_40px_-10px_rgba(59,130,246,0.2)] transform perspective-[1000px] -rotate-y-1 hover:rotate-y-0 transition-transform duration-300"
-                                    srcset=""
+                                    srcSet=""
                                     loading="lazy"
                                 />
                             </div>

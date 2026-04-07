@@ -115,6 +115,11 @@ const Apply = ({ jobs }) => {
             setProgress("100%");
             setFrom("form3");
             toast.success("Application submitted successfully");
+            window.dispatchEvent(
+                new CustomEvent("jobApplied", {
+                    detail: { jobId },
+                }),
+            );
         } else {
             setActiveModalState("");
             localStorage.clear();

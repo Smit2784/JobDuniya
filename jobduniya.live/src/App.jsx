@@ -17,6 +17,11 @@ import SavedJobsPage from "./componants/Common/SavedJobsPage";
 import { ToastContainer, Slide } from "react-toastify";
 import ListUsers from "./UserSide/ListUsers";
 import LoginAsUser from "./UserSide/LoginAsUser";
+import AboutUs from "./UserSide/AboutUs";
+import PrivacyPolicy from "./UserSide/PrivacyPolicy";
+import TermsAndCondition from "./UserSide/TermsAndCondition";
+import ContactUs from "./UserSide/ContactUs";
+import GetHelp from "./UserSide/GetHelp";
 
 const App = () => {
     const [modell, setModell] = useState(false);
@@ -81,6 +86,11 @@ const App = () => {
                         <Route path="/search" element={<SearchSection />} />
                         <Route path={"/jobs/:id"} element={<Jobs />} />
                         <Route path={"/jobs"} element={<JobsList />} />
+                        <Route path="/about-us" element={<AboutUs />} />
+                        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                        <Route path="/terms-and-condition" element={<TermsAndCondition />} />
+                        <Route path="/contact-us" element={<ContactUs />} />
+                        <Route path="/get-help" element={<GetHelp />} />
                     </Route>
                     <Route path={"/loginasuser"} element={<LoginAsUser />} />
                     <Route path={"/signup"} element={<Signup />} />

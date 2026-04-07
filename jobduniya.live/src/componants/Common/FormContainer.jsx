@@ -48,7 +48,7 @@ const FormContainer = ({
     const [activeModalState, setActiveModalState] = useContext(ActiveModal);
     return (
         <>
-            <ToastContainer />
+            {/* <ToastContainer /> */}
             <div className="w-full flex flex-wrap items-center justify-center min-h-[90vh] overflow-auto p-4 md:p-6 bg-gray-50">
                 <div className="hidden md:block w-full md:w-1/2 max-w-[500px] p-4 animate__animated animate__zoomIn">
                     {leftSection}

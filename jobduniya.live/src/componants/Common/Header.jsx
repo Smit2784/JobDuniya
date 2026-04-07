@@ -28,8 +28,7 @@ const Header = () => {
         "font-[Inter] text-[0.95rem] font-medium text-slate-700 px-2 py-2 rounded-md transition-all duration-200 no-underline bg-transparent border-none cursor-pointer flex items-center gap-2 hover:text-blue-600 hover:bg-slate-40";
     const navLinkActiveClass =
         "font-[Inter] text-[0.95rem] font-medium px-2 py-2 rounded-md transition-all duration-200 no-underline bg-blue-600/10 border-none cursor-pointer flex items-center gap-2 text-blue-600 font-semibold";
-    const navLinkBoxClass =
-        "h-full flex items-center relative mx-1";
+    const navLinkBoxClass = "h-full flex items-center relative mx-1";
 
     return (
         <>
@@ -87,7 +86,7 @@ const Header = () => {
                                 }
                             >
                                 <Link className={navLinkClass} to={"/search"}>
-                                    <i class="fa-solid fa-search"></i>
+                                    <i className="fa-solid fa-search"></i>
                                 </Link>
                             </div>
                             <div
@@ -101,12 +100,12 @@ const Header = () => {
                                     className={`${navLinkClass} `}
                                     to={"/saved"}
                                 >
-                                    <i class="fa-solid fa-bookmark"></i>
+                                    <i className="fa-solid fa-bookmark"></i>
                                 </Link>
                             </div>
                             {/* <div className={`${navLinkBoxClass}`}>
                                 <button className={navLinkClass} onClick={()=>setActiveModalState("notifications")}>
-                                    <i class="fa-solid fa-bell"></i>
+                                    <i className="fa-solid fa-bell"></i>
                                 </button>
                             </div> */}
                             <div
@@ -120,7 +119,7 @@ const Header = () => {
                                     className={`${navLinkClass} `}
                                     to={"/profile"}
                                 >
-                                    <i class="fa-solid fa-user"></i>
+                                    <i className="fa-solid fa-user"></i>
                                 </Link>
                             </div>
                             <div className="h-6 w-px bg-slate-200 mx-2"></div>
@@ -147,7 +146,7 @@ const Header = () => {
                                     }
                                 >
                                     <button className={navLinkClass}>
-                                        <i class="fa-solid fa-bell"></i>
+                                        <i className="fa-solid fa-bell"></i>
                                     </button>
                                 </div>
                                 <div
@@ -161,7 +160,7 @@ const Header = () => {
                                         className={navLinkClass}
                                         to={"/profile"}
                                     >
-                                        <i class="fa-solid fa-user"></i>
+                                        <i className="fa-solid fa-user"></i>
                                     </Link>
                                 </div>
                                 <div className="h-6 w-px bg-slate-200 mx-2"></div>
@@ -174,9 +173,9 @@ const Header = () => {
                                     >
                                         <span className="whitespace-nowrap tracking-wide text-lg w-fit p-2.5 text-[#343434] text-left font-thin transition-colors duration-200">
                                             {active ? (
-                                                <i class="fa-solid fa-xmark"></i>
+                                                <i className="fa-solid fa-xmark"></i>
                                             ) : (
-                                                <i class="fa-solid fa-bars"></i>
+                                                <i className="fa-solid fa-bars"></i>
                                             )}
                                         </span>
                                     </div>
@@ -196,7 +195,7 @@ const Header = () => {
                         }
                     >
                         <Link className={navLinkClass} to={"/"}>
-                            <i class="fa-solid fa-home"></i>
+                            <i className="fa-solid fa-home"></i>
                         </Link>
                     </div>
                     <div
@@ -207,7 +206,7 @@ const Header = () => {
                         }
                     >
                         <Link className={navLinkClass} to={"/jobs"}>
-                            <i class="fa-solid fa-briefcase"></i>
+                            <i className="fa-solid fa-briefcase"></i>
                         </Link>
                     </div>
                     <div
@@ -218,7 +217,7 @@ const Header = () => {
                         }
                     >
                         <Link className={navLinkClass} to={"/saved"}>
-                            <i class="fa-solid fa-bookmark"></i>
+                            <i className="fa-solid fa-bookmark"></i>
                         </Link>
                     </div>
                     <div
@@ -229,7 +228,7 @@ const Header = () => {
                         }
                     >
                         <Link className={navLinkClass} to={"/network"}>
-                            <i class="fa-solid fa-users"></i>
+                            <i className="fa-solid fa-users"></i>
                         </Link>
                     </div>
                     <div
@@ -240,7 +239,7 @@ const Header = () => {
                         }
                     >
                         <Link className={navLinkClass} to={"/search"}>
-                            <i class="fa-solid fa-search"></i>
+                            <i className="fa-solid fa-search"></i>
                         </Link>
                     </div>
                 </div>

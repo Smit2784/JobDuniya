@@ -83,7 +83,7 @@ const ResetPassword = ({ close }) => {
 
     return (
         <div className="fixed inset-0 z-12336677 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-            <ToastContainer />
+            {/* <ToastContainer /> */}
             <div className="bg-white p-5 rounded-lg shadow-lg relative max-w-xl w-full mx-4">
                 <button
                     className="absolute top-2 right-2 p-2 rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-700 transition-colors"

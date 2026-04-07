@@ -133,7 +133,7 @@ const Body = ({ style }) => {
 
     return (
         <div className="w-full mx-auto p-12 font-sans bg-slate-100 min-h-screen box-border md:p-6 md:px-4">
-            <div className="flex flex-col items-center mb-12 relative z-2">
+            <div className="flex flex-col items-center mb-5 relative z-2">
                 <h2 className="text-4xl font-extrabold text-slate-800 mb-8 uppercase tracking-tighter relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-1/2 after:-translate-x-1/2 after:w-16 after:h-1 after:bg-blue-500 after:rounded-[2px] md:text-2xl">
                     {toggle ? "Applied Jobs" : "Saved Jobs"}
                     {data.length > 0 && (
